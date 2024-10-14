@@ -3291,7 +3291,7 @@ export default function HomeComponent() {
         </i>
       </a>
 
-      <div id="preloader"></div>
+   {/*    <div id="preloader"></div> */}
     </div>
   );
 }
