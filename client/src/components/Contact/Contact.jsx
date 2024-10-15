@@ -131,20 +131,23 @@ export default function Contact() {
           <nav id="navmenu" class="navmenu">
             <ul>
               <li>
-                <a href="/" class="active">
-                  Inicio
+                <a href="/" >
+                  Princípal
                 </a>
               </li>
               <li>
-                <a href="/about">Acerca</a>
+                <a href="/acerca" >Nosotros</a>
               </li>
-
               <li>
-                <a href="/contacto">Contact</a>
+                <a href="/galeria">Galeria</a>
+              </li>
+              <li>
+                <a href="/contacto" class="active">Contacto</a>
               </li>
             </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"><BsList/></i>
-
+            <i class="mobile-nav-toggle d-xl-none bi bi-list">
+              <BsList />
+            </i>
           </nav>
         </div>
       </header>
@@ -152,14 +155,9 @@ export default function Contact() {
         <main class="main">
       
           <div class="page-title dark-background">
-            <div class="container position-relative">
-              <h1>Contact</h1>
-              <nav class="breadcrumbs">
-                <ol>
-                  <li><a href="index.html">Home</a></li>
-                  <li class="current">Contact</li>
-                </ol>
-              </nav>
+            <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+              <h1>Contacto</h1>
+          
             </div>
           </div>
       

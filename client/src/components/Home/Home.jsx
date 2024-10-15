@@ -149,15 +149,17 @@ export default function HomeComponent() {
             <ul>
               <li>
                 <a href="/" class="active">
-                  Inicio
+                  Princípal
                 </a>
               </li>
               <li>
-                <a href="/acerca">Acerca</a>
+                <a href="/acerca">Nosotros</a>
               </li>
-
               <li>
-                <a href="/contacto">Contact</a>
+                <a href="/galeria">Galeria</a>
+              </li>
+              <li>
+                <a href="/contacto">Contacto</a>
               </li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list">
@@ -198,19 +200,22 @@ export default function HomeComponent() {
             data-bs-interval="5000"
           >
             <div class="carousel-item">
-              <img src={require("../../assets/img/carrusel-4.png")} alt="" />
-            </div>
-
-            <div class="carousel-item active">
               <img src={require("../../assets/img/carrusel-1.png")} alt="" />
             </div>
 
-            <div class="carousel-item">
+            <div class="carousel-item active">
               <img src={require("../../assets/img/carrusel-2.png")} alt="" />
             </div>
 
             <div class="carousel-item">
               <img src={require("../../assets/img/carrusel-3.png")} alt="" />
+            </div>
+
+            <div class="carousel-item">
+              <img src={require("../../assets/img/carrusel-4.png")} alt="" />
+            </div>
+            <div class="carousel-item">
+              <img src={require("../../assets/img/carrusel-5.png")} alt="" />
             </div>
 
             <a
