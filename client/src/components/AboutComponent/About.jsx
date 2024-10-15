@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react'
-import AOS from 'aos';
-import imagesLoaded from 'imagesloaded';
-import Isotope from 'isotope-layout';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import {Link} from 'react-router-dom'
-import GLightbox from 'glightbox'; // Importa GLightbox
+import React, { useEffect } from "react";
+import AOS from "aos";
+import imagesLoaded from "imagesloaded";
+import Isotope from "isotope-layout";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
+import GLightbox from "glightbox"; // Importa GLightbox
 import { BsList } from "react-icons/bs";
+import { IoMdArrowUp } from "react-icons/io";
 
-import 'glightbox/dist/css/glightbox.css'; // Asegúrate de importar el CSS
+import "glightbox/dist/css/glightbox.css"; // Asegúrate de importar el CSS
 export default function About() {
   useEffect(() => {
     const toggleScrolled = () => {
@@ -24,23 +25,23 @@ export default function About() {
         ? selectBody.classList.add("scrolled")
         : selectBody.classList.remove("scrolled");
     };
-  
+
     // Añadir eventos de scroll
     document.addEventListener("scroll", toggleScrolled);
     toggleScrolled(); // Llamar inmediatamente para verificar si la página ya está scrolleada.
-  
+
     const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
-  
+
     const mobileNavToogle = () => {
       document.querySelector("div").classList.toggle("mobile-nav-active"); // Cambiar 'div' por un selector más específico
       mobileNavToggleBtn.classList.toggle("bi-list");
       mobileNavToggleBtn.classList.toggle("bi-x");
     };
-  
+
     if (mobileNavToggleBtn) {
       mobileNavToggleBtn.addEventListener("click", mobileNavToogle);
     }
-  
+
     document.querySelectorAll("#navmenu a").forEach((navmenu) => {
       navmenu.addEventListener("click", () => {
         if (document.querySelector(".mobile-nav-active")) {
@@ -48,22 +49,26 @@ export default function About() {
         }
       });
     });
-  
-    document.querySelectorAll(".navmenu .toggle-dropdown").forEach((navmenu) => {
-      navmenu.addEventListener("click", function (e) {
-        e.preventDefault();
-        this.parentNode.classList.toggle("active");
-        this.parentNode.nextElementSibling.classList.toggle("dropdown-active");
-        e.stopImmediatePropagation();
+
+    document
+      .querySelectorAll(".navmenu .toggle-dropdown")
+      .forEach((navmenu) => {
+        navmenu.addEventListener("click", function (e) {
+          e.preventDefault();
+          this.parentNode.classList.toggle("active");
+          this.parentNode.nextElementSibling.classList.toggle(
+            "dropdown-active"
+          );
+          e.stopImmediatePropagation();
+        });
       });
-    });
-  
+
     // Eliminar el preloader inmediatamente si existe
     const preloader = document.querySelector("#preloader");
     if (preloader) {
       preloader.remove();
     }
-  
+
     let scrollTop = document.querySelector(".scroll-top");
     if (scrollTop) {
       const toggleScrollTop = () => {
@@ -71,7 +76,7 @@ export default function About() {
           ? scrollTop.classList.add("active")
           : scrollTop.classList.remove("active");
       };
-  
+
       scrollTop.addEventListener("click", (e) => {
         e.preventDefault();
         window.scrollTo({
@@ -79,11 +84,11 @@ export default function About() {
           behavior: "smooth",
         });
       });
-  
+
       document.addEventListener("scroll", toggleScrollTop);
       toggleScrollTop(); // Verificar estado inicial del scroll-top
     }
-  
+
     // Inicialización de AOS (Animaciones)
     const aosInit = () => {
       if (typeof AOS !== "undefined") {
@@ -97,21 +102,23 @@ export default function About() {
       }
     };
     aosInit(); // Llamar directamente para inicializar sin depender de 'load'
-  
+
     // Inicialización de Swiper
     const initSwiper = () => {
-      document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
-        const configElement = swiperElement.querySelector(".swiper-config");
-        if (configElement) {
-          let config = JSON.parse(configElement.innerHTML.trim());
-          if (!swiperElement.classList.contains("swiper-tab")) {
-            new Swiper(swiperElement, config);
+      document
+        .querySelectorAll(".init-swiper")
+        .forEach(function (swiperElement) {
+          const configElement = swiperElement.querySelector(".swiper-config");
+          if (configElement) {
+            let config = JSON.parse(configElement.innerHTML.trim());
+            if (!swiperElement.classList.contains("swiper-tab")) {
+              new Swiper(swiperElement, config);
+            }
           }
-        }
-      });
+        });
     };
     initSwiper(); // Llamar directamente sin depender de 'load'
-  
+
     // Limpieza al desmontar el componente
     return () => {
       document.removeEventListener("scroll", toggleScrolled);
@@ -120,85 +127,115 @@ export default function About() {
       }
     };
   }, []);
-    return (
-        <div class="about-page">
-
-<header id="header" class="header d-flex align-items-center fixed-top">
+  return (
+    <div class="about-page">
+      <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
           <a href="/" class="logo d-flex align-items-center">
-            <img src={require("../../assets/img/logo.png")} alt="" />
+            <img src={require("../../assets/img/logo-removebg.png")} alt="" />
           </a>
 
           <nav id="navmenu" class="navmenu">
             <ul>
               <li>
-                <a href="/" class="active">
-                  Inicio
-                </a>
+                <a href="/">Inicio</a>
               </li>
               <li>
-                <a href="/about">Acerca</a>
+                <a href="/acerca" class="active">
+                  Acerca
+                </a>
               </li>
 
               <li>
                 <a href="/contacto">Contact</a>
               </li>
             </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"><BsList/></i>
-
+            <i class="mobile-nav-toggle d-xl-none bi bi-list">
+              <BsList />
+            </i>
           </nav>
         </div>
       </header>
-      
-        <main class="main">
-      
-          <div class="page-title dark-background" >
-            <div class="container position-relative">
-              <h1>About</h1>
-              <nav class="breadcrumbs">
-                <ol>
-                  <li><a href="index.html">Home</a></li>
-                  <li class="current">About</li>
-                </ol>
-              </nav>
-            </div>
+
+      <main class="main">
+        <div class="page-title dark-background">
+          <div class="container position-relative">
+            <h1>About</h1>
+            <nav class="breadcrumbs">
+              <ol>
+                <li>
+                  <a href="index.html">Home</a>
+                </li>
+                <li class="current">About</li>
+              </ol>
+            </nav>
           </div>
-      
-          <section id="about" class="about section">
-      
-            <div class="container">
-      
-              <div class="row position-relative">
-      
-                <div class="col-lg-7 about-img" data-aos="zoom-out" data-aos-delay="200"><img src="assets/img/about.jpg"/></div>
-      
-                <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-                  <h2 class="inner-title">Consequatur eius et magnam</h2>
-                  <div class="our-story">
-                    <h4>Est 1988</h4>
-                    <h3>Our Story</h3>
-                    <p>Inventore aliquam beatae at et id alias. Ipsa dolores amet consequuntur minima quia maxime autem. Quidem id sed ratione. Tenetur provident autem in reiciendis rerum at dolor. Aliquam consectetur laudantium temporibus dicta minus dolor.</p>
-                    <ul>
-                      <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commo</span></li>
-                      <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in</span></li>
-                      <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
-                    </ul>
-                    <p>Vitae autem velit excepturi fugit. Animi ad non. Eligendi et non nesciunt suscipit repellendus porro in quo eveniet. Molestias in maxime doloremque.</p>
-      
-                    <div class="watch-video d-flex align-items-center position-relative">
-                      <i class="bi bi-play-circle"></i>
-                      <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox stretched-link">Watch Video</a>
-                    </div>
+        </div>
+
+        <section id="about" class="about section">
+          <div class="container">
+            <div class="row position-relative">
+              <div
+                class="col-lg-7 about-img"
+                data-aos="zoom-out"
+                data-aos-delay="200"
+              >
+                <img src="https://normalessuperiores.org.mx/img/en-rural-salaices-chihuahua.jpg" />
+              </div>
+
+              <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="inner-title">
+                  Bienvenidos a la Escuela Secundaria Greenwood
+                </h2>
+                <div class="our-story">
+                  <h4>Fundada en 1965</h4>
+                  <h3>Nuestra Historia</h3>
+                  <p>
+                    La Escuela Secundaria Greenwood ha sido un referente de
+                    excelencia académica y participación comunitaria durante más
+                    de 50 años. Nos comprometemos a brindar una educación de
+                    calidad y a fomentar un entorno seguro e inclusivo para
+                    nuestros estudiantes.
+                  </p>
+                  <ul>
+                    <li>
+                      <i class="bi bi-check-circle"></i>
+                      <span>Personal docente experimentado y comprometido</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle"></i>
+                      <span>Programas extracurriculares completos</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle"></i>
+                      <span>
+                        Instalaciones y tecnología de última generación
+                      </span>
+                    </li>
+                  </ul>
+                  <p>
+                    Únete a nosotros en nuestra misión de formar mentes jóvenes
+                    y dar forma al futuro. Creemos en empoderar a los
+                    estudiantes para que alcancen su máximo potencial, tanto en
+                    lo académico como en su crecimiento personal.
+                  </p>
+
+                  <div class="watch-video d-flex align-items-center position-relative">
+                    <i class="bi bi-play-circle"></i>
+                    <a
+                      href="https://www.youtube.com/watch?v=VideoDeLaEscuela"
+                      class="glightbox stretched-link"
+                    >
+                      Ver Video
+                    </a>
                   </div>
                 </div>
-      
               </div>
-      
             </div>
-      
-          </section>
-      
-          <section id="stats-counter" class="stats-counter section">
+          </div>
+        </section>
+
+        {/*  <section id="stats-counter" class="stats-counter section">
       
             <div class="container section-title" data-aos="fade-up">
               <h2>Stats</h2>
@@ -253,14 +290,14 @@ export default function About() {
       
             </div>
       
-          </section>
-      
-          <section id="alt-services" class="alt-services section">
+          </section> */}
+
+        {/*    <section id="alt-services" class="alt-services section">
       
             <div class="container">
       
               <div class="row justify-content-around gy-4">
-                <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/alt-services.jpg" alt=""/></div>
+                <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="https://normalessuperiores.org.mx/img/en-rural-salaices-chihuahua.jpg" alt=""/></div>
       
                 <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                   <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
@@ -303,67 +340,81 @@ export default function About() {
       
             </div>
       
-          </section>
-      
-          <section id="alt-services-2" class="alt-services-2 section">
-      
-            <div class="container">
-      
-              <div class="row justify-content-around gy-4">
-      
-                <div class="col-lg-6 d-flex flex-column justify-content-center order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
-                  <h3>Enim quis est voluptatibus aliquid consequatur</h3>
-                  <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi</p>
-      
-                  <div class="row">
-      
-                    <div class="col-lg-6 icon-box d-flex">
-                      <i class="bi bi-easel flex-shrink-0"></i>
-                      <div>
-                        <h4>Lorem Ipsum</h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias </p>
-                      </div>
-                    </div>
-      
-                    <div class="col-lg-6 icon-box d-flex">
-                      <i class="bi bi-patch-check flex-shrink-0"></i>
-                      <div>
-                        <h4>Nemo Enim</h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiise</p>
-                      </div>
-                    </div>
-      
-                    <div class="col-lg-6 icon-box d-flex">
-                      <i class="bi bi-brightness-high flex-shrink-0"></i>
-                      <div>
-                        <h4>Dine Pad</h4>
-                        <p>Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit</p>
-                      </div>
-                    </div>
-      
-                    <div class="col-lg-6 icon-box d-flex">
-                      <i class="bi bi-brightness-high flex-shrink-0"></i>
-                      <div>
-                        <h4>Tride clov</h4>
-                        <p>Est voluptatem labore deleniti quis a delectus et. Saepe dolorem libero sit</p>
-                      </div>
-                    </div>
-      
-                  </div>
-      
-                </div>
-      
-                <div class="features-image col-lg-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-                  <img src="assets/img/features-3-2.jpg" alt=""/>
-                </div>
-      
-              </div>
-      
+          </section> */}
+
+<section id="alt-services-2" class="alt-services-2 section">
+  <div class="container">
+    <div class="row justify-content-around gy-4">
+      <div
+        class="col-lg-6 d-flex flex-column justify-content-center order-2 order-lg-1"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <h3>Educación de Excelencia para Todos</h3>
+        <p>
+          En la Escuela Secundaria Greenwood, nos dedicamos a ofrecer una formación integral. 
+          Promovemos el desarrollo académico, emocional y social de nuestros estudiantes para prepararlos para el futuro.
+        </p>
+
+        <div class="row">
+          <div class="col-lg-6 icon-box d-flex">
+            <i class="bi bi-easel flex-shrink-0"></i>
+            <div>
+              <h4>Clases Innovadoras</h4>
+              <p>
+                Utilizamos métodos de enseñanza modernos para fomentar el pensamiento crítico y la creatividad en nuestros estudiantes.
+              </p>
             </div>
-      
-          </section>
-      
-          <section id="team" class="team section">
+          </div>
+
+          <div class="col-lg-6 icon-box d-flex">
+            <i class="bi bi-patch-check flex-shrink-0"></i>
+            <div>
+              <h4>Excelencia Académica</h4>
+              <p>
+                Nuestro enfoque académico se centra en brindar una educación de calidad, que prepara a los estudiantes para los retos del mañana.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 icon-box d-flex">
+            <i class="bi bi-brightness-high flex-shrink-0"></i>
+            <div>
+              <h4>Actividades Extracurriculares</h4>
+              <p>
+                Ofrecemos una amplia gama de actividades que permiten a los estudiantes desarrollar habilidades fuera del aula.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 icon-box d-flex">
+            <i class="bi bi-brightness-high flex-shrink-0"></i>
+            <div>
+              <h4>Ambiente Inclusivo</h4>
+              <p>
+                Fomentamos un ambiente de respeto y apoyo donde cada estudiante puede crecer y prosperar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="features-image col-lg-5 order-1 order-lg-2"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <img
+          src="https://normalessuperiores.org.mx/img/en-rural-salaices-chihuahua.jpg"
+          alt="Imagen de la escuela"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+        {/*    <section id="team" class="team section">
       
             <div class="container section-title" data-aos="fade-up">
               <h2>Team</h2>
@@ -480,9 +531,9 @@ export default function About() {
       
             </div>
       
-          </section>
-      
-          <section id="testimonials" class="testimonials section">
+          </section> */}
+
+        {/*  <section id="testimonials" class="testimonials section">
       
             <div class="container section-title" data-aos="fade-up">
               <h2>Testimonials</h2>
@@ -492,7 +543,7 @@ export default function About() {
             <div class="container" data-aos="fade-up" data-aos-delay="100">
       
               <div class="swiper init-swiper">
-              {/*   <script type="application/json" class="swiper-config">
+                <script type="application/json" class="swiper-config">
                   {
                     "loop": true,
                     "speed": 600,
@@ -516,7 +567,7 @@ export default function About() {
                       }
                     }
                   }
-                </script> */}
+                </script> 
                 <div class="swiper-wrapper">
       
                   <div class="swiper-slide">
@@ -616,94 +667,153 @@ export default function About() {
             </div>
       
           </section>
-      
-        </main>
-      
-        <footer id="footer" class="footer dark-background">
-      
-          <div class="container footer-top">
-            <div class="row gy-4">
-              <div class="col-lg-4 col-md-6 footer-about">
-                <a href="index.html" class="logo d-flex align-items-center">
-                  <span class="sitename">UpConstruction</span>
+       */}
+      </main>
+
+      <footer id="footer" class="footer dark-background">
+        <div class="container footer-top">
+          <div class="row gy-4">
+            <div class="col-lg-4 col-md-6 footer-about">
+              <a href="index.html" class="logo d-flex align-items-center">
+                <span class="sitename">UpConstruction</span>
+              </a>
+              <div class="footer-contact pt-3">
+                <p>A108 Adam Street</p>
+                <p>New York, NY 535022</p>
+                <p class="mt-3">
+                  <strong>Phone:</strong> <span>+1 5589 55488 55</span>
+                </p>
+                <p>
+                  <strong>Email:</strong> <span>info@example.com</span>
+                </p>
+              </div>
+              <div class="social-links d-flex mt-4">
+                <a href="">
+                  <i class="bi bi-twitter-x"></i>
                 </a>
-                <div class="footer-contact pt-3">
-                  <p>A108 Adam Street</p>
-                  <p>New York, NY 535022</p>
-                  <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                  <p><strong>Email:</strong> <span>info@example.com</span></p>
-                </div>
-                <div class="social-links d-flex mt-4">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <a href="">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <a href="">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a href="">
+                  <i class="bi bi-linkedin"></i>
+                </a>
               </div>
-      
-              <div class="col-lg-2 col-md-3 footer-links">
-                <h4>Useful Links</h4>
-                <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Terms of service</a></li>
-                  <li><a href="#">Privacy policy</a></li>
-                </ul>
-              </div>
-      
-              <div class="col-lg-2 col-md-3 footer-links">
-                <h4>Our Services</h4>
-                <ul>
-                  <li><a href="#">Web Design</a></li>
-                  <li><a href="#">Web Development</a></li>
-                  <li><a href="#">Product Management</a></li>
-                  <li><a href="#">Marketing</a></li>
-                  <li><a href="#">Graphic Design</a></li>
-                </ul>
-              </div>
-      
-              <div class="col-lg-2 col-md-3 footer-links">
-                <h4>Hic solutasetp</h4>
-                <ul>
-                  <li><a href="#">Molestiae accusamus iure</a></li>
-                  <li><a href="#">Excepturi dignissimos</a></li>
-                  <li><a href="#">Suscipit distinctio</a></li>
-                  <li><a href="#">Dilecta</a></li>
-                  <li><a href="#">Sit quas consectetur</a></li>
-                </ul>
-              </div>
-      
-              <div class="col-lg-2 col-md-3 footer-links">
-                <h4>Nobis illum</h4>
-                <ul>
-                  <li><a href="#">Ipsam</a></li>
-                  <li><a href="#">Laudantium dolorum</a></li>
-                  <li><a href="#">Dinera</a></li>
-                  <li><a href="#">Trodelas</a></li>
-                  <li><a href="#">Flexo</a></li>
-                </ul>
-              </div>
-      
+            </div>
+
+            <div class="col-lg-2 col-md-3 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <a href="#">Home</a>
+                </li>
+                <li>
+                  <a href="#">About us</a>
+                </li>
+                <li>
+                  <a href="#">Services</a>
+                </li>
+                <li>
+                  <a href="#">Terms of service</a>
+                </li>
+                <li>
+                  <a href="#">Privacy policy</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-2 col-md-3 footer-links">
+              <h4>Our Services</h4>
+              <ul>
+                <li>
+                  <a href="#">Web Design</a>
+                </li>
+                <li>
+                  <a href="#">Web Development</a>
+                </li>
+                <li>
+                  <a href="#">Product Management</a>
+                </li>
+                <li>
+                  <a href="#">Marketing</a>
+                </li>
+                <li>
+                  <a href="#">Graphic Design</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-2 col-md-3 footer-links">
+              <h4>Hic solutasetp</h4>
+              <ul>
+                <li>
+                  <a href="#">Molestiae accusamus iure</a>
+                </li>
+                <li>
+                  <a href="#">Excepturi dignissimos</a>
+                </li>
+                <li>
+                  <a href="#">Suscipit distinctio</a>
+                </li>
+                <li>
+                  <a href="#">Dilecta</a>
+                </li>
+                <li>
+                  <a href="#">Sit quas consectetur</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-2 col-md-3 footer-links">
+              <h4>Nobis illum</h4>
+              <ul>
+                <li>
+                  <a href="#">Ipsam</a>
+                </li>
+                <li>
+                  <a href="#">Laudantium dolorum</a>
+                </li>
+                <li>
+                  <a href="#">Dinera</a>
+                </li>
+                <li>
+                  <a href="#">Trodelas</a>
+                </li>
+                <li>
+                  <a href="#">Flexo</a>
+                </li>
+              </ul>
             </div>
           </div>
-      
-          <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">UpConstruction</strong> <span>All Rights Reserved</span></p>
-            <div class="credits">
-             
-              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
+        </div>
+
+        <div class="container copyright text-center mt-4">
+          <p>
+            © <span>Copyright</span>{" "}
+            <strong class="px-1 sitename">UpConstruction</strong>{" "}
+            <span>All Rights Reserved</span>
+          </p>
+          <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
           </div>
-      
-        </footer>
-      
-        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-      
-        <div id="preloader"></div>
-      
-       
-      
-      </div>
-    )
+        </div>
+      </footer>
+
+      <a
+        href="#"
+        id="scroll-top"
+        class="scroll-top d-flex align-items-center justify-content-center"
+      >
+        <i class="bi bi-arrow-up-short">
+        <IoMdArrowUp className="icon-color" />
+
+
+        </i>
+      </a>
+
+      <div id="preloader"></div>
+    </div>
+  );
 }

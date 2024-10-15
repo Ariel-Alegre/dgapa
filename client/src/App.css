@@ -157,7 +157,7 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 90px;
+  max-height: 100px;
   margin-right: 8px;
 }
 
@@ -3423,5 +3423,30 @@ color: #059652;
   }
 }
 
-
+.whatsapp {
+    position:fixed;
+    width:50px;
+    height:50px;
+    bottom:70px;
+    z-index:9999;
+    right:10px;
+    background-color:#25d366;
+    color:white;
+    border-radius:50px;
+    text-align:center;
+    font-size:25px;
+    text-decoration: none;
+    box-shadow: 0px 0px 10px #25d366 ;
+    padding: 3px;
+  }
+  
+  .whatsapp:hover{
+    box-shadow: 0px 0px 50px #25d366 ;
+  
+  }
+  
+  .icon_whatsapp{
+    color: white;
+    margin-top: 10px;
+  }
 

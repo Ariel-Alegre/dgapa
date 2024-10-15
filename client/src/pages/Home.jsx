@@ -1,3 +1,4 @@
+import ButtonWhatsapp from "../components/ButtonWhatsaapp/ButtonWhatsaapp";
 import HomeComponent from "../components/Home/Home";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
                 <HomeComponent/>
 
             </div>
+            <ButtonWhatsapp/>
         </div>
     )
 }

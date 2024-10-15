@@ -125,7 +125,7 @@ export default function Contact() {
 <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
           <a href="/" class="logo d-flex align-items-center">
-            <img src={require("../../assets/img/logo.png")} alt="" />
+            <img src={require("../../assets/img/logo-removebg.png")} alt="" />
           </a>
 
           <nav id="navmenu" class="navmenu">
