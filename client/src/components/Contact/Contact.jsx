@@ -124,25 +124,26 @@ export default function Contact() {
 
 <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-          <a href="/" class="logo d-flex align-items-center">
+        <Link to="/" class="logo d-flex align-items-center">
+
             <img src={require("../../assets/img/logo-removebg.png")} alt="" />
-          </a>
+          </Link>
 
           <nav id="navmenu" class="navmenu">
             <ul>
               <li>
-                <a href="/" >
+                <Link to="/" >
                   Princípal
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/acerca" >Nosotros</a>
+                <Link to="/acerca">Nosotros</Link>
               </li>
               <li>
-                <a href="/galeria">Galeria</a>
+                <Link to="/galeria" >Galeria</Link>
               </li>
               <li>
-                <a href="/contacto" class="active">Contacto</a>
+                <Link to="/contacto" class="active">Contacto</Link>
               </li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list">

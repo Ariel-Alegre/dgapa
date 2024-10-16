@@ -131,25 +131,26 @@ export default function About() {
     <div class="about-page">
       <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-          <a href="/" class="logo d-flex align-items-center">
+        <Link to="/" class="logo d-flex align-items-center">
+
             <img src={require("../../assets/img/logo-removebg.png")} alt="" />
-          </a>
+          </Link>
 
           <nav id="navmenu" class="navmenu">
             <ul>
               <li>
-                <a href="/" >
+                <Link to="/" >
                   Princípal
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/acerca" class="active">Nosotros</a>
+                <Link to="/acerca" class="active">Nosotros</Link>
               </li>
               <li>
-                <a href="/galeria">Galeria</a>
+                <Link to="/galeria" >Galeria</Link>
               </li>
               <li>
-                <a href="/contacto">Contacto</a>
+                <Link to="/contacto">Contacto</Link>
               </li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list">

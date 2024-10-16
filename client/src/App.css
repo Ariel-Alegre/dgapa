@@ -12,13 +12,15 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Roboto",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Roboto", sans-serif;
+  --nav-font: "Poppins", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
+:root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #364d59; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #52565e; /* Color for headings, subheadings and title throughout the website */
@@ -29,7 +31,12 @@
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: rgba(255, 255, 255, 0.55);  /* The default color of the main navmenu links */
+  --nav-color: rgba(
+    255,
+    255,
+    255,
+    0.55
+  ); /* The default color of the main navmenu links */
   --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
@@ -40,7 +47,6 @@
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 a {
   text-decoration: none;
-
 }
 .light-background {
   --background-color: #f4f7f6;
@@ -146,12 +152,10 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: rgba(255, 255, 255, 0);
   --default-color: #ffffff;
   --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
-
 }
 
 .header .logo img {
@@ -159,16 +163,15 @@ h6 {
   margin-right: 8px;
 }
 
-@media screen and (max-width: 768px ) {
+@media screen and (max-width: 768px) {
   .header .logo img {
     max-height: 60px;
     margin-right: 8px;
   }
 }
 .header a {
-text-decoration: none;
+  text-decoration: none;
 }
-
 
 .header .logo h1 {
   font-size: 24px;
@@ -218,18 +221,18 @@ text-decoration: none;
     position: relative;
   }
 
-  .navmenu>ul>li {
+  .navmenu > ul > li {
     white-space: nowrap;
     padding: 15px 14px;
   }
 
-  .navmenu>ul>li:last-child {
+  .navmenu > ul > li:last-child {
     padding-right: 0;
   }
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-color);
+    color: black;
     font-size: 14px;
     padding: 0 2px;
     font-family: var(--nav-font);
@@ -251,7 +254,7 @@ text-decoration: none;
     transition: 0.3s;
   }
 
-  .navmenu>ul>li>a:before {
+  .navmenu > ul > li > a:before {
     content: "";
     position: absolute;
     height: 2px;
@@ -264,16 +267,16 @@ text-decoration: none;
   }
 
   .navmenu a:hover:before,
-  .navmenu li:hover>a:before,
+  .navmenu li:hover > a:before,
   .navmenu .active:before {
     visibility: visible;
     width: 100%;
   }
 
-  .navmenu li:hover>a,
+  .navmenu li:hover > a,
   .navmenu .active,
   .navmenu .active:focus {
-    color: var(--nav-hover-color);
+    color: black;
   }
 
   .navmenu .dropdown ul {
@@ -310,11 +313,11 @@ text-decoration: none;
 
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
-  .navmenu .dropdown ul li:hover>a {
+  .navmenu .dropdown ul li:hover > a {
     color: #0091ff;
   }
 
-  .navmenu .dropdown:hover>ul {
+  .navmenu .dropdown:hover > ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
@@ -326,7 +329,7 @@ text-decoration: none;
     visibility: hidden;
   }
 
-  .navmenu .dropdown .dropdown:hover>ul {
+  .navmenu .dropdown .dropdown:hover > ul {
     opacity: 1;
     top: 0;
     left: -100%;
@@ -337,7 +340,7 @@ text-decoration: none;
 /* Mobile Navigation */
 @media (max-width: 1199px) {
   .mobile-nav-toggle {
-    color: var(--nav-color);
+    color: black;
     font-size: 28px;
     line-height: 0;
     margin-right: 10px;
@@ -428,7 +431,7 @@ text-decoration: none;
     background-color: rgba(33, 37, 41, 0.1);
   }
 
-  .navmenu .dropdown>.dropdown-active {
+  .navmenu .dropdown > .dropdown-active {
     display: block;
     background-color: rgba(33, 37, 41, 0.03);
   }
@@ -438,7 +441,8 @@ text-decoration: none;
   }
 
   .mobile-nav-active .mobile-nav-toggle {
-    color: #fff;
+    color: black;
+
     position: absolute;
     font-size: 32px;
     top: 15px;
@@ -455,7 +459,7 @@ text-decoration: none;
     transition: 0.3s;
   }
 
-  .mobile-nav-active .navmenu>ul {
+  .mobile-nav-active .navmenu > ul {
     display: block;
   }
 }
@@ -579,7 +583,8 @@ text-decoration: none;
 .footer .copyright {
   padding-top: 25px;
   padding-bottom: 25px;
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-top: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .footer .copyright p {
@@ -590,7 +595,6 @@ text-decoration: none;
   margin-top: 8px;
   font-size: 13px;
 }
-
 
 /*--------------------------------------------------------------
 # Preloader
@@ -671,6 +675,7 @@ text-decoration: none;
   [data-aos-delay] {
     transition-delay: 0 !important;
   }
+
 }
 
 /*--------------------------------------------------------------
@@ -682,15 +687,19 @@ text-decoration: none;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 160px 0 60px 0;
+  padding: 300px 0 60px 0;
   text-align: center;
   position: relative;
-  background-image: url("./assets/img/carrusel-1.png")
+  background-image: url("./assets/img/carrusel-1.png");
 }
 
 .page-title:before {
   content: "";
-  background-color: color-mix(in srgb, var(--background-color), transparent 40%);
+  background-color: color-mix(
+    in srgb,
+    var(--background-color),
+    transparent 40%
+  );
   position: absolute;
   inset: 0;
 }
@@ -712,11 +721,11 @@ text-decoration: none;
   font-weight: 500;
 }
 
-.page-title .breadcrumbs ol li+li {
+.page-title .breadcrumbs ol li + li {
   padding-left: 10px;
 }
 
-.page-title .breadcrumbs ol li+li::before {
+.page-title .breadcrumbs ol li + li::before {
   content: "/";
   display: inline-block;
   padding-right: 10px;
@@ -736,7 +745,6 @@ section,
 }
 
 @media (max-width: 1199px) {
-
   section,
   .section {
     scroll-margin-top: 76px;
@@ -800,8 +808,7 @@ section,
   padding: 140px 0 60px 0;
 }
 
-@media (max-width: 768px),
-(max-height: 480px) {
+@media (max-width: 768px), (max-height: 480px) {
   .hero .info {
     padding: 100px 50px 60px 50px;
   }
@@ -885,7 +892,11 @@ section,
 
 .hero .carousel-item::before {
   content: "";
-  background-color: color-mix(in srgb, var(--background-color), transparent 30%);
+  background-color: color-mix(
+    in srgb,
+    var(--background-color),
+    transparent 30%
+  );
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -996,31 +1007,35 @@ section,
   margin-bottom: 20px;
 }
 
-.get-started .php-email-form input[type=text],
-.get-started .php-email-form input[type=email],
+.get-started .php-email-form input[type="text"],
+.get-started .php-email-form input[type="email"],
 .get-started .php-email-form textarea {
   font-size: 14px;
   padding: 10px 15px;
   box-shadow: none;
   border-radius: 0;
   color: var(--default-color);
-  background-color: color-mix(in srgb, var(--background-color), transparent 20%);
+  background-color: color-mix(
+    in srgb,
+    var(--background-color),
+    transparent 20%
+  );
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.get-started .php-email-form input[type=text]:focus,
-.get-started .php-email-form input[type=email]:focus,
+.get-started .php-email-form input[type="text"]:focus,
+.get-started .php-email-form input[type="email"]:focus,
 .get-started .php-email-form textarea:focus {
   border-color: #0091ff;
 }
 
-.get-started .php-email-form input[type=text]::placeholder,
-.get-started .php-email-form input[type=email]::placeholder,
+.get-started .php-email-form input[type="text"]::placeholder,
+.get-started .php-email-form input[type="email"]::placeholder,
 .get-started .php-email-form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-.get-started .php-email-form button[type=submit] {
+.get-started .php-email-form button[type="submit"] {
   color: var(--contrast-color);
   background: #0091ff;
   border: 0;
@@ -1029,7 +1044,7 @@ section,
   border-radius: 4px;
 }
 
-.get-started .php-email-form button[type=submit]:hover {
+.get-started .php-email-form button[type="submit"]:hover {
   background: color-mix(in srgb, #0091ff, transparent 20%);
 }
 
@@ -1120,7 +1135,8 @@ section,
   font-size: 22px;
   position: relative;
   display: inline-block;
-  border-bottom: 4px solid color-mix(in srgb, var(--heading-color), transparent 90%);
+  border-bottom: 4px solid
+    color-mix(in srgb, var(--heading-color), transparent 90%);
   transition: 0.3s;
 }
 
@@ -1135,7 +1151,6 @@ section,
   display: inline-block;
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
-
 
 .services .service-card {
   background-color: var(--surface-color);
@@ -1313,7 +1328,8 @@ section,
   cursor: pointer;
   height: 100%;
   border: 0;
-  border-bottom: 4px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-bottom: 4px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .features .nav-link i {
@@ -1994,7 +2010,8 @@ section,
   display: block;
   line-height: 1;
   padding: 8px 0 8px 15px;
-  border-left: 3px solid color-mix(in srgb, var(--default-color), transparent 70%);
+  border-left: 3px solid
+    color-mix(in srgb, var(--default-color), transparent 70%);
   margin: 20px 0;
   color: color-mix(in srgb, var(--default-color), transparent 20%);
   transition: 0.3s;
@@ -2083,7 +2100,6 @@ section,
 }
 
 @media (max-width: 575px) {
-
   .project-details .swiper-button-prev,
   .project-details .swiper-button-next {
     display: none;
@@ -2420,7 +2436,7 @@ section,
   margin: 0;
 }
 
-.blog-details .meta-top ul li+li {
+.blog-details .meta-top ul li + li {
   padding-left: 20px;
 }
 
@@ -2440,7 +2456,8 @@ section,
 
 .blog-details .meta-bottom {
   padding-top: 10px;
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-top: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .blog-details .meta-bottom i {
@@ -2479,7 +2496,7 @@ section,
   display: inline-block;
 }
 
-.blog-details .meta-bottom .tags li+li::before {
+.blog-details .meta-bottom .tags li + li::before {
   padding-right: 6px;
   color: var(--default-color);
   content: ",";
@@ -2724,8 +2741,8 @@ section,
   }
 }
 
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email],
+.contact .php-email-form input[type="text"],
+.contact .php-email-form input[type="email"],
 .contact .php-email-form textarea {
   font-size: 14px;
   padding: 10px 15px;
@@ -2736,19 +2753,19 @@ section,
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.contact .php-email-form input[type=text]:focus,
-.contact .php-email-form input[type=email]:focus,
+.contact .php-email-form input[type="text"]:focus,
+.contact .php-email-form input[type="email"]:focus,
 .contact .php-email-form textarea:focus {
   border-color: #0091ff;
 }
 
-.contact .php-email-form input[type=text]::placeholder,
-.contact .php-email-form input[type=email]::placeholder,
+.contact .php-email-form input[type="text"]::placeholder,
+.contact .php-email-form input[type="email"]::placeholder,
 .contact .php-email-form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .php-email-form button[type="submit"] {
   color: var(--contrast-color);
   background: #0091ff;
   border: 0;
@@ -2757,7 +2774,7 @@ section,
   border-radius: 50px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .php-email-form button[type="submit"]:hover {
   background: color-mix(in srgb, #0091ff, transparent 20%);
 }
 
@@ -2802,7 +2819,7 @@ section,
   transition: 0.3s;
 }
 
-.search-widget form input[type=text] {
+.search-widget form input[type="text"] {
   border: 0;
   padding: 4px;
   border-radius: 4px;
@@ -2811,7 +2828,7 @@ section,
   color: var(--default-color);
 }
 
-.search-widget form input[type=text]:focus {
+.search-widget form input[type="text"]:focus {
   outline: none;
 }
 
@@ -2946,13 +2963,15 @@ section,
 
 .contact-whatsapp {
 }
-.contact-whatsapp a{
-color: #059652;
+.contact-whatsapp a {
+  color: #059652;
   font-size: 50px;
 }
 
 .maps {
-  border:0; width: 100%; height: 400px;
+  border: 0;
+  width: 100%;
+  height: 400px;
 }
 
 .form-container {
@@ -2970,11 +2989,10 @@ color: #059652;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  width:600px;
+  width: 600px;
   max-width: 95%;
 
   font-family: Arial, sans-serif;
-
 }
 .booking-container h2 {
   text-align: center;
@@ -3170,7 +3188,8 @@ color: #059652;
   font-weight: bold;
 }
 
-.flight-form input, .flight-form textarea {
+.flight-form input,
+.flight-form textarea {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -3208,11 +3227,9 @@ color: #059652;
   .flight-form {
     grid-template-columns: 1fr;
   }
-
 }
 
 .title-client {
-
   max-width: 900px;
 
   margin: auto;
@@ -3284,16 +3301,17 @@ color: #059652;
 
 .mapsvg-region {
   cursor: pointer;
-    stroke: #fff;
-    stroke-width: 1px;
-    fill: #08245a;
+  stroke: #fff;
+  stroke-width: 1px;
+  fill: #08245a;
+  z-index: -2;
 }
 
 .mapsvg-region:hover {
   cursor: pointer;
-    stroke: #fff;
-    stroke-width: 1px;
-    fill: #0d6efd;
+  stroke: #fff;
+  stroke-width: 1px;
+  fill: #0d6efd;
 }
 
 .map-container {
@@ -3381,7 +3399,6 @@ color: #059652;
 .timeline-item.right .timeline-content {
   margin-left: 0; /* No margen a la izquierda para elementos a la derecha */
   margin-right: 2rem; /* Espaciado a la derecha */
-
 }
 
 .timeline-content:hover {
@@ -3392,7 +3409,6 @@ color: #059652;
   border: none; /* Sin borde para las tarjetas */
   max-width: 500px;
   width: 100%;
-
 }
 
 .card-img-top {
@@ -3417,46 +3433,73 @@ color: #059652;
 
 @media (min-width: 768px) {
   .timeline-item.left .timeline-content {
-      margin-left: auto; /* Para centrar en pantallas más grandes */
+    margin-left: auto; /* Para centrar en pantallas más grandes */
   }
 }
 
 .whatsapp {
-    position:fixed;
-    width:50px;
-    height:50px;
-    bottom:70px;
-    z-index:9999;
-    right:10px;
-    background-color:#25d366;
-    color:white;
-    border-radius:50px;
-    text-align:center;
-    font-size:25px;
-    text-decoration: none;
-    box-shadow: 0px 0px 10px #25d366 ;
-    padding: 3px;
-  }
-  
-  .whatsapp:hover{
-    box-shadow: 0px 0px 50px #25d366 ;
-  
-  }
-  
-  .icon_whatsapp{
-    color: white;
-    margin-top: 10px;
-  }
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 70px;
+  z-index: 9999;
+  right: 10px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 25px;
+  text-decoration: none;
+  box-shadow: 0px 0px 10px #25d366;
+  padding: 3px;
+}
 
-  .gallery-card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1em;
-  }
+.whatsapp:hover {
+  box-shadow: 0px 0px 50px #25d366;
+}
 
-  .img-gallery {
-    width: 100%;
-    max-width: 345px;
-  }
+.icon_whatsapp {
+  color: white;
+  margin-top: 10px;
+}
 
+.gallery-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 3em;
+}
+
+.img-gallery {
+  width: 100%;
+  max-width: 345px;
+}
+
+/* App.css */
+.hover-container {
+  position: relative;
+  display: inline-block;
+}
+
+.card-toolip {
+  position: absolute;
+  top: 110px; /* Ajusta la posición de la tarjeta */
+  left: 0;
+  width: 200px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+.page-schools {
+  margin-top: 5em;
+}
+
+@media screen and (max-width: 768px) {
+  .page-schools {
+    margin-top: 2em;
+  }
+}
