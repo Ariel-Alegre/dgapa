@@ -1,40 +1,37 @@
 import React, { useEffect, useState } from "react";
-import AOS from "aos";
-import imagesLoaded from "imagesloaded";
-import Isotope from "isotope-layout";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Link, useLocation } from "react-router-dom";
-import GLightbox from "glightbox"; // Importa GLightbox
 import { BsList } from "react-icons/bs";
 import { IoMdArrowUp } from "react-icons/io";
-import { Image } from "antd";
-import "glightbox/dist/css/glightbox.css"; // Asegúrate de importar el CSS
 import { Global } from "../../assets/utils/utils";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import CardActionArea from "@mui/material/CardActionArea";
+
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import EmailIcon from "@mui/icons-material/Email";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import axios from "axios";
 
-
-export default function Gallery() {
+export default function AllSchools() {
   const { pathname } = useLocation();
-  const [allPhoto, setAllPhoto] = useState([]);
-  console.log(allPhoto)
+  const [allSchool, setAllschool] = useState([]);
 
   useEffect(() => {
     Global();
-
   }, []);
-
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 10);
   }, [pathname]);
 
- const AllGallery = async() => {
-  const response = await axios.get("http://localhost:3001/api/gallerys");
-  setAllPhoto(response.data.data)
-
- }
+  const AllSchool = async () => {
+    const response = await axios.get("http://localhost:3001/api/escuelas");
+    setAllschool(response.data.data);
+  };
 
   useEffect(() => {
-    AllGallery()
+    AllSchool();
   }, []);
   return (
     <div class="about-page">
@@ -53,9 +50,7 @@ export default function Gallery() {
                 <Link to="/acerca">Nosotros</Link>
               </li>
               <li>
-                <Link to="/galeria" class="active">
-                  Galeria
-                </Link>
+                <Link to="/galeria">Galeria</Link>
               </li>
               <li>
                 <Link to="/contacto">Contacto</Link>
@@ -68,27 +63,53 @@ export default function Gallery() {
         </div>
       </header>
       <main class="main">
-        <div class="page-title dark-background">
-          <div
-            class="container position-relative"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <h1>Galeria</h1>
-          </div>
-        </div>
-
         <section id="about" class="about section" data-aos="fade-up">
+          <div class="page-schools dark-background">
+            <div
+              class="container position-relative"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <h1>Escuelas de México</h1>
+            </div>
+          </div>
           <div class="container gallery-card">
+            {allSchool?.map((data) => (
+              <Card sx={{ maxWidth: 345, width: 345 }}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={data.image}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {data.name}
+                    </Typography>
 
-            {allPhoto?.map((data) => (
-
-            <Image
-              className="img-gallery"
-              src={data.imageGallery}
-            />
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
+                    >
+                      <EmailIcon /> {data.email}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
+                    >
+                      <LocalPhoneIcon /> {data.phone}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
+                    >
+                      <LocationOnIcon /> {data.province}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
             ))}
-       
           </div>
         </section>
 
@@ -347,8 +368,6 @@ export default function Gallery() {
           </section>
        */}
       </main>
-
-   
 
       <a
         href="#"

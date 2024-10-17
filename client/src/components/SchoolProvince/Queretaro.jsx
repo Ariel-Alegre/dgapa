@@ -1,26 +1,26 @@
 import React, { useEffect } from "react";
-import AOS from "aos";
-import imagesLoaded from "imagesloaded";
-import Isotope from "isotope-layout";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Link } from "react-router-dom";
-import GLightbox from "glightbox"; // Importa GLightbox
+import { Link,useLocation } from "react-router-dom";
 import { BsList } from "react-icons/bs";
 import { IoMdArrowUp } from "react-icons/io";
-import { Image } from "antd";
-import "glightbox/dist/css/glightbox.css"; // Asegúrate de importar el CSS
 import { Global } from "../../assets/utils/utils";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import CardActionArea from '@mui/material/CardActionArea';
-import CardActions from '@mui/material/CardActions';
+
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import EmailIcon from '@mui/icons-material/Email';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 export default function Queretaro() {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     Global();
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 10);
+  }, [pathname]);
   return (
     <div class="about-page">
       <header id="header" class="header d-flex align-items-center fixed-top">
@@ -72,16 +72,23 @@ export default function Queretaro() {
         <CardMedia
           component="img"
           height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          image="https://normalessuperiores.org.mx//img/timeline/queretaro/ensq.jpg"
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h5" component="div" >
+          Escuela Normal Superior de Querétaro
+          </Typography>
+         
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <EmailIcon/> info@ensq.edu.mx
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           <LocalPhoneIcon/>  (442) 214 4741 y 49 41    
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <LocationOnIcon/> Querétaro
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -92,16 +99,23 @@ export default function Queretaro() {
         <CardMedia
           component="img"
           height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          image="https://normalessuperiores.org.mx//img/timeline/queretaro/ensq.jpg"
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h5" component="div" >
+          Escuela Normal Superior de Querétaro
+          </Typography>
+         
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <EmailIcon/> info@ensq.edu.mx
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           <LocalPhoneIcon/>  (442) 214 4741 y 49 41    
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <LocationOnIcon/> Querétaro
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -112,16 +126,23 @@ export default function Queretaro() {
         <CardMedia
           component="img"
           height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          image="https://normalessuperiores.org.mx//img/timeline/queretaro/ensq.jpg"
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h5" component="div" >
+          Escuela Normal Superior de Querétaro
+          </Typography>
+         
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <EmailIcon/> info@ensq.edu.mx
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           <LocalPhoneIcon/>  (442) 214 4741 y 49 41    
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <LocationOnIcon/> Querétaro
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -132,16 +153,23 @@ export default function Queretaro() {
         <CardMedia
           component="img"
           height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          image="https://normalessuperiores.org.mx//img/timeline/queretaro/ensq.jpg"
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h5" component="div" >
+          Escuela Normal Superior de Querétaro
+          </Typography>
+         
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <EmailIcon/> info@ensq.edu.mx
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           <LocalPhoneIcon/>  (442) 214 4741 y 49 41    
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <LocationOnIcon/> Querétaro
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -152,16 +180,23 @@ export default function Queretaro() {
         <CardMedia
           component="img"
           height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          image="https://normalessuperiores.org.mx//img/timeline/queretaro/ensq.jpg"
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h5" component="div" >
+          Escuela Normal Superior de Querétaro
+          </Typography>
+         
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <EmailIcon/> info@ensq.edu.mx
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           <LocalPhoneIcon/>  (442) 214 4741 y 49 41    
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <LocationOnIcon/> Querétaro
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -172,16 +207,23 @@ export default function Queretaro() {
         <CardMedia
           component="img"
           height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          image="https://normalessuperiores.org.mx//img/timeline/queretaro/ensq.jpg"
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h5" component="div" >
+          Escuela Normal Superior de Querétaro
+          </Typography>
+         
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <EmailIcon/> info@ensq.edu.mx
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           <LocalPhoneIcon/>  (442) 214 4741 y 49 41    
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <LocationOnIcon/> Querétaro
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -192,16 +234,23 @@ export default function Queretaro() {
         <CardMedia
           component="img"
           height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          image="https://normalessuperiores.org.mx//img/timeline/queretaro/ensq.jpg"
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h5" component="div" >
+          Escuela Normal Superior de Querétaro
+          </Typography>
+         
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <EmailIcon/> info@ensq.edu.mx
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           <LocalPhoneIcon/>  (442) 214 4741 y 49 41    
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <LocationOnIcon/> Querétaro
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -212,181 +261,29 @@ export default function Queretaro() {
         <CardMedia
           component="img"
           height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          image="https://normalessuperiores.org.mx//img/timeline/queretaro/ensq.jpg"
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography gutterBottom variant="h5" component="div" >
+          Escuela Normal Superior de Querétaro
+          </Typography>
+         
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <EmailIcon/> info@ensq.edu.mx
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           <LocalPhoneIcon/>  (442) 214 4741 y 49 41    
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+           <LocationOnIcon/> Querétaro
           </Typography>
         </CardContent>
       </CardActionArea>
     
     </Card>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
     
-    </Card>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    
-    </Card>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    
-    </Card>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    
-    </Card>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    
-    </Card>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    
-    </Card>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    
-    </Card>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    
-    </Card>
           </div>
         </section>
 
