@@ -3321,7 +3321,6 @@ section,
 }
 
 .map-container {
-  position: relative;
 }
 
 .icon-color {
@@ -3756,5 +3755,15 @@ button {
   .convocation-card {
     font-size: 14px;
   }
+}
+
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  pointer-events: none; /* Para evitar que el tooltip interfiera con el mouse */
+  z-index: 1000;
 }
 

@@ -75,6 +75,7 @@ export default function AllSchools() {
           </div>
           <div class="container gallery-card">
             {allSchool?.map((data) => (
+              <Link to={`/escuelas-detalles/${data.id}`} style={{textDecoration: "none"}}>
               <Card sx={{ maxWidth: 345, width: 345 }}>
                 <CardActionArea>
                   <CardMedia
@@ -109,6 +110,8 @@ export default function AllSchools() {
                   </CardContent>
                 </CardActionArea>
               </Card>
+              </Link>
+
             ))}
           </div>
         </section>

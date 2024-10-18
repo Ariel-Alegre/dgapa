@@ -67,6 +67,18 @@ const RegisterSchool = () => {
     } finally {
       setLoadingSuccess(false);
       alert("Escuela registrada correctamente");
+      setFormData({
+
+      name: "",
+      address: "",
+      phone: "",
+      email: "",
+      year_of_operation: "",
+      province: "",
+      image: null,
+    })
+    setPreviewImage(null)
+
     }
   };
   

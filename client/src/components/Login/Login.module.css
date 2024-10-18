@@ -1,0 +1,13 @@
+.btn-login {
+  background: blue;
+}
+
+.logo {
+  width: 14em;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 10em;
+  }
+}

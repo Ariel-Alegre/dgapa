@@ -59,3 +59,32 @@ export const DeleteSchool = (schoolId) => {
   };
 };
 
+export const login = (email, password) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("https://atrading-production.up.railway.app/login", {
+        email,
+        password,
+      });
+
+      if (response.status === 200 && response.data.token) {
+        localStorage.setItem("token", response.data.token);
+
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: {
+            token: response.data.token,
+            role: response.data.role,
+          },
+        });
+
+        return true; // Autenticación exitosa
+      } else {
+        throw new Error("Error durante el inicio de sesión.");
+      }
+    } catch (error) {
+      dispatch({ type: "LOGIN_ERROR" });
+      return false; // Autenticación fallida
+    }
+  };
+};

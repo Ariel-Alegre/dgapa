@@ -8,6 +8,7 @@ import { Global } from "../../assets/utils/utils";
 const SchoolDetails = () => {
   const {schoolId} = useParams()
   const [detailsSchool, setDetailsSchool] = React.useState([]);
+  console.log(detailsSchool)
   React.useEffect(() => {
     Global();
   }, []);
@@ -51,7 +52,7 @@ const SchoolDetails = () => {
           </nav>
         </div>
       </header>
-    <div className="school-container">
+    <div className="school-container" data-aos="fade-up">
       
     <header className="school-header">
       <h1>{detailsSchool?.name}</h1>
@@ -66,7 +67,7 @@ const SchoolDetails = () => {
 {/*         <p><strong>Municipio:</strong> {detailsSchool?.municipality}</p> */}
         {/* <p><strong>Código Postal:</strong> {detailsSchool?.postalCode}</p> */}
         <p><strong>Email:</strong> <a href={`mailto:${detailsSchool?.email}`}>{detailsSchool?.email}</a></p>
-        <p><strong>Año de Fundación:</strong> {detailsSchool?.foundationYear}</p>
+        <p><strong>Año de Fundación:</strong> {detailsSchool?.year_of_operation}</p>
         <p><strong>Teléfonos:</strong> {detailsSchool?.phone}</p>
       </div>
       

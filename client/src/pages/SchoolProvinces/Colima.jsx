@@ -1,11 +1,11 @@
-import QuerateroComponent from '../../components/SchoolProvince/Queretaro';
+import ColimaComponent from '../../components/SchoolProvince/Colima';
 import ButtonWhatsapp from "../../components/ButtonWhatsaapp/ButtonWhatsaapp";
 import Footer from '../../components/Footer/Footer';
 
-export default function Queretaro() {
+export default function Colima() {
     return (
         <div>
-<QuerateroComponent/>
+<ColimaComponent/>
 <ButtonWhatsapp/>
 <Footer/>
 

@@ -14,7 +14,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import axios from "axios";
 
-export default function Querétaro() {
+export default function BajaCaliforniaSur() {
   const { pathname } = useLocation();
   const [allSchool, setAllschool] = useState([]);
 
@@ -35,7 +35,7 @@ export default function Querétaro() {
     AllSchool();
   }, []);
 
-  const durangoSchools = allSchool.filter((data) => data.province === "Querétaro");
+  const durangoSchools = allSchool.filter((data) => data.province === "Baja California Sur");
 
   return (
     <div className="about-page">
@@ -74,13 +74,13 @@ export default function Querétaro() {
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              <h1>Escuelas de Querétaro</h1>
+              <h1>Escuelas de Baja California Sur</h1>
             </div>
           </div>
           <div className="container gallery-card">
             {durangoSchools.length > 0 ? (
               durangoSchools.map((data) => (
-                <Link to={`/escuelas-detalles/${data.id}`} key={data.id} style={{textDecoration: "none"}}>
+                <Link to={`/escuelas-detalles/${data.id}`} key={data.id}style={{textDecoration: "none"}}>
                   <Card sx={{ maxWidth: 345, width: 345 }}>
                     <CardActionArea>
                       <CardMedia
@@ -118,7 +118,7 @@ export default function Querétaro() {
               ))
             ) : (
               <Typography variant="h6" sx={{ textAlign: "center", marginTop: 2 }}>
-                No hay escuelas registradas en Querétaro.
+                No hay escuelas registradas en Baja California Sur.
               </Typography>
             )}
           </div>

@@ -6,40 +6,38 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import SchoolIcon from '@mui/icons-material/School';
 import EditIcon from '@mui/icons-material/Edit';
 import CollectionsIcon from '@mui/icons-material/Collections';
+
 const drawerWidth = 240;
 
 function Admin(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState(0); // Estado para la opción seleccionada
+  const location = useLocation(); // Para detectar cambios en la URL
 
   const handleDrawerClose = () => {
-    setIsClosing(true);
     setMobileOpen(false);
   };
 
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
+  // Función para manejar el cambio de selección
+  const handleListItemClick = (index) => {
+    setSelectedIndex(index);
   };
 
   const drawer = (
@@ -47,41 +45,51 @@ function Admin(props) {
       <Toolbar />
       <Divider />
       <List>
-        <Link to= "publicar-escuela" style={{textDecoration: "none", color: "black"}}>
-          <ListItem  disablePadding>
-            <ListItemButton>
+        <Link to="publicar-escuela" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={selectedIndex === 0}
+              onClick={() => handleListItemClick(0)} // Cambia el índice de la opción seleccionada
+              sx={{ backgroundColor: selectedIndex === 0 ? '#f0f0f0' : 'transparent' }} // Color si está seleccionada
+            >
               <ListItemIcon>
-                 <SchoolIcon />
+                <SchoolIcon />
               </ListItemIcon>
-              <ListItemText primary={"Publicar escuela"} />
+              <ListItemText primary="Publicar escuela" />
             </ListItemButton>
           </ListItem>
         </Link>
 
-        <Link to= "actualizar-escuela" style={{textDecoration: "none", color: "black"}}>
-          <ListItem  disablePadding>
-            <ListItemButton>
+        <Link to="actualizar-escuela" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={selectedIndex === 1}
+              onClick={() => handleListItemClick(1)} // Cambia el índice
+              sx={{ backgroundColor: selectedIndex === 1 ? '#f0f0f0' : 'transparent' }}
+            >
               <ListItemIcon>
-                 <EditIcon />
+                <EditIcon />
               </ListItemIcon>
-              <ListItemText primary={"Actualizar escuela"} />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link to= "publicar-galeria" style={{textDecoration: "none", color: "black"}}>
-
-          <ListItem   disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <CollectionsIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Publicar galeria"} />
+              <ListItemText primary="Actualizar escuela" />
             </ListItemButton>
           </ListItem>
         </Link>
 
+        <Link to="publicar-galeria" style={{ textDecoration: 'none', color: 'black' }}>
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={selectedIndex === 2}
+              onClick={() => handleListItemClick(2)} // Cambia el índice
+              sx={{ backgroundColor: selectedIndex === 2 ? '#f0f0f0' : 'transparent' }}
+            >
+              <ListItemIcon>
+                <CollectionsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Publicar galeria" />
+            </ListItemButton>
+          </ListItem>
+        </Link>
       </List>
-    
     </div>
   );
 
@@ -118,12 +126,10 @@ function Admin(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
@@ -151,13 +157,14 @@ function Admin(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-  <Outlet/>
-  
+        <Outlet />
       </Box>
     </Box>
   );
 }
 
-
+Admin.propTypes = {
+  window: PropTypes.func,
+};
 
 export default Admin;
