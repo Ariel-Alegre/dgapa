@@ -6,12 +6,12 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE, DB_PORT
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
+const sequelize = new Sequelize(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
   logging: false,
   native: false,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  dialect: 'postgres',
+  dialect: 'mysql',
 });
 
 const basename = path.basename(__filename);

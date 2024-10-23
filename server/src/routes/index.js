@@ -1,11 +1,11 @@
 
 const { Router  }= require('express');
 const router = Router();
-const routerBooking = require('./bookings')
+const routerSchools= require('./schools')
 
 
 
-router.use('/api', routerBooking ) 
+router.use('/api', routerSchools ) 
 
 
 
