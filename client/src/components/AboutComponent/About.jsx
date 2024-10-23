@@ -5,7 +5,6 @@ import { IoMdArrowUp } from "react-icons/io";
 import { Global } from "../../assets/utils/utils";
 
 export default function About() {
-
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -19,23 +18,22 @@ export default function About() {
     <div class="about-page">
       <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-        <Link to="/" class="logo d-flex align-items-center">
-
+          <Link to="/" class="logo d-flex align-items-center">
             <img src={require("../../assets/img/logo-removebg.png")} alt="" />
           </Link>
 
           <nav id="navmenu" class="navmenu">
             <ul>
               <li>
-                <Link to="/" >
-                  Princípal
+                <Link to="/">Princípal</Link>
+              </li>
+              <li>
+                <Link to="/acerca" class="active">
+                  Nosotros
                 </Link>
               </li>
               <li>
-                <Link to="/acerca" class="active">Nosotros</Link>
-              </li>
-              <li>
-                <Link to="/galeria" >Galeria</Link>
+                <Link to="/galeria">Galeria</Link>
               </li>
               <li>
                 <Link to="/contacto">Contacto</Link>
@@ -49,9 +47,12 @@ export default function About() {
       </header>
       <main class="main">
         <div class="page-title dark-background">
-          <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+          <div
+            class="container position-relative"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <h1>Acerca de nosotros</h1>
-       
           </div>
         </div>
 
@@ -63,47 +64,34 @@ export default function About() {
                 data-aos="zoom-out"
                 data-aos-delay="200"
               >
-                <img src="https://normalessuperiores.org.mx/img/en-rural-salaices-chihuahua.jpg" />
+                <img src={require("../../assets/img/nosotros.jpg")} alt="" />
               </div>
 
               <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-                <h2 class="inner-title">
-                  Bienvenidos a la Escuela Secundaria Greenwood
-                </h2>
+                <h2 class="inner-title">Presentación</h2>
                 <div class="our-story">
-                  <h4>Fundada en 1965</h4>
-                  <h3>Nuestra Historia</h3>
                   <p>
-                    La Escuela Secundaria Greenwood ha sido un referente de
-                    excelencia académica y participación comunitaria durante más
-                    de 50 años. Nos comprometemos a brindar una educación de
-                    calidad y a fomentar un entorno seguro e inclusivo para
-                    nuestros estudiantes.
-                  </p>
-                  <ul>
-                    <li>
-                      <i class="bi bi-check-circle"></i>
-                      <span>Personal docente experimentado y comprometido</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circle"></i>
-                      <span>Programas extracurriculares completos</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circle"></i>
-                      <span>
-                        Instalaciones y tecnología de última generación
-                      </span>
-                    </li>
-                  </ul>
-                  <p>
-                    Únete a nosotros en nuestra misión de formar mentes jóvenes
-                    y dar forma al futuro. Creemos en empoderar a los
-                    estudiantes para que alcancen su máximo potencial, tanto en
-                    lo académico como en su crecimiento personal.
+                    El interés por conocer y comprender el subsistema de
+                    formación de las Escuelas Normales Superiores resulta una
+                    tarea de gran relevancia porque representan el espacio
+                    institucional donde se forman, se negocian, se dirimen, e
+                    incluso se imponen las decisiones de política educativa y de
+                    formación que abordan el rumbo de la educación secundaria en
+                    el país. Las Escuelas Normales Superiores, en su conjunto,
+                    son las responsables de la formación, la investigación y la
+                    difusión del conocimiento, por lo cual resultan ser un
+                    objeto de estudio atractivo; conocerlas y comprenderlas nos
+                    conduce a desentrañar su desempeño y resultados en función
+                    de ciertas limitaciones que enfrentan al formar parte del
+                    sistema de educación de tercer nivel de manera tardía. En
+                    ese sentido, sirva este espacio para explorar, conocer y
+                    ubicar el conjunto de las Escuelas Normales Superiores que
+                    se encuentran a lo largo y ancho del territorio. Representa
+                    un espacio para hacerlas visibles dentro del subsistema de
+                    instituciones de educación superior en México.
                   </p>
 
-                  <div class="watch-video d-flex align-items-center position-relative">
+                  {/*     <div class="watch-video d-flex align-items-center position-relative">
                     <i class="bi bi-play-circle"></i>
                     <a
                       href="https://www.youtube.com/watch?v=VideoDeLaEscuela"
@@ -111,7 +99,7 @@ export default function About() {
                     >
                       Ver Video
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -225,7 +213,7 @@ export default function About() {
       
           </section> */}
 
-<section id="alt-services-2" class="alt-services-2 section">
+        {/* <section id="alt-services-2" class="alt-services-2 section">
   <div class="container">
     <div class="row justify-content-around gy-4">
       <div
@@ -294,8 +282,7 @@ export default function About() {
       </div>
     </div>
   </div>
-</section>
-
+</section> */}
 
         {/*    <section id="team" class="team section">
       
@@ -552,14 +539,12 @@ export default function About() {
           </section>
        */}
 
-<section id="services" class="services section light-background">
+        <section id="services" class="services section light-background">
           <div class="container section-title" data-aos="fade-up">
             <h2>Historia a través del tiempo</h2>
           </div>
 
-          <div class="container" 
-          data-aos="fade-up"
-          >
+          <div class="container" data-aos="fade-up">
             <div class="row no-gutters">
               <div class="col-12 linea-tiempo ">
                 <ul class="timeline ms-2">
@@ -575,7 +560,7 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/primera-institucion.webp "
+                            src={require("../../assets/img/historia1.jpg")}
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -611,7 +596,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/consejo-nacional.png "
+                            src={require("../../assets/img/historia2.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -645,7 +631,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/impes.jpg "
+                            src={require("../../assets/img/historia3.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -682,7 +669,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/ley-organica.jpg "
+                            src={require("../../assets/img/historia4.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -718,7 +706,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/leyorganica.jpeg "
+                            src={require("../../assets/img/historia5.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -755,7 +744,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/coahuila.jpg "
+                            src={require("../../assets/img/historia6.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -786,7 +776,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/ensinaloa.jpg "
+                            src={require("../../assets/img/historia7.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -817,7 +808,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/ "
+                            src={require("../../assets/img/historia8.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -847,7 +839,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/guerrero.jpg "
+                            src={require("../../assets/img/historia9.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -881,7 +874,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/puebla.webp "
+                            src={require("../../assets/img/historia10.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -913,7 +907,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/labastida.jpeg "
+                            src={require("../../assets/img/historia11.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -942,7 +937,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/benavente.jpg "
+                            src={require("../../assets/img/historia12.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -972,7 +968,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/nayarit.jpg "
+                            src={require("../../assets/img/historia13.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1004,7 +1001,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/ "
+                            src={require("../../assets/img/historia14.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1033,7 +1031,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/chihuahua.jpeg "
+                            src={require("../../assets/img/historia15.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1072,7 +1071,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/fundacion-de-escuelas.jpg "
+                            src={require("../../assets/img/historia16.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1102,7 +1102,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/chalco.png "
+                            src={require("../../assets/img/historia17.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1131,7 +1132,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/juana.jpg "
+                            src={require("../../assets/img/historia18.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1163,7 +1165,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/ "
+                            src={require("../../assets/img/historia19.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1195,7 +1198,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/ "
+                            src={require("../../assets/img/historia20.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1232,7 +1236,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/ensedomex.jpg "
+                            src={require("../../assets/img/historia21.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1271,7 +1276,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/tamaulipas.jpg "
+                            src={require("../../assets/img/historia22.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1304,7 +1310,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/tejupilco.jpeg "
+                            src={require("../../assets/img/historia23.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1334,7 +1341,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/ "
+                            src={require("../../assets/img/historia24.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1361,7 +1369,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/michoacano.jpg "
+                            src={require("../../assets/img/historia25.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1400,7 +1409,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/la-laguna.png "
+                            src={require("../../assets/img/historia26.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1441,7 +1451,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/texcoco.jpg "
+                            src={require("../../assets/img/historia27.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1469,7 +1480,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/baja-california.jpg "
+                            src={require("../../assets/img/historia28.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1506,7 +1518,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/ecatepec.jpg "
+                            src={require("../../assets/img/historia29.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1551,7 +1564,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/zaragoza.jpg "
+                            src={require("../../assets/img/historia30.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1579,7 +1593,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/madero.png "
+                            src={require("../../assets/img/historia31.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1616,7 +1631,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/veracruz.jpg "
+                            src={require("../../assets/img/historia32.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1649,7 +1665,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/campeche.jpg "
+                            src={require("../../assets/img/historia33.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1686,7 +1703,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/ "
+                            src={require("../../assets/img/historia34.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1715,7 +1733,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/morelia.avif "
+                            src={require("../../assets/img/historia35.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1744,7 +1763,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/benito-juarez.jpg "
+                            src={require("../../assets/img/historia36.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1779,7 +1799,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/trujillo.png "
+                            src={require("../../assets/img/historia37.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1829,7 +1850,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/oaxaca.webp "
+                            src={require("../../assets/img/historia38.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1859,7 +1881,8 @@ export default function About() {
                           <img
                             class="card-img-top img-fluid"
                             loading="lazy"
-                            src="https://normalessuperiores.org.mx/img/timeline/general/normal-vicente-guerrero.jpg "
+                            src={require("../../assets/img/historia39.jpg")}
+
                             alt=""
                           />
                           <div class="card-body p-xl-4">
@@ -1877,7 +1900,7 @@ export default function About() {
                       </div>
                     </div>
                   </li>
-                  <li class="timeline-item right">
+                 {/*  <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
                         <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
@@ -2108,7 +2131,7 @@ export default function About() {
                         </div>
                       </div>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -2116,17 +2139,13 @@ export default function About() {
         </section>
       </main>
 
-
-
       <a
         href="#"
         id="scroll-top"
         class="scroll-top d-flex align-items-center justify-content-center"
       >
         <i class="bi bi-arrow-up-short">
-        <IoMdArrowUp className="icon-color" />
-
-
+          <IoMdArrowUp className="icon-color" />
         </i>
       </a>
 

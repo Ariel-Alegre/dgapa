@@ -36,11 +36,7 @@ export default function Footer() {
               </p>
             </div>
             <div class="social-links d-flex mt-4">
-              <a href="">
-                <i class="bi bi-twitter-x">
-                  <XIcon />
-                </i>
-              </a>
+             
               <a href="">
                 <i class="bi bi-facebook">
                   <FacebookIcon />
@@ -51,11 +47,7 @@ export default function Footer() {
                   <InstagramIcon />
                 </i>
               </a>
-              <a href="">
-                <i class="bi bi-linkedin">
-                  <LinkedInIcon />
-                </i>
-              </a>
+            
             </div>
           </div>
 

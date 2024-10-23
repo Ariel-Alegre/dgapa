@@ -9,7 +9,7 @@ import axios from 'axios'
 export const FormRegister = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post('http://localhost:3001/api/register-school', payload);
+      const response = await axios.post('https://dgapa-production.up.railway.app/api/register-school', payload);
       const data= response.data
 
       dispatch({ type: 'SCHOOLS_SUCCESS', payload: data });
@@ -25,7 +25,7 @@ export const FormRegister = (payload) => {
 export const UpdateSchool = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put('http://localhost:3001/api/update-school', payload);
+      const response = await axios.put('https://dgapa-production.up.railway.app/api/update-school', payload);
       const data = response.data;
 
       // Despacha la acción con los datos actualizados
@@ -44,7 +44,7 @@ export const UpdateSchool = (payload) => {
 export const DeleteSchool = (schoolId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/api/delete-school/${schoolId}`);
+      const response = await axios.delete(`https://dgapa-production.up.railway.app/api/delete-school/${schoolId}`);
       const data = response.data;
 
       // Despacha la acción con los datos actualizados

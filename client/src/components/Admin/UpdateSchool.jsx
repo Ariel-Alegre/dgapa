@@ -36,7 +36,7 @@ export default function UpdateSchool() {
   const handleOpen = async (schoolId) => {
     setOpen(true);
     const response = await axios.get(
-      `http://localhost:3001/api/detail-school/${schoolId}`
+      `https://dgapa-production.up.railway.app/api/detail-school/${schoolId}`
     );
     setDetailsSchools(response.data.data);
   };
@@ -49,7 +49,7 @@ export default function UpdateSchool() {
   }, [pathname]);
 
   const AllSchool = async () => {
-    const response = await axios.get("http://localhost:3001/api/escuelas");
+    const response = await axios.get("https://dgapa-production.up.railway.app/api/escuelas");
     setAllschool(response.data.data);
   };
 

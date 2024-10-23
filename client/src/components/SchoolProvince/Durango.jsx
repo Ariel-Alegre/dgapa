@@ -27,7 +27,7 @@ export default function AllSchools() {
   }, [pathname]);
 
   const AllSchool = async () => {
-    const response = await axios.get("http://localhost:3001/api/escuelas");
+    const response = await axios.get("https://dgapa-production.up.railway.app/api/escuelas");
     setAllschool(response.data.data);
   };
 
