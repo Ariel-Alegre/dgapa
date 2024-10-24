@@ -9,6 +9,7 @@ const { AllGallery } = require('../controllers/AllGallery');
 const { EditSchool } = require('../controllers/EditSchool');
 const { DetailSchools } = require('../controllers/DetailSchools');
 const { DeleteSchool } = require('../controllers/DeleteSchool');
+const { ContactUs } = require('../controllers/Contact');
 
 
 const storage = multer.diskStorage({
@@ -57,6 +58,7 @@ router.delete('/delete-school/:schoolId', DeleteSchool);
 router.get('/escuelas', AllSchool);
 router.get('/gallerys', AllGallery);
 router.get('/detail-school/:schoolId', DetailSchools);
+router.post('/contact-us', ContactUs);
 
 
 

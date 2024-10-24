@@ -14,7 +14,7 @@ import {
   Marker,
   Autocomplete,
 } from "@react-google-maps/api";
-import { Swiper,  } from "swiper/react";
+import { Swiper } from "swiper/react";
 import AOS from "aos";
 const containerStyle = {
   width: "345px",
@@ -25,6 +25,7 @@ const defaultCenter = {
   lat: -12.0464,
   lng: -77.0428,
 };
+
 const SchoolDetails = () => {
   const { schoolId } = useParams();
   const [detailsSchool, setDetailsSchool] = React.useState([]);
@@ -158,6 +159,33 @@ const SchoolDetails = () => {
   React.useEffect(() => {
     OneSchool();
   }, []);
+
+  React.useEffect(() => {
+    if (detailsSchool && detailsSchool.address) {
+      // Función para geocodificar la dirección usando la API de Google Maps
+      const geocodeAddress = async (address) => {
+        const geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({ address: address }, (results, status) => {
+          if (status === "OK" && results[0]) {
+            const location = results[0].geometry.location;
+            const newCenter = {
+              lat: location.lat(),
+              lng: location.lng(),
+            };
+            setCenter(newCenter); // Actualizamos el centro del mapa con las coordenadas obtenidas
+          } else {
+            console.error("No se pudo geocodificar la dirección:", status);
+            alert(
+              "No se pudo encontrar la ubicación de la dirección proporcionada."
+            );
+          }
+        });
+      };
+
+      // Geocodifica la dirección cuando está disponible
+      geocodeAddress(detailsSchool.address);
+    }
+  }, [detailsSchool]);
   return (
     <div>
       <header id="header" class="header d-flex align-items-center fixed-top">
@@ -182,7 +210,6 @@ const SchoolDetails = () => {
               </li>
             </ul>
             <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
-
           </nav>
         </div>
       </header>
@@ -341,10 +368,10 @@ const SchoolDetails = () => {
                         <GoogleMap
                           mapContainerStyle={containerStyle}
                           center={center}
-                          zoom={12}
+                          zoom={10}
                         >
                           {/* Marcador en la ubicación seleccionada */}
-                          {detailsSchool && detailsSchool.address && (
+                          {detailsSchool.address && detailsSchool.address && (
                             <Marker position={center} />
                           )}
                         </GoogleMap>
@@ -841,44 +868,45 @@ const SchoolDetails = () => {
                                 </div>
                               </div>
                               <div className="cardalumn-container">
-
-
-                              {detailsSchool?.alumnos &&
-                                detailsSchool.alumnos.map((data, index) => (
-                                  <div
-                                    className="row justify-content-center"
-                                    key={index}
-                                  >
-                                    <div className="col-md-6 col-lg-3 my-3">
-                                      <div className="alumn-card text-center shadow-sm">
-                                        <div className="card-body">
-                                          <p className="card-text mb-0">
-                                            Ciclo escolar{" "}
-                                            {(data.fechaDesdeAlumnos &&
-                                              data.fechaDesdeAlumnos.split("-")[0]) ||
-                                              ""}{" "}
-                                            -{" "}
-                                            {(data.fechaDesdeAlumnos &&
-                                              data.fechaDesdeAlumnos.split("-")[0]) ||
-                                              ""}
-                                          </p>
-                                          <hr />
-                                          <p>
-                                            <b className="fs-2 text-primary mb-2">
-                                              {data.cantidadAlumnos}
-                                              <br />
-                                              <span className="fs-4 fw-medium">
-                                                alumnos
-                                              </span>
-                                            </b>
-                                          </p>
+                                {detailsSchool?.alumnos &&
+                                  detailsSchool.alumnos.map((data, index) => (
+                                    <div
+                                      className="row justify-content-center"
+                                      key={index}
+                                    >
+                                      <div className="col-md-6 col-lg-3 my-3">
+                                        <div className="alumn-card text-center shadow-sm">
+                                          <div className="card-body">
+                                            <p className="card-text mb-0">
+                                              Ciclo escolar{" "}
+                                              {(data.fechaDesdeAlumnos &&
+                                                data.fechaDesdeAlumnos.split(
+                                                  "-"
+                                                )[0]) ||
+                                                ""}{" "}
+                                              -{" "}
+                                              {(data.fechaDesdeAlumnos &&
+                                                data.fechaDesdeAlumnos.split(
+                                                  "-"
+                                                )[0]) ||
+                                                ""}
+                                            </p>
+                                            <hr />
+                                            <p>
+                                              <b className="fs-2 text-primary mb-2">
+                                                {data.cantidadAlumnos}
+                                                <br />
+                                                <span className="fs-4 fw-medium">
+                                                  alumnos
+                                                </span>
+                                              </b>
+                                            </p>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  ))}
                               </div>
-
                             </section>
                           </div>
                         </div>
@@ -917,43 +945,45 @@ const SchoolDetails = () => {
                                 </div>
                               </div>
                               <div className="cardalumn-container">
-
-                              {detailsSchool?.egresados &&
-                                detailsSchool.egresados.map((data, index) => (
-                                  <div
-                                    className="row justify-content-center d-flex"
-                                    key={index}
-                                  >
-                                    <div className="col-md-6 col-lg-3 my-3 " >
-                                      <div className="alumn-card text-center shadow-sm">
-                                        <div className="card-body">
-                                          <p className="card-text mb-0">
-                                            Ciclo escolar{" "}
-                                            {(data.fechaDesdeEgresados &&
-                                              data.fechaHastaEgresados.split("-")[0]) ||
-                                              ""}{" "}
-                                            -{" "}
-                                            {(data.fechaDesdeEgresados &&
-                                              data.fechaHastaEgresados.split("-")[0]) ||
-                                              ""}
-                                          </p>
-                                          <hr />
-                                          <p>
-                                            <b className="fs-2 text-primary mb-2">
-                                              {data.cantidadAlumnos}
-                                              <br />
-                                              <span className="fs-4 fw-medium">
-                                                alumnos
-                                              </span>
-                                            </b>
-                                          </p>
+                                {detailsSchool?.egresados &&
+                                  detailsSchool.egresados.map((data, index) => (
+                                    <div
+                                      className="row justify-content-center d-flex"
+                                      key={index}
+                                    >
+                                      <div className="col-md-6 col-lg-3 my-3 ">
+                                        <div className="alumn-card text-center shadow-sm">
+                                          <div className="card-body">
+                                            <p className="card-text mb-0">
+                                              Ciclo escolar{" "}
+                                              {(data.fechaDesdeEgresados &&
+                                                data.fechaHastaEgresados.split(
+                                                  "-"
+                                                )[0]) ||
+                                                ""}{" "}
+                                              -{" "}
+                                              {(data.fechaDesdeEgresados &&
+                                                data.fechaHastaEgresados.split(
+                                                  "-"
+                                                )[0]) ||
+                                                ""}
+                                            </p>
+                                            <hr />
+                                            <p>
+                                              <b className="fs-2 text-primary mb-2">
+                                                {data.cantidadAlumnos}
+                                                <br />
+                                                <span className="fs-4 fw-medium">
+                                                  alumnos
+                                                </span>
+                                              </b>
+                                            </p>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  ))}
                               </div>
-
                             </section>
                           </div>
                         </div>
@@ -964,6 +994,7 @@ const SchoolDetails = () => {
                   </div>
                 </div>
               </div>
+
               <div id="item-edades" class="my-5">
                 <div data-aos="fade-up" class="container">
                   <h2>Profesorado </h2>
@@ -992,7 +1023,7 @@ const SchoolDetails = () => {
                         <div className="accordion-body">
                           <section className="container">
                             <h4 className="mb-4">Lista de profesores actual</h4>
-                           
+
                             {detailsSchool?.profesores &&
                               detailsSchool?.profesores.map((data, index) => (
                                 <div
@@ -1032,389 +1063,152 @@ const SchoolDetails = () => {
                       </div>
                     </div>
                   </div>
-                  <div id="item-edades-profesorado-maestria">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="profesoradoMaestria">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#colapsarMaestria"
-                          aria-expanded="false"
-                          aria-controls="colapsarMaestria"
+
+                  {detailsSchool.profesoresMaestrias &&
+                  detailsSchool.profesoresMaestrias.length > 0 ? (
+                    <div id="item-edades-profesorado-maestria">
+                      <div className="accordion-item">
+                        <h2
+                          className="accordion-header"
+                          id="profesoradoMaestria"
                         >
-                          Con Maestría
-                        </button>
-                      </h2>
-                      <div
-                        id="colapsarMaestria"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="profesoradoMaestria"
-                        data-bs-parent="#accordionProfesores"
-                      >
-                        <div class="accordion-body">
-                          <section class="container">
-                            <h4 class="mb-4">
-                              Lista de profesores con maestría
-                            </h4>
-                            <div class="row my-3 justify-content-center">
-                              <div class="col-md-6 d-flex justify-content-center align-items-center">
-                                <div class="card mb-4">
-                                  <div class="card-header">
-                                    <h2 class="card-title">
-                                      Lista de nombres y edades año: 2016{" "}
-                                    </h2>
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#colapsarMaestria"
+                            aria-expanded="false"
+                            aria-controls="colapsarMaestria"
+                          >
+                            Con Maestría
+                          </button>
+                        </h2>
+                        <div
+                          id="colapsarMaestria"
+                          className="accordion-collapse collapse"
+                          aria-labelledby="profesoradoMaestria"
+                          data-bs-parent="#accordionProfesores"
+                        >
+                          <div className="accordion-body">
+                            <section className="container">
+                              <h4 className="mb-4">
+                                Lista de profesores con maestría
+                              </h4>
+                              {detailsSchool.profesoresMaestrias.map(
+                                (data, index) => (
+                                  <div
+                                    className="row my-3 justify-content-center"
+                                    key={index}
+                                  >
+                                    <div className="col-md-6 d-flex justify-content-center align-items-center">
+                                      <div className="card mb-4">
+                                        <div className="card-header">
+                                          <h2 className="card-title">
+                                            Lista de nombres y edades año:{" "}
+                                            {data.fechaHastaMaestria}
+                                          </h2>
+                                        </div>
+                                        <div className="card-body">
+                                          <ul className="list-group">
+                                            {data.textProfeMaestria &&
+                                            data.textProfeMaestria.length > 0
+                                              ? data.textProfeMaestria.map(
+                                                  (row, rowIndex) => (
+                                                    <li
+                                                      key={rowIndex}
+                                                      className="list-group-item"
+                                                    >
+                                                      {rowIndex + 1}. {row}
+                                                    </li>
+                                                  )
+                                                )
+                                              : null}
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
-                                  <div class="card-body">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        1. Ixchel Aguilar Rangel, 34 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        2. María Concepción Leal García, 48 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        3. María Eugenia López Peña, 48 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        4. Martha Nictze ha Frías Lara, 36 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        5. Rogelio González Hernández, 44 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        6. Alberto Alonso Partida, 60 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        7. Angelica Vazquez Ricaño, 55 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        8. Rosa María Magallanes Moreno, 68 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        9. José Martín Hurtado Galves, 54 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-6 d-flex justify-content-center align-items-center">
-                                <div class="card mb-4">
-                                  <div class="card-header">
-                                    <h2 class="card-title">
-                                      Lista de nombres y edades año: 2017{" "}
-                                    </h2>
-                                  </div>
-                                  <div class="card-body">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        1. Ixchel Aguilar Rangel, 35 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        2. María Concepción Leal García, 49 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        3. María Eugenia López Peña, 49 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        4. Martha Nictze ha Frías Lara, 37 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        5. Rogelio González Hernández, 45 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        6. Alberto Alonso Partida, 61 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        7. Angelica Vazquez Ricaño, 56 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        8. Rosa María Magallanes Moreno, 69 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        9. José Martín Hurtado Galves, 55 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                              <div class="col-md-6 d-flex justify-content-center align-items-center">
-                                <div class="card mb-4">
-                                  <div class="card-header">
-                                    <h2 class="card-title">
-                                      Lista de nombres y edades año: 2018{" "}
-                                    </h2>
-                                  </div>
-                                  <div class="card-body">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        1. Ixchel Aguilar Rangel, 36 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        2. María Concepción Leal García, 50 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        3. María Eugenia López Peña, 50 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        4. Martha Nictze ha Frías Lara, 38 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        5. Rogelio González Hernández, 46 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        6. Alberto Alonso Partida, 62 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        7. Angelica Vazquez Ricaño, 57 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        8. Rosa María Magallanes Moreno, 70 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        9. José Martín Hurtado Galves, 56 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        10. Gabriela Valeria Villavicencio
-                                        Valdez, 35 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        11. Jannet Guadalupe Figueroa Hidalgo,
-                                        30 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-6 d-flex justify-content-center align-items-center">
-                                <div class="card mb-4">
-                                  <div class="card-header">
-                                    <h2 class="card-title">
-                                      Lista de nombres y edades año: 2019{" "}
-                                    </h2>
-                                  </div>
-                                  <div class="card-body">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        1. Ixchel Aguilar Rangel, 37 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        2. María Concepción Leal García, 51 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        3. María Eugenia López Peña, 51 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        4. Martha Nictze ha Frías Lara, 37 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        5. Rogelio González Hernández, 47 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        6. Alberto Alonso Partida, 63 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        7. Angelica Vazquez Ricaño, 58 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        8. Rosa María Magallanes Moreno, 71 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        10. Gabriela Valeria Villavicencio
-                                        Valdez, 36 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        11. Jannet Guadalupe Figueroa Hidalgo,
-                                        31 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                              <div class="col-md-6 d-flex justify-content-center align-items-center">
-                                <div class="card mb-4">
-                                  <div class="card-header">
-                                    <h2 class="card-title">
-                                      Lista de nombres y edades año: 2023 - 2024{" "}
-                                    </h2>
-                                  </div>
-                                  <div class="card-body">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        1. Jesús Alejandro Báez Rodríguez, 35
-                                        años
-                                      </li>
-                                      <li class="list-group-item">
-                                        2. Jannet Guadalupe Figueroa Hidalgo, 35
-                                        años
-                                      </li>
-                                      <li class="list-group-item">
-                                        3. Nayely Cancino Banderas, 37 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        4. Ixchel Aguilar Rangel, 42 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        5. María Concepción Leal García, 54 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        6. María Eugenia López Peña, 55 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        7. Gabriela Valeria Villavicencio
-                                        Valdez, 40 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        8. Martha Nictze ha Frías Lara, 42 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        10. Rogelio González Hernández, 51 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        11. Alberto Alonso Partida, 67 años
-                                      </li>
-                                      <li class="list-group-item">
-                                        11. Angelica Vazquez Ricaño, 62 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </section>
+                                )
+                              )}
+                            </section>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div id="item-edades-profesorado-doctorado" class="mb-5">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="profesoradoDoctorado">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#colapsarDoctorado"
-                          aria-expanded="false"
-                          aria-controls="colapsarDoctorado"
+                  ) : null}
+
+                  {detailsSchool.profesoresConDoctorados &&
+                  detailsSchool.profesoresConDoctorados.length > 0 ? (
+                    <div id="item-edades-profesorado-doctorado" class="mb-5">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="profesoradoDoctorado">
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#colapsarDoctorado"
+                            aria-expanded="false"
+                            aria-controls="colapsarDoctorado"
+                          >
+                            Con Doctorado
+                          </button>
+                        </h2>
+                        <div
+                          id="colapsarDoctorado"
+                          class="accordion-collapse collapse"
+                          aria-labelledby="profesoradoDoctorado"
+                          data-bs-parent="#accordionProfesores"
                         >
-                          Con Doctorado
-                        </button>
-                      </h2>
-                      <div
-                        id="colapsarDoctorado"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="profesoradoDoctorado"
-                        data-bs-parent="#accordionProfesores"
-                      >
-                        <div class="accordion-body">
-                          <section class="container">
-                            <h4 class="mb-4">
-                              Lista de profesores con doctorado
-                            </h4>
-                            <div class="row my-3 justify-content-center">
-                              <div class="col-md-7 d-flex justify-content-center align-items-center">
-                                <div
-                                  id="simple-list-item-3"
-                                  class="card text-center w-100"
-                                >
-                                  <div class="card-header fs-3 fw-bold">
-                                    Lista de nombres y edades del ciclo 2023 -
-                                    2024{" "}
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        1. Jesús Alejandro Báez Rodríguez, 35
-                                        años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        2. Jannet Guadalupe Figueroa Hidalgo, 35
-                                        años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        3. Nayely Cancino Banderas, 37 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        4. Ixchel Aguilar Rangel, 42 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        5. María Concepción Leal García, 54 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        6. María Eugenia López Peña, 55 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        7. Gabriela Valeria Villavicencio
-                                        Valdez, 40 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        8. Martha Nictze ha Frías Lara, 42 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        9. Rogelio González Hernández, 51 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        10. Alberto Alonso Partida, 67 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                  <div class="card-body m-0 p-0">
-                                    <ul class="list-group">
-                                      <li class="list-group-item">
-                                        11. Angelica Vazquez Ricaño, 62 años
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </section>
+                          <div class="accordion-body">
+                            <section class="container">
+                              <h4 class="mb-4">
+                                Lista de profesores con doctorado
+                              </h4>
+                              {detailsSchool.profesoresConDoctorados &&
+                                detailsSchool.profesoresConDoctorados.map(
+                                  (data, index) => (
+                                    <div class="row my-3 justify-content-center">
+                                      <div class="col-md-7 d-flex justify-content-center align-items-center">
+                                        <div
+                                          id="simple-list-item-3"
+                                          class="card text-center w-100"
+                                        >
+                                          <div class="card-header fs-3 fw-bold">
+                                            Lista de nombres y edades del ciclo{" "}
+                                            {data.fechaDesdeDoctorado} -{" "}
+                                            {data.fechaHastaDoctorado}
+                                          </div>
+                                          <div class="card-body m-0 p-0">
+                                            <ul class="list-group">
+                                              {data.textProfeDoctorado &&
+                                              data.textProfeDoctorado.length > 0
+                                                ? data.textProfeDoctorado.map(
+                                                    (row, rowIndex) => (
+                                                      <li
+                                                        key={rowIndex}
+                                                        className="list-group-item"
+                                                      >
+                                                        {rowIndex + 1}. {row}
+                                                      </li>
+                                                    )
+                                                  )
+                                                : null}
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )
+                                )}
+                            </section>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  ) : null}
                 </div>
               </div>
+
               <div class="row">
                 <div id="item-doctores" class="my-3">
                   <div

@@ -21,7 +21,21 @@ export const FormRegister = (payload) => {
     }
   };
 };
+export const ContactUs = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('https://dgapa-production.up.railway.app/api/contact-us', payload);
+      const data= response.data
 
+      dispatch({ type: 'CONTACTUS_SUCCESS', payload: data });
+
+    } catch (error) {
+      console.error(error);
+
+
+    }
+  };
+};
 export const UpdateSchool = (payload) => {
   return async (dispatch) => {
     try {

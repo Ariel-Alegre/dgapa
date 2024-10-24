@@ -17,8 +17,14 @@ export const rootReducer = (state = initialState, action) => {
           ...state,
       
         };
-      
 
+        case 'CONTACTUS_SUCCESS':
+          return {
+            ...state,
+        
+          };
+      
+        
 
     default: return { ...state }
   }
