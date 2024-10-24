@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import { FormRegister } from "../../redux/action";
-
+import {
+  LoadScript,
+  Autocomplete,
+} from "@react-google-maps/api";
 const RegisterSchool = () => {
   const dispatch = useDispatch();
+  const autocompleteRef = useRef(null); // Referencia para el Autocomplete
 
   const [formData, setFormData] = useState({
     name: "",
@@ -30,6 +34,9 @@ const RegisterSchool = () => {
     plantel3: null,
     image: null,
     profesoresTemporales: [],
+    profesoresTemporalesMaestria: [],
+    profesoresTemporalesDoctorado: [],
+
   });
   const [previewImage, setPreviewImage] = useState(null);
   const [loadingSuccess, setLoadingSuccess] = useState(false);
@@ -145,7 +152,7 @@ const RegisterSchool = () => {
       if (formData.plantel3) {
         data.append("plantel3", formData.plantel3);
       }
-     await dispatch(FormRegister(data));
+      await dispatch(FormRegister(data));
       // Envía los datos (descomentar esto una vez que todo esté correcto)
 
       alert("Escuela registrada con éxito!");
@@ -187,7 +194,11 @@ const RegisterSchool = () => {
     e.preventDefault();
     const { fechaDesdeAlumnos, fechaHastaAlumnos, cantidadAlumnos } = formData;
     if (fechaDesdeAlumnos && fechaHastaAlumnos && cantidadAlumnos) {
-      handleAddToList("alumnos", { fechaDesdeAlumnos, fechaHastaAlumnos, cantidadAlumnos });
+      handleAddToList("alumnos", {
+        fechaDesdeAlumnos,
+        fechaHastaAlumnos,
+        cantidadAlumnos,
+      });
       setFormData((prev) => ({
         ...prev,
         fechaDesdeAlumnos: "",
@@ -199,14 +210,19 @@ const RegisterSchool = () => {
 
   const handleAddEgresados = (e) => {
     e.preventDefault();
-    const { fechaDesdeEgresados, fechaHastaEgresados, cantidadAlumnos } = formData;
-    if (fechaDesdeEgresados && fechaHastaEgresados && cantidadAlumnos) {
-      handleAddToList("egresados", { fechaDesdeEgresados, fechaHastaEgresados, cantidadAlumnos });
+    const { fechaDesdeEgresados, fechaHastaEgresados, cantidadAlumnosEgresados } =
+      formData;
+    if (fechaDesdeEgresados && fechaHastaEgresados && cantidadAlumnosEgresados) {
+      handleAddToList("egresados", {
+        fechaDesdeEgresados,
+        fechaHastaEgresados,
+        cantidadAlumnosEgresados,
+      });
       setFormData((prev) => ({
         ...prev,
         fechaDesdeEgresados: "",
         fechaHastaEgresados: "",
-        cantidadAlumnos: "",
+        cantidadAlumnosEgresados: "",
       }));
     }
   };
@@ -229,7 +245,7 @@ const RegisterSchool = () => {
   };
   const handleAddProfesor = () => {
     const { textProfeactuales } = formData;
-  
+
     if (textProfeactuales.trim() !== "") {
       setFormData((prev) => ({
         ...prev,
@@ -238,11 +254,11 @@ const RegisterSchool = () => {
       }));
     }
   };
-  
+
   const handleAddProfesoresActuales = (e) => {
     e.preventDefault();
     const { fechaDesde, fechaHasta, profesoresTemporales } = formData;
-  
+
     if (fechaDesde && fechaHasta && profesoresTemporales.length > 0) {
       // Añadir un nuevo registro con las fechas y los profesores
       setFormData((prev) => ({
@@ -258,48 +274,103 @@ const RegisterSchool = () => {
         // Limpiar campos de fecha y la lista de profesores temporales
         fechaDesde: "",
         fechaHasta: "",
-        profesoresTemporales: [], 
+        profesoresTemporales: [],
+      }));
+    }
+  };
+  const handleAddProfesorMaestria = () => {
+    const { textProfeMaestria } = formData;
+
+    if (textProfeMaestria.trim() !== "") {
+      setFormData((prev) => ({
+        ...prev,
+        profesoresTemporalesMaestria: [
+          ...prev.profesoresTemporalesMaestria,
+          textProfeMaestria,
+        ], // Añade al array temporal
+        textProfeMaestria: "", // Limpia el input
+      }));
+    }
+  };
+  const handleProfesoresMaestria = (e) => {
+    e.preventDefault();
+    const {
+      fechaDesdeMaestria,
+      fechaHastaMaestria,
+      profesoresTemporalesMaestria,
+    } = formData;
+
+    if (
+      fechaDesdeMaestria &&
+      fechaHastaMaestria &&
+      profesoresTemporalesMaestria.length > 0
+    ) {
+      // Añadir un nuevo registro con las fechas y los profesores
+      setFormData((prev) => ({
+        ...prev,
+        profesoresMaestrias: [
+          ...prev.profesoresMaestrias,
+          {
+            fechaDesdeMaestria,
+            fechaHastaMaestria,
+            textProfeMaestria: [...profesoresTemporalesMaestria], // Copiar los profesores temporales
+          },
+        ],
+        // Limpiar campos de fecha y la lista de profesores temporales
+        fechaDesdeMaestria: "",
+        fechaHastaMaestria: "",
+        profesoresTemporalesMaestria: [],
+      }));
+    }
+  };
+
+
+  const handleAddProfesorDoctorado = () => {
+    const { textProfeDoctorado } = formData;
+
+    if (textProfeDoctorado.trim() !== "") {
+      setFormData((prev) => ({
+        ...prev,
+        profesoresTemporalesDoctorado: [
+          ...prev.profesoresTemporalesDoctorado,
+          textProfeDoctorado,
+        ], // Añade al array temporal
+        textProfeDoctorado: "", // Limpia el input
+      }));
+    }
+  };
+  const handleProfesoresDoctorado  = (e) => {
+    e.preventDefault();
+    const {
+      fechaDesdeDoctorado,
+      fechaHastaDoctorado,
+      profesoresTemporalesDoctorado,
+    } = formData;
+
+    if (
+      fechaDesdeDoctorado &&
+      fechaHastaDoctorado &&
+      profesoresTemporalesDoctorado.length > 0
+    ) {
+      // Añadir un nuevo registro con las fechas y los profesores
+      setFormData((prev) => ({
+        ...prev,
+        profesoresConDoctorados: [
+          ...prev.profesoresConDoctorados,
+          {
+            fechaDesdeDoctorado,
+            fechaHastaDoctorado,
+            textProfeDoctorado: [...profesoresTemporalesDoctorado], // Copiar los profesores temporales
+          },
+        ],
+        // Limpiar campos de fecha y la lista de profesores temporales
+        fechaDesdeDoctorado: "",
+        fechaHastaDoctorado: "",
+        profesoresTemporalesDoctorado: [],
       }));
     }
   };
   
-  
-
-  const handleAddProfesoresMaestria = (e) => {
-    e.preventDefault();
-    const { fechaDesde, fechaHasta, textProfemaestria } = formData;
-    if (fechaDesde && fechaHasta && textProfemaestria) {
-      handleAddToList("profesoresMaestrias", {
-        fechaDesde,
-        fechaHasta,
-        textProfemaestria,
-      });
-      setFormData((prev) => ({
-        ...prev,
-        fechaDesde: "",
-        fechaHasta: "",
-        textProfemaestria: "",
-      }));
-    }
-  };
-
-  const handleAddProfesoresDoctorado = (e) => {
-    e.preventDefault();
-    const { fechaDesde, fechaHasta, cantidadMaestros } = formData;
-    if (fechaDesde && fechaHasta && cantidadMaestros) {
-      handleAddToList("profesoresConDoctorados", {
-        fechaDesde,
-        fechaHasta,
-        cantidadMaestros,
-      });
-      setFormData((prev) => ({
-        ...prev,
-        fechaDesde: "",
-        fechaHasta: "",
-        cantidadMaestros: "",
-      }));
-    }
-  };
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
@@ -308,6 +379,29 @@ const RegisterSchool = () => {
       [name]: files[0],
     });
   };
+
+
+  const onPlaceChanged = () => {
+    if (autocompleteRef.current) {
+      const place = autocompleteRef.current.getPlace();
+  
+      if (place?.geometry) {
+        const addressComponents = place.address_components;
+        if (addressComponents) {
+     
+          setFormData({
+            ...formData,
+            address: place.formatted_address, // Dirección completa
+          });
+        } else {
+          console.error('No se pudo obtener los componentes de la dirección.');
+        }
+      } else {
+        console.error('No se pudo obtener la información de geometría.');
+      }
+    }
+  };
+  
   return (
     <form onSubmit={handleSubmit} className="responsive-form">
       <div className="form-group">
@@ -321,13 +415,29 @@ const RegisterSchool = () => {
       </div>
       <div className="form-group">
         <label>Dirección:</label>
+        <LoadScript
+                    googleMapsApiKey="AIzaSyBMqv1fgtsDEQQgm4kmLBRtZI7zu-wSldA" // Reemplaza con tu clave API
+                    libraries={["places"]} // Necesario para usar Autocomplete
+                  >
+
+                    <Autocomplete
+                      onLoad={(autocomplete) =>
+                        (autocompleteRef.current = autocomplete)
+                      }
+                      onPlaceChanged={onPlaceChanged}
+                    >
         <input
           type="text"
           name="address"
           value={formData.address}
           onChange={handleInputChange}
         />
+                      </Autocomplete>
+
+</LoadScript>
       </div>
+
+     
       <div className="form-group">
         <label>Teléfono:</label>
         <input
@@ -498,15 +608,15 @@ const RegisterSchool = () => {
       />
       <input
         type="number"
-        name="cantidadAlumnos"
-        value={formData.cantidadAlumnos}
+        name="cantidadAlumnosEgresados"
+        value={formData.cantidadAlumnosEgresados}
         onChange={handleInputChange}
       />
       <button onClick={handleAddEgresados}>Agregar</button>
       <ul className="record-list">
         {formData.egresados.map((registro, index) => (
           <li key={index}>
-            <span>{`Desde: ${registro.fechaDesdeEgresados}, Hasta: ${registro.fechaHastaEgresados}, Cantidad: ${registro.cantidadAlumnos}`}</span>
+            <span>{`Desde: ${registro.fechaDesdeEgresados}, Hasta: ${registro.fechaHastaEgresados}, Cantidad: ${registro.cantidadAlumnosEgresados}`}</span>
             <button onClick={() => handleDeleteFromList("egresados", index)}>
               Eliminar
             </button>
@@ -514,87 +624,117 @@ const RegisterSchool = () => {
         ))}
       </ul>
       <h2>Lista de profesores actual</h2>
-  
-  {/* Input de fechas */}
-  <input
-    type="text"
-    name="fechaDesde"
-    value={formData.fechaDesde}
-    onChange={handleInputChange}
-    placeholder="Fecha Desde"
-  />
-  <input
-    type="text"
-    name="fechaHasta"
-    value={formData.fechaHasta}
-    onChange={handleInputChange}
-    placeholder="Fecha Hasta"
-  />
-    
-  {/* Campo para agregar un profesor */}
-  <input
-    type="text"
-    name="textProfeactuales"
-    value={formData.textProfeactuales}
-    onChange={handleInputChange}
-    placeholder="Nombre del Profesor"
-  />
-  
-  {/* Botón para agregar profesor temporalmente */}
-  <button type="button" onClick={handleAddProfesor}>Agregar Profesor</button>
-  
-  {/* Lista temporal de profesores */}
-  <ul>
-    {formData.profesoresTemporales && formData.profesoresTemporales.map((profe, i) => (
-      <li key={i}>{`Profesor: ${profe}`}</li>
-    ))}
-  </ul>
-  
-  {/* Botón para agregar el registro completo */}
-  <button onClick={handleAddProfesoresActuales}>Agregar Registro</button>
-  
-  {/* Lista de registros finales */}
-  <ul className="record-list">
-    {formData.profesores.map((registro, index) => (
-      <li key={index}>
-        <span>{`Desde: ${registro.fechaDesde}, Hasta: ${registro.fechaHasta}`}</span>
-        <ul>
-          {registro.textProfeactuales.map((profe, i) => (
-            <li key={i}>{`Profesor: ${profe}`}</li>
-          ))}
-        </ul>
-        <button onClick={() => handleDeleteFromList("profesores", index)}>
-          Eliminar
-        </button>
-      </li>
-    ))}
-  </ul>
-  
 
-      <h2>Lista de profesores con maestrias</h2>
+      {/* Input de fechas */}
       <input
-        type="date"
+        type="text"
         name="fechaDesde"
         value={formData.fechaDesde}
         onChange={handleInputChange}
-      />
-      <input
-        type="date"
-        name="fechaHasta"
-        value={formData.fechaHasta}
-        onChange={handleInputChange}
+        placeholder="Fecha Desde"
       />
       <input
         type="text"
-        name="textProfemaestria"
-        value={formData.textProfemaestria}
+        name="fechaHasta"
+        value={formData.fechaHasta}
         onChange={handleInputChange}
+        placeholder="Fecha Hasta"
       />
-      <button onClick={handleAddProfesoresMaestria}>Agregar</button>
+
+      {/* Campo para agregar un profesor */}
+      <input
+        type="text"
+        name="textProfeactuales"
+        value={formData.textProfeactuales}
+        onChange={handleInputChange}
+        placeholder="Nombre del Profesor"
+      />
+
+      {/* Botón para agregar profesor temporalmente */}
+      <button type="button" onClick={handleAddProfesor}>
+        Agregar Profesor
+      </button>
+
+      {/* Lista temporal de profesores */}
+      <ul>
+        {formData.profesoresTemporales &&
+          formData.profesoresTemporales.map((profe, i) => (
+            <li key={i}>{`Profesor: ${profe}`}</li>
+          ))}
+      </ul>
+
+      {/* Botón para agregar el registro completo */}
+      <button onClick={handleAddProfesoresActuales}>Agregar Registro</button>
+
+      {/* Lista de registros finales */}
+      <ul className="record-list">
+        {formData.profesores.map((registro, index) => (
+          <li key={index}>
+            <span>{`Desde: ${registro.fechaDesde}, Hasta: ${registro.fechaHasta}`}</span>
+            <ul>
+              {registro.textProfeactuales.map((profe, i) => (
+                <li key={i}>{`Profesor: ${profe}`}</li>
+              ))}
+            </ul>
+            <button onClick={() => handleDeleteFromList("profesores", index)}>
+              Eliminar
+            </button>
+          </li>
+        ))}
+      </ul>
+      <h2>Lista de profesores con maestrias</h2>
+
+      {/* Input de fechas */}
+      <input
+        type="text"
+        name="fechaDesdeMaestria"
+        value={formData.fechaDesdeMaestria}
+        onChange={handleInputChange}
+        placeholder="Fecha Desde"
+      />
+      <input
+        type="text"
+        name="fechaHastaMaestria"
+        value={formData.fechaHastaMaestria}
+        onChange={handleInputChange}
+        placeholder="Fecha Hasta"
+      />
+
+      {/* Campo para agregar un profesor */}
+      <input
+        type="text"
+        name="textProfeMaestria"
+        value={formData.textProfeMaestria}
+        onChange={handleInputChange}
+        placeholder="Nombre del Profesor"
+      />
+
+      {/* Botón para agregar profesor temporalmente */}
+      <button type="button" onClick={handleAddProfesorMaestria}>
+        Agregar Profesor
+      </button>
+
+      {/* Lista temporal de profesores */}
+      <ul>
+        {formData.profesoresTemporalesMaestria &&
+          formData.profesoresTemporalesMaestria.map((profe, i) => (
+            <li key={i}>{`Profesor: ${profe}`}</li>
+          ))}
+      </ul>
+
+      {/* Botón para agregar el registro completo */}
+      <button onClick={handleProfesoresMaestria}>Agregar Registro</button>
+
+      {/* Lista de registros finales */}
       <ul className="record-list">
         {formData.profesoresMaestrias.map((registro, index) => (
           <li key={index}>
-            <span>{`Desde: ${registro.fechaDesde}, Hasta: ${registro.fechaHasta}, profesor: ${registro.textProfemaestria}`}</span>
+            <span>{`Desde: ${registro.fechaDesdeMaestria}, Hasta: ${registro.fechaHastaMaestria}`}</span>
+            <ul>
+              {registro.textProfeMaestria.map((profe, i) => (
+                <li key={i}>{`Profesor: ${profe}`}</li>
+              ))}
+            </ul>
             <button
               onClick={() => handleDeleteFromList("profesoresMaestrias", index)}
             >
@@ -604,40 +744,69 @@ const RegisterSchool = () => {
         ))}
       </ul>
 
+
       <h2>Lista de profesores con doctorados</h2>
-      <input
-        type="date"
-        name="fechaDesde"
-        value={formData.fechaDesde}
-        onChange={handleInputChange}
-      />
-      <input
-        type="date"
-        name="fechaHasta"
-        value={formData.fechaHasta}
-        onChange={handleInputChange}
-      />
-      <input
-        type="number"
-        name="cantidadMaestros"
-        value={formData.cantidadMaestros}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleAddProfesoresDoctorado}>Agregar</button>
-      <ul className="record-list">
-        {formData.profesoresConDoctorados.map((registro, index) => (
-          <li key={index}>
-            <span>{`Desde: ${registro.fechaDesde}, Hasta: ${registro.fechaHasta}, Cantidad: ${registro.cantidadMaestros}`}</span>
-            <button
-              onClick={() =>
-                handleDeleteFromList("profesoresConDoctorados", index)
-              }
-            >
-              Eliminar
-            </button>
-          </li>
+
+{/* Input de fechas */}
+<input
+  type="text"
+  name="fechaDesdeDoctorado"
+  value={formData.fechaDesdeDoctorado}
+  onChange={handleInputChange}
+  placeholder="Fecha Desde"
+/>
+<input
+  type="text"
+  name="fechaHastaDoctorado"
+  value={formData.fechaHastaDoctorado}
+  onChange={handleInputChange}
+  placeholder="Fecha Hasta"
+/>
+
+{/* Campo para agregar un profesor */}
+<input
+  type="text"
+  name="textProfeDoctorado"
+  value={formData.textProfeDoctorado}
+  onChange={handleInputChange}
+  placeholder="Nombre del Profesor"
+/>
+
+{/* Botón para agregar profesor temporalmente */}
+<button type="button" onClick={handleAddProfesorDoctorado}>
+  Agregar Profesor
+</button>
+
+{/* Lista temporal de profesores */}
+<ul>
+  {formData.profesoresTemporalesDoctorado &&
+    formData.profesoresTemporalesDoctorado.map((profe, i) => (
+      <li key={i}>{`Profesor: ${profe}`}</li>
+    ))}
+</ul>
+
+{/* Botón para agregar el registro completo */}
+<button onClick={handleProfesoresDoctorado}>Agregar Registro</button>
+
+{/* Lista de registros finales */}
+<ul className="record-list">
+  {formData.profesoresConDoctorados.map((registro, index) => (
+    <li key={index}>
+      <span>{`Desde: ${registro.fechaDesdeDoctorado}, Hasta: ${registro.fechaHastaDoctorado}`}</span>
+      <ul>
+        {registro.textProfeDoctorado.map((profe, i) => (
+          <li key={i}>{`Profesor: ${profe}`}</li>
         ))}
       </ul>
+      <button
+        onClick={() => handleDeleteFromList("profesoresConDoctorados", index)}
+      >
+        Eliminar
+      </button>
+    </li>
+  ))}
+</ul>
+      
 
       <h2>Doctores jubilados</h2>
       <input

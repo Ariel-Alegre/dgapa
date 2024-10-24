@@ -771,7 +771,12 @@ section,
   font-weight: 700;
   position: relative;
 }
-
+@media (max-width: 768px) {
+  .section-title h2 {
+    width: 100%;
+   
+  }
+}
 .section-title h2:before,
 .section-title h2:after {
   content: "";
