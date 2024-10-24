@@ -3861,3 +3861,20 @@ h3 {
 .btn-delete:hover {
   background-color: #c82333;
 }
+.alumn-card{
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cardalumn-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}

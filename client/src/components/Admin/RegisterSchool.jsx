@@ -29,6 +29,7 @@ const RegisterSchool = () => {
     plantel2: null,
     plantel3: null,
     image: null,
+    profesoresTemporales: [],
   });
   const [previewImage, setPreviewImage] = useState(null);
   const [loadingSuccess, setLoadingSuccess] = useState(false);
@@ -144,7 +145,7 @@ const RegisterSchool = () => {
       if (formData.plantel3) {
         data.append("plantel3", formData.plantel3);
       }
-      await dispatch(FormRegister(data));
+     await dispatch(FormRegister(data));
       // Envía los datos (descomentar esto una vez que todo esté correcto)
 
       alert("Escuela registrada con éxito!");
@@ -226,23 +227,43 @@ const RegisterSchool = () => {
       setFormData((prev) => ({ ...prev, doctorCandidato: "" }));
     }
   };
-
-  const handleAddProfesoresActuales = (e) => {
-    e.preventDefault();
-    const { fechaDesde, fechaHasta, textProfeactuales } = formData;
-    if (fechaDesde && fechaHasta && textProfeactuales) {
-      handleAddToList("profesores", {
-        fechaDesde,
-        fechaHasta,
-        textProfeactuales,
-      });
+  const handleAddProfesor = () => {
+    const { textProfeactuales } = formData;
+  
+    if (textProfeactuales.trim() !== "") {
       setFormData((prev) => ({
         ...prev,
-      
-        textProfeactuales: "",
+        profesoresTemporales: [...prev.profesoresTemporales, textProfeactuales], // Añade al array temporal
+        textProfeactuales: "", // Limpia el input
       }));
     }
   };
+  
+  const handleAddProfesoresActuales = (e) => {
+    e.preventDefault();
+    const { fechaDesde, fechaHasta, profesoresTemporales } = formData;
+  
+    if (fechaDesde && fechaHasta && profesoresTemporales.length > 0) {
+      // Añadir un nuevo registro con las fechas y los profesores
+      setFormData((prev) => ({
+        ...prev,
+        profesores: [
+          ...prev.profesores,
+          {
+            fechaDesde,
+            fechaHasta,
+            textProfeactuales: [...profesoresTemporales], // Copiar los profesores temporales
+          },
+        ],
+        // Limpiar campos de fecha y la lista de profesores temporales
+        fechaDesde: "",
+        fechaHasta: "",
+        profesoresTemporales: [], 
+      }));
+    }
+  };
+  
+  
 
   const handleAddProfesoresMaestria = (e) => {
     e.preventDefault();
@@ -492,37 +513,63 @@ const RegisterSchool = () => {
           </li>
         ))}
       </ul>
-
       <h2>Lista de profesores actual</h2>
-      <input
-        type="text"
-        name="fechaDesde"
-        value={formData.fechaDesde}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="fechaHasta"
-        value={formData.fechaHasta}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="textProfeactuales"
-        value={formData.textProfeactuales}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleAddProfesoresActuales}>Agregar</button>
-      <ul className="record-list">
-        {formData.profesores.map((registro, index) => (
-          <li key={index}>
-            <span>{`Desde: ${registro.fechaDesde}, Hasta: ${registro.fechaHasta}, profesor: ${registro.textProfeactuales}`}</span>
-            <button onClick={() => handleDeleteFromList("profesores", index)}>
-              Eliminar
-            </button>
-          </li>
-        ))}
-      </ul>
+  
+  {/* Input de fechas */}
+  <input
+    type="text"
+    name="fechaDesde"
+    value={formData.fechaDesde}
+    onChange={handleInputChange}
+    placeholder="Fecha Desde"
+  />
+  <input
+    type="text"
+    name="fechaHasta"
+    value={formData.fechaHasta}
+    onChange={handleInputChange}
+    placeholder="Fecha Hasta"
+  />
+    
+  {/* Campo para agregar un profesor */}
+  <input
+    type="text"
+    name="textProfeactuales"
+    value={formData.textProfeactuales}
+    onChange={handleInputChange}
+    placeholder="Nombre del Profesor"
+  />
+  
+  {/* Botón para agregar profesor temporalmente */}
+  <button type="button" onClick={handleAddProfesor}>Agregar Profesor</button>
+  
+  {/* Lista temporal de profesores */}
+  <ul>
+    {formData.profesoresTemporales && formData.profesoresTemporales.map((profe, i) => (
+      <li key={i}>{`Profesor: ${profe}`}</li>
+    ))}
+  </ul>
+  
+  {/* Botón para agregar el registro completo */}
+  <button onClick={handleAddProfesoresActuales}>Agregar Registro</button>
+  
+  {/* Lista de registros finales */}
+  <ul className="record-list">
+    {formData.profesores.map((registro, index) => (
+      <li key={index}>
+        <span>{`Desde: ${registro.fechaDesde}, Hasta: ${registro.fechaHasta}`}</span>
+        <ul>
+          {registro.textProfeactuales.map((profe, i) => (
+            <li key={i}>{`Profesor: ${profe}`}</li>
+          ))}
+        </ul>
+        <button onClick={() => handleDeleteFromList("profesores", index)}>
+          Eliminar
+        </button>
+      </li>
+    ))}
+  </ul>
+  
 
       <h2>Lista de profesores con maestrias</h2>
       <input

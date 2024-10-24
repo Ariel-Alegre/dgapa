@@ -30,9 +30,7 @@ function App() {
 
   const [hoveredRegion, setHoveredRegion] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    Global();
-  }, []);
+ 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -44,7 +42,9 @@ function App() {
   useEffect(() => {
     AllSchool();
   }, []);
-
+  useEffect(() => {
+    Global();
+  }, []);
   const aguSchools = allSchool.filter(
     (data) => data.province === "Aguascalientes"
   );
@@ -249,12 +249,12 @@ function App() {
           <nav id="navmenu" class="navmenu">
             <ul>
               <li>
-                <Link to="/" class="active">
-                  Princípal
-                </Link>
+                <Link to="/" class="active">Princípal</Link>
               </li>
               <li>
-                <Link to="/acerca">Nosotros</Link>
+                <Link to="/acerca" >
+                  Nosotros
+                </Link>
               </li>
               <li>
                 <Link to="/galeria">Galeria</Link>

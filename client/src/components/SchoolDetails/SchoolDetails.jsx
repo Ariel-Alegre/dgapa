@@ -187,7 +187,7 @@ const SchoolDetails = () => {
               <div class="row p-3">
                 <div class="col d-flex align-items-center justify-content-center">
                   <h1 data-aos="fade-up" class="text-center">
-                    {detailsSchool?.name} 
+                    {detailsSchool?.name}
                   </h1>
                 </div>
                 <hr />
@@ -726,30 +726,44 @@ const SchoolDetails = () => {
                                   <h6>Modalidad escolarizada</h6>
                                 </div>
                               </div>
-                             {detailsSchool?.alumnos &&
-    detailsSchool.alumnos.map((data, index) => (
-        <div className="row justify-content-center" key={index}>
-            <div className="col-md-6 col-lg-3 my-3">
-                <div className="card text-center shadow-sm">
-                    <div className="card-body">
-                        <p className="card-text mb-0">
-                            Ciclo escolar{" "}
-                            {(data.fechaDesde && data.fechaDesde.split("-")[0]) || ""} -{" "}
-                            {(data.fechaHasta && data.fechaHasta.split("-")[0]) || ""}
-                        </p>
-                        <hr />
-                        <p>
-                            <b className="fs-2 text-primary mb-2">
-                                {data.cantidadAlumnos}
-                                <br />
-                                <span className="fs-4 fw-medium">alumnos</span>
-                            </b>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    ))}
+                              <div className="cardalumn-container">
+
+
+                              {detailsSchool?.alumnos &&
+                                detailsSchool.alumnos.map((data, index) => (
+                                  <div
+                                    className="row justify-content-center"
+                                    key={index}
+                                  >
+                                    <div className="col-md-6 col-lg-3 my-3">
+                                      <div className="alumn-card text-center shadow-sm">
+                                        <div className="card-body">
+                                          <p className="card-text mb-0">
+                                            Ciclo escolar{" "}
+                                            {(data.fechaDesde &&
+                                              data.fechaDesde.split("-")[0]) ||
+                                              ""}{" "}
+                                            -{" "}
+                                            {(data.fechaHasta &&
+                                              data.fechaHasta.split("-")[0]) ||
+                                              ""}
+                                          </p>
+                                          <hr />
+                                          <p>
+                                            <b className="fs-2 text-primary mb-2">
+                                              {data.cantidadAlumnos}
+                                              <br />
+                                              <span className="fs-4 fw-medium">
+                                                alumnos
+                                              </span>
+                                            </b>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
 
                             </section>
                           </div>
@@ -788,30 +802,43 @@ const SchoolDetails = () => {
                                   <h6>Modalidad mixta</h6>
                                 </div>
                               </div>
+                              <div className="cardalumn-container">
+
                               {detailsSchool?.egresados &&
-    detailsSchool.egresados.map((data, index) => (
-        <div className="row justify-content-center" key={index}>
-            <div className="col-md-6 col-lg-3 my-3">
-                <div className="card text-center shadow-sm">
-                    <div className="card-body">
-                        <p className="card-text mb-0">
-                            Ciclo escolar{" "}
-                            {(data.fechaDesde && data.fechaDesde.split("-")[0]) || ""} -{" "}
-                            {(data.fechaHasta && data.fechaHasta.split("-")[0]) || ""}
-                        </p>
-                        <hr />
-                        <p>
-                            <b className="fs-2 text-primary mb-2">
-                                {data.cantidadAlumnos}
-                                <br />
-                                <span className="fs-4 fw-medium">alumnos</span>
-                            </b>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    ))}
+                                detailsSchool.egresados.map((data, index) => (
+                                  <div
+                                    className="row justify-content-center d-flex"
+                                    key={index}
+                                  >
+                                    <div className="col-md-6 col-lg-3 my-3 " >
+                                      <div className="alumn-card text-center shadow-sm">
+                                        <div className="card-body">
+                                          <p className="card-text mb-0">
+                                            Ciclo escolar{" "}
+                                            {(data.fechaDesde &&
+                                              data.fechaDesde.split("-")[0]) ||
+                                              ""}{" "}
+                                            -{" "}
+                                            {(data.fechaHasta &&
+                                              data.fechaHasta.split("-")[0]) ||
+                                              ""}
+                                          </p>
+                                          <hr />
+                                          <p>
+                                            <b className="fs-2 text-primary mb-2">
+                                              {data.cantidadAlumnos}
+                                              <br />
+                                              <span className="fs-4 fw-medium">
+                                                alumnos
+                                              </span>
+                                            </b>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
 
                             </section>
                           </div>
@@ -851,39 +878,41 @@ const SchoolDetails = () => {
                         <div className="accordion-body">
                           <section className="container">
                             <h4 className="mb-4">Lista de profesores actual</h4>
-
-                            <section className="container">
-                              <h4 className="mb-4">
-                                Lista de profesores actual
-                              </h4>
-                              {detailsSchool?.profesores &&
-                                detailsSchool?.profesores.map((data, index) => (
-                                  <div
-                                    key={index}
-                                    className="row my-3 justify-content-center"
-                                  >
-                                    <div className="col-md-7 d-flex justify-content-center align-items-center">
-                                      <div
-                                        id="simple-list-item-3"
-                                        className="card text-center w-100"
-                                      >
-                                        <div className="card-header fs-3 fw-bold">
-                                          Lista de nombres y edades del ciclo{" "}
-                                          {data.fechaDesde.split("-")[0]}
-                                        </div>
-                                        <div className="card-body m-0 p-0">
-                                          {/* Lista ordenada con los profesores */}
-                                          <ol className="list-group">
-                                            <li className="list-group-item">
-                                              {data.textProfeactuales}
-                                            </li>
-                                          </ol>
-                                        </div>
+                           
+                            {detailsSchool?.profesores &&
+                              detailsSchool?.profesores.map((data, index) => (
+                                <div
+                                  key={index}
+                                  className="row my-3 justify-content-center"
+                                >
+                                  <div className="col-md-7 d-flex justify-content-center align-items-center">
+                                    <div
+                                      id="simple-list-item-3"
+                                      className="card text-center w-100"
+                                    >
+                                      <div className="card-header fs-3 fw-bold">
+                                        Lista de nombres y edades del ciclo{" "}
+                                        {data.fechaDesde} - {data.fechaHasta}
+                                      </div>
+                                      <div className="card-body m-0 p-0">
+                                        {/* Lista ordenada con los profesores */}
+                                        <ol className="list-group">
+                                          {data.textProfeactuales.map(
+                                            (row, index) => (
+                                              <li
+                                                key={index}
+                                                className="list-group-item"
+                                              >
+                                                {index + 1}. {row}
+                                              </li>
+                                            )
+                                          )}
+                                        </ol>
                                       </div>
                                     </div>
                                   </div>
-                                ))}
-                            </section>
+                                </div>
+                              ))}
                           </section>
                         </div>
                       </div>
