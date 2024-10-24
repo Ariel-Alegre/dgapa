@@ -60,9 +60,8 @@ export default function Campeche() {
                 <Link to="/contacto">Contacto</Link>
               </li>
             </ul>
-            <i className="mobile-nav-toggle d-xl-none bi bi-list">
-              <BsList />
-            </i>
+            <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
+
           </nav>
         </div>
       </header>

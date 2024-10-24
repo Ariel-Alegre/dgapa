@@ -1733,7 +1733,6 @@ section,
 }
 
 .about .our-story {
-  padding: 40px;
   background-color: color-mix(in srgb, var(--default-color), transparent 96%);
 }
 

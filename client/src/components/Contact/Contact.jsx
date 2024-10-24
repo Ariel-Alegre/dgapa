@@ -45,9 +45,8 @@ export default function Contact() {
                 <Link to="/contacto" class="active">Contacto</Link>
               </li>
             </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list">
-              <BsList />
-            </i>
+            <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
+
           </nav>
         </div>
       </header>
