@@ -10,7 +10,9 @@ import AOS from "aos";
 import { IoMdArrowUp } from "react-icons/io";
 import { ContactUs } from "../../redux/action";
 import { useDispatch } from "react-redux";
-
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
 export default function Contact() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -20,6 +22,8 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+  const [loadingSuccess, setLoadingSuccess] = useState(false);
+  const [messageSuccess, setMesageSuccess] = useState(false);
 
   useEffect(() => {
     const toggleScrolled = () => {
@@ -144,11 +148,21 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoadingSuccess(true)
+    setTimeout( async () => {
+      
     try {
       await dispatch(ContactUs(data));
     } catch (error) {
       console.error(error);
+    } finally{
+    setLoadingSuccess(false)
+    setMesageSuccess(true)
+
+
     }
+  }, 1000);
+
   };
 
   const handleChange = (e) => {
@@ -254,14 +268,9 @@ export default function Contact() {
 
             <div class="row gy-4 mt-1">
               <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
-                  frameborder="0"
-                  class="maps"
-                  allowfullscreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
+              
+                <img class="maps" src={require("../../assets/img/contactanos.png")} alt="" />
+
               </div>
 
               <div class="col-lg-6">
@@ -279,7 +288,7 @@ export default function Contact() {
                         onChange={handleChange}
                         class="form-control"
                         placeholder="Nombre"
-                        required=""
+                        required
                       />
                     </div>
 
@@ -301,7 +310,7 @@ export default function Contact() {
                         onChange={handleChange}
                         name="subject"
                         placeholder="Asunto"
-                        required=""
+                        required
                       />
                     </div>
 
@@ -312,7 +321,7 @@ export default function Contact() {
                         onChange={handleChange}
                         rows="6"
                         placeholder="Message"
-                        required=""
+                        required
                       ></textarea>
                     </div>
 
@@ -323,7 +332,18 @@ export default function Contact() {
                         Your message has been sent. Thank you!
                       </div>
 
-                      <button type="submit">Enviar</button>
+                      <button type="submit">   {loadingSuccess ? (
+          <CircularProgress size={25} thickness={5} sx={{ color: "#fff" }} />
+        ) : (
+          "Enviar mensaje"
+        )}</button>
+
+        {messageSuccess ? (
+
+          <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+    Mensaje enviado corectamente gracias por comunicarse con nosotros.
+    </Alert>
+        ): null}
                     </div>
                   </div>
                 </form>

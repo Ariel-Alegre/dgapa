@@ -3,11 +3,45 @@ import { Link, useLocation } from "react-router-dom";
 import { BsList } from "react-icons/bs";
 import { IoMdArrowUp } from "react-icons/io";
 import { Global } from "../../assets/utils/utils";
-import { Swiper,  } from "swiper/react";
+import { Swiper } from "swiper/react";
 import AOS from "aos";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+  transform: expand ? "rotate(180deg)" : "rotate(0deg)",
+}));
+
 export default function About() {
   const { pathname } = useLocation();
+  const [expanded, setExpanded] = React.useState({});
 
+
+  const handleExpandClick = (cardId) => {
+    setExpanded((prevExpanded) => ({
+      ...prevExpanded,
+      [cardId]: !prevExpanded[cardId],
+    }));
+  };
   useEffect(() => {
     const toggleScrolled = () => {
       const selectBody = document.querySelector("body");
@@ -154,7 +188,7 @@ export default function About() {
                 <Link to="/contacto">Contacto</Link>
               </li>
             </ul>
-              <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
+            <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
           </nav>
         </div>
       </header>
@@ -169,164 +203,11 @@ export default function About() {
           </div>
         </div>
 
-        <section id="about" class="about section">
-          <div class="container">
-            <div class="row position-relative">
-              <div
-                class="col-lg-7 about-img"
-                data-aos="zoom-out"
-                data-aos-delay="200"
-              >
-                <img src={require("../../assets/img/nosotros.jpg")} alt="" />
-              </div>
+     
 
-              <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-                <h2 class="inner-title">Presentación</h2>
-                <div class="our-story">
-                  <p>
-                    El interés por conocer y comprender el subsistema de
-                    formación de las Escuelas Normales Superiores resulta una
-                    tarea de gran relevancia porque representan el espacio
-                    institucional donde se forman, se negocian, se dirimen, e
-                    incluso se imponen las decisiones de política educativa y de
-                    formación que abordan el rumbo de la educación secundaria en
-                    el país. Las Escuelas Normales Superiores, en su conjunto,
-                    son las responsables de la formación, la investigación y la
-                    difusión del conocimiento, por lo cual resultan ser un
-                    objeto de estudio atractivo; conocerlas y comprenderlas nos
-                    conduce a desentrañar su desempeño y resultados en función
-                    de ciertas limitaciones que enfrentan al formar parte del
-                    sistema de educación de tercer nivel de manera tardía. En
-                    ese sentido, sirva este espacio para explorar, conocer y
-                    ubicar el conjunto de las Escuelas Normales Superiores que
-                    se encuentran a lo largo y ancho del territorio. Representa
-                    un espacio para hacerlas visibles dentro del subsistema de
-                    instituciones de educación superior en México.
-                  </p>
+    
 
-                  {/*     <div class="watch-video d-flex align-items-center position-relative">
-                    <i class="bi bi-play-circle"></i>
-                    <a
-                      href="https://www.youtube.com/watch?v=VideoDeLaEscuela"
-                      class="glightbox stretched-link"
-                    >
-                      Ver Video
-                    </a>
-                  </div> */}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/*  <section id="stats-counter" class="stats-counter section">
-      
-            <div class="container section-title" data-aos="fade-up">
-              <h2>Stats</h2>
-              <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-            </div>
-      
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-      
-              <div class="row gy-4">
-      
-                <div class="col-lg-3 col-md-6">
-                  <div class="stats-item d-flex align-items-center w-100 h-100">
-                    <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
-                    <div>
-                      <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                      <p>Happy Clients</p>
-                    </div>
-                  </div>
-                </div>
-      
-                <div class="col-lg-3 col-md-6">
-                  <div class="stats-item d-flex align-items-center w-100 h-100">
-                    <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
-                    <div>
-                      <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                      <p>Projects</p>
-                    </div>
-                  </div>
-                </div>
-      
-                <div class="col-lg-3 col-md-6">
-                  <div class="stats-item d-flex align-items-center w-100 h-100">
-                    <i class="bi bi-headset color-green flex-shrink-0"></i>
-                    <div>
-                      <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-                      <p>Hours Of Support</p>
-                    </div>
-                  </div>
-                </div>
-      
-                <div class="col-lg-3 col-md-6">
-                  <div class="stats-item d-flex align-items-center w-100 h-100">
-                    <i class="bi bi-people color-pink flex-shrink-0"></i>
-                    <div>
-                      <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                      <p>Hard Workers</p>
-                    </div>
-                  </div>
-                </div>
-      
-              </div>
-      
-            </div>
-      
-          </section> */}
-
-        {/*    <section id="alt-services" class="alt-services section">
-      
-            <div class="container">
-      
-              <div class="row justify-content-around gy-4">
-                <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="https://normalessuperiores.org.mx/img/en-rural-salaices-chihuahua.jpg" alt=""/></div>
-      
-                <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-                  <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
-                  <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi</p>
-      
-                  <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300">
-                    <i class="bi bi-easel flex-shrink-0"></i>
-                    <div>
-                      <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-                      <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-                    </div>
-                  </div>
-      
-                  <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
-                    <i class="bi bi-patch-check flex-shrink-0"></i>
-                    <div>
-                      <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
-                      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-                    </div>
-                  </div>
-      
-                  <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="500">
-                    <i class="bi bi-brightness-high flex-shrink-0"></i>
-                    <div>
-                      <h4><a href="" class="stretched-link">Dine Pad</a></h4>
-                      <p>Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
-                    </div>
-                  </div>
-      
-                  <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="600">
-                    <i class="bi bi-brightness-high flex-shrink-0"></i>
-                    <div>
-                      <h4><a href="" class="stretched-link">Tride clov</a></h4>
-                      <p>Est voluptatem labore deleniti quis a delectus et. Saepe dolorem libero sit non aspernatur odit amet. Et eligendi</p>
-                    </div>
-                  </div>
-      
-                </div>
-              </div>
-      
-            </div>
-      
-          </section> */}
-
-        {/* <section id="alt-services-2" class="alt-services-2 section">
+       <section id="alt-services-2" class="alt-services-2 section">
   <div class="container">
     <div class="row justify-content-around gy-4">
       <div
@@ -334,53 +215,21 @@ export default function About() {
         data-aos="fade-up"
         data-aos-delay="100"
       >
-        <h3>Educación de Excelencia para Todos</h3>
+        <h3>Presentación</h3>
         <p>
-          En la Escuela Secundaria Greenwood, nos dedicamos a ofrecer una formación integral. 
-          Promovemos el desarrollo académico, emocional y social de nuestros estudiantes para prepararlos para el futuro.
+        El interés por conocer y comprender el subsistema de formación de las Escuelas Normales Superiores resulta una tarea de gran relevancia porque representan el espacio institucional donde se forman, se negocian, se dirimen, e incluso se imponen las decisiones de política educativa y de formación que abordan el rumbo de la educación secundaria en el país.
+        <br />
+        <br />
+         Las Escuelas Normales Superiores, en su conjunto, son las responsables de la formación, la investigación y la difusión del conocimiento, por lo cual resultan ser un objeto de estudio atractivo; conocerlas y comprenderlas nos conduce a desentrañar su desempeño y resultados en función de ciertas limitaciones que enfrentan al formar parte del sistema de educación de tercer nivel de manera tardía. 
+         <br />
+         <br />
+         En ese sentido, sirva este espacio para explorar, conocer y ubicar el conjunto de las Escuelas Normales Superiores que se encuentran a lo largo y ancho del territorio.
+         <br />
+         <br />
+          Representa un espacio para hacerlas visibles dentro del subsistema de instituciones de educación superior en México.
         </p>
 
-        <div class="row">
-          <div class="col-lg-6 icon-box d-flex">
-            <i class="bi bi-easel flex-shrink-0"></i>
-            <div>
-              <h4>Clases Innovadoras</h4>
-              <p>
-                Utilizamos métodos de enseñanza modernos para fomentar el pensamiento crítico y la creatividad en nuestros estudiantes.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-6 icon-box d-flex">
-            <i class="bi bi-patch-check flex-shrink-0"></i>
-            <div>
-              <h4>Excelencia Académica</h4>
-              <p>
-                Nuestro enfoque académico se centra en brindar una educación de calidad, que prepara a los estudiantes para los retos del mañana.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-6 icon-box d-flex">
-            <i class="bi bi-brightness-high flex-shrink-0"></i>
-            <div>
-              <h4>Actividades Extracurriculares</h4>
-              <p>
-                Ofrecemos una amplia gama de actividades que permiten a los estudiantes desarrollar habilidades fuera del aula.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-6 icon-box d-flex">
-            <i class="bi bi-brightness-high flex-shrink-0"></i>
-            <div>
-              <h4>Ambiente Inclusivo</h4>
-              <p>
-                Fomentamos un ambiente de respeto y apoyo donde cada estudiante puede crecer y prosperar.
-              </p>
-            </div>
-          </div>
-        </div>
+       
       </div>
 
       <div
@@ -389,268 +238,17 @@ export default function About() {
         data-aos-delay="200"
       >
         <img
-          src="https://normalessuperiores.org.mx/img/en-rural-salaices-chihuahua.jpg"
+          src={require("../../assets/img/nosotros.jpg")} 
           alt="Imagen de la escuela"
         />
       </div>
     </div>
   </div>
-</section> */}
+</section>
 
-        {/*    <section id="team" class="team section">
-      
-            <div class="container section-title" data-aos="fade-up">
-              <h2>Team</h2>
-              <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-            </div>
-      
-            <div class="container">
-      
-              <div class="row gy-5">
-      
-                <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
-                  <div class="member-img">
-                    <img src="assets/img/team/team-1.jpg" class="img-fluid" alt=""/>
-                    <div class="social">
-                      <a href="#"><i class="bi bi-twitter-x"></i></a>
-                      <a href="#"><i class="bi bi-facebook"></i></a>
-                      <a href="#"><i class="bi bi-instagram"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                  </div>
-                  <div class="member-info text-center">
-                    <h4>Walter White</h4>
-                    <span>Chief Executive Officer</span>
-                    <p>Aliquam iure quaerat voluptatem praesentium possimus unde laudantium vel dolorum distinctio dire flow</p>
-                  </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="200">
-                  <div class="member-img">
-                    <img src="assets/img/team/team-2.jpg" class="img-fluid" alt=""/>
-                    <div class="social">
-                      <a href="#"><i class="bi bi-twitter-x"></i></a>
-                      <a href="#"><i class="bi bi-facebook"></i></a>
-                      <a href="#"><i class="bi bi-instagram"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                  </div>
-                  <div class="member-info text-center">
-                    <h4>Sarah Jhonson</h4>
-                    <span>Product Manager</span>
-                    <p>Labore ipsam sit consequatur exercitationem rerum laboriosam laudantium aut quod dolores exercitationem ut</p>
-                  </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="300">
-                  <div class="member-img">
-                    <img src="assets/img/team/team-3.jpg" class="img-fluid" alt=""/>
-                    <div class="social">
-                      <a href="#"><i class="bi bi-twitter-x"></i></a>
-                      <a href="#"><i class="bi bi-facebook"></i></a>
-                      <a href="#"><i class="bi bi-instagram"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                  </div>
-                  <div class="member-info text-center">
-                    <h4>William Anderson</h4>
-                    <span>CTO</span>
-                    <p>Illum minima ea autem doloremque ipsum quidem quas aspernatur modi ut praesentium vel tque sed facilis at qui</p>
-                  </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="400">
-                  <div class="member-img">
-                    <img src="assets/img/team/team-4.jpg" class="img-fluid" alt=""/>
-                    <div class="social">
-                      <a href="#"><i class="bi bi-twitter-x"></i></a>
-                      <a href="#"><i class="bi bi-facebook"></i></a>
-                      <a href="#"><i class="bi bi-instagram"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                  </div>
-                  <div class="member-info text-center">
-                    <h4>Amanda Jepson</h4>
-                    <span>Accountant</span>
-                    <p>Magni voluptatem accusamus assumenda cum nisi aut qui dolorem voluptate sed et veniam quasi quam consectetur</p>
-                  </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="500">
-                  <div class="member-img">
-                    <img src="assets/img/team/team-5.jpg" class="img-fluid" alt=""/>
-                    <div class="social">
-                      <a href="#"><i class="bi bi-twitter-x"></i></a>
-                      <a href="#"><i class="bi bi-facebook"></i></a>
-                      <a href="#"><i class="bi bi-instagram"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                  </div>
-                  <div class="member-info text-center">
-                    <h4>Brian Doe</h4>
-                    <span>Marketing</span>
-                    <p>Qui consequuntur quos accusamus magnam quo est molestiae eius laboriosam sunt doloribus quia impedit laborum velit</p>
-                  </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="600">
-                  <div class="member-img">
-                    <img src="assets/img/team/team-6.jpg" class="img-fluid" alt=""/>
-                    <div class="social">
-                      <a href="#"><i class="bi bi-twitter-x"></i></a>
-                      <a href="#"><i class="bi bi-facebook"></i></a>
-                      <a href="#"><i class="bi bi-instagram"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                  </div>
-                  <div class="member-info text-center">
-                    <h4>Josepha Palas</h4>
-                    <span>Operation</span>
-                    <p>Sint sint eveniet explicabo amet consequatur nesciunt error enim rerum earum et omnis fugit eligendi cupiditate vel</p>
-                  </div>
-                </div>
-      
-              </div>
-      
-            </div>
-      
-          </section> */}
+     
 
-        {/*  <section id="testimonials" class="testimonials section">
-      
-            <div class="container section-title" data-aos="fade-up">
-              <h2>Testimonials</h2>
-              <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-            </div>
-      
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-      
-              <div class="swiper init-swiper">
-                <script type="application/json" class="swiper-config">
-                  {
-                    "loop": true,
-                    "speed": 600,
-                    "autoplay": {
-                      "delay": 5000
-                    },
-                    "slidesPerView": "auto",
-                    "pagination": {
-                      "el": ".swiper-pagination",
-                      "type": "bullets",
-                      "clickable": true
-                    },
-                    "breakpoints": {
-                      "320": {
-                        "slidesPerView": 1,
-                        "spaceBetween": 40
-                      },
-                      "1200": {
-                        "slidesPerView": 2,
-                        "spaceBetween": 20
-                      }
-                    }
-                  }
-                </script> 
-                <div class="swiper-wrapper">
-      
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt=""/>
-                        <h3>Saul Goodman</h3>
-                        <h4>Ceo &amp; Founder</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt=""/>
-                        <h3>Sara Wilsson</h3>
-                        <h4>Designer</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt=""/>
-                        <h3>Jena Karlis</h3>
-                        <h4>Store Owner</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt=""/>
-                        <h3>Matt Brandon</h3>
-                        <h4>Freelancer</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt=""/>
-                        <h3>John Larson</h3>
-                        <h4>Entrepreneur</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                          <i class="bi bi-quote quote-icon-left"></i>
-                          <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                          <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-      
-                </div>
-                <div class="swiper-pagination"></div>
-              </div>
-      
-            </div>
-      
-          </section>
-       */}
+        
 
         <section id="services" class="services section light-background">
           <div class="container section-title" data-aos="fade-up">
@@ -669,31 +267,52 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia1.jpg")}
-                            alt=""
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia1.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
                               Primera institución encargada de la formación de
                               los maestros{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              La Escuela Normal Superior Universitaria (ENSU),
-                              de la antigua Facultad de Altos Estudios (FAE),
-                              dependiente de la Universidad Nacional de México
-                              (UNM), fue la primera institución encargada de la
-                              formación de los maestros para la educación
-                              secundaria. Fue cerrada temporalmente el mismo
-                              año; reabierta en 1925; enseguida de la Facultad
-                              de Filosofía y Letras en 1929 y separada de manera
-                              definitiva de la UNM en 1933.{" "}
-                            </p>
-                          </div>
-                        </div>
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[1]}
+                              onClick={() => handleExpandClick(1)}
+
+                              aria-expanded={expanded[1]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[1]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                                La Escuela Normal Superior Universitaria (ENSU),
+                                de la antigua Facultad de Altos Estudios (FAE),
+                                dependiente de la Universidad Nacional de México
+                                (UNM), fue la primera institución encargada de
+                                la formación de los maestros para la educación
+                                secundaria. Fue cerrada temporalmente el mismo
+                                año; reabierta en 1925; enseguida de la Facultad
+                                de Filosofía y Letras en 1929 y separada de
+                                manera definitiva de la UNM en 1933.{" "}
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -705,20 +324,38 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia2.jpg")}
-
-                            alt=""
+                      <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia2.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Creación del Consejo Nacional de la Educación
-                              Superior{" "}
-                            </h4>
-                            <p class="card-text m-0">
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                               Creación del Consejo Nacional de la Educación
+                               Superior{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[2]}
+                              onClick={() => handleExpandClick(2)}
+                              aria-expanded={expanded[2]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[2]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
                               Fue creado el Consejo Nacional de la Educación
                               Superior y de la Investigación Científica
                               (CNESIC), instancia encargada de organizar y
@@ -726,9 +363,11 @@ export default function About() {
                               Mejoramiento del Profesorado de Enseñanza
                               Secundaria (IMPES), antecedente de la Escuela
                               Normal Superior (ENS).{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                   
                       </div>
                     </div>
                   </li>
@@ -740,20 +379,40 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia3.jpg")}
+                   
 
-                            alt=""
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia3.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Origen y Evolución del IMPES hacia la ENS{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Fundación del Instituto de Mejoramiento del
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Origen y Evolución del IMPES hacia la ENS{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[3]}
+                              onClick={() => handleExpandClick(3)}
+                              aria-expanded={expanded[3]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[3]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                          Fundación del Instituto de Mejoramiento del
                               Profesorado de Enseñanza Secundaria (IMPES), que
                               más tarde se transformó en Escuela Normal Superior
                               (ENS), como centro de formación de profesores de
@@ -764,9 +423,10 @@ export default function About() {
                               Dirección General de Enseñanza Superior e
                               Investigación Científica de la Secretaría de
                               Educación Pública (SEP).{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -778,21 +438,41 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia4.jpg")}
+                    
 
-                            alt=""
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia4.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              La Enseñanza Normal Superior según la Ley Orgánica
-                              de Educación{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              En la Ley Orgánica de Educación, la Enseñanza
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                             La Enseñanza Normal Superior según la Ley Orgánica
+                             de Educación{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[4]}
+                              onClick={() => handleExpandClick(4)}
+                              aria-expanded={expanded[4]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[4]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                      En la Ley Orgánica de Educación, la Enseñanza
                               Normal Superior se impartía a los profesores
                               normalistas graduados en las escuelas normales
                               urbanas y a los de las rurales. Ambos profesores
@@ -801,9 +481,10 @@ export default function About() {
                               Técnica o de cualquier grado de la Educación
                               Superior y graduaba doctores en Ciencias de la
                               Educación (Artículo 71, Capítulo XIII).{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -815,20 +496,39 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia5.jpg")}
-
-                            alt=""
+                        
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia5.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              La ENS en la Ley Orgánica de Educación de 1942{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              La ENS fue concebida como la única institución
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           La ENS en la Ley Orgánica de Educación de 1942{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[5]}
+                              onClick={() => handleExpandClick(5)}
+                              aria-expanded={expanded[5]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[5]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                    La ENS fue concebida como la única institución
                               educativa a nivel federal para formar maestros
                               posprimarios, así como para preparar burócratas,
                               intelectuales y especialistas. La Ley Orgánica de
@@ -839,9 +539,10 @@ export default function About() {
                               de mejoramiento profesional para elevar el nivel
                               cultural técnico y pedagógico de los maestros en
                               servicios". (Artículo 81, Capítulo XI).{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -853,27 +554,48 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia6.jpg")}
+                        
 
-                            alt=""
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia6.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Creación de la ENS de Coahuila{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se creó la Escuela Normal Superior del Estado de
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Creación de la ENS de Coahuila{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[6]}
+                              onClick={() => handleExpandClick(6)}
+                              aria-expanded={expanded[6]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[6]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                    Se creó la Escuela Normal Superior del Estado de
                               Coahuila, la cual quedó comprendida dentro de la
                               Universidad de Coahuila como institución pública
                               estatal. El 7 de abril de 1965 se separó de la
                               Universidad. (Hernández, 2017: 25){" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -885,27 +607,47 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia7.jpg")}
-
-                            alt=""
+                   
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia7.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Fundación de escuelas{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se fundaron: la Escuela Normal Superior “FEP” del
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           Fundación de escuelas{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[7]}
+                              onClick={() => handleExpandClick(7)}
+                              aria-expanded={expanded[7]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[7]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                      Se fundaron: la Escuela Normal Superior “FEP” del
                               D.F., la Escuela Normal Superior “Nueva Galicia”,
                               A.C., Guadalajara, Jal., y la Escuela Normal de
                               Sinaloa. Las dos primera instituciones educativas
                               particulares; la tercera pública estatal.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -917,26 +659,47 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia8.jpg")}
+                       
 
-                            alt=""
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia8.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Instauración de la EN de la Constitución{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Fue instaurada la Escuela Normal de la
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                          Instauración de la EN de la Constitución{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[8]}
+                              onClick={() => handleExpandClick(8)}
+                              aria-expanded={expanded[8]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[8]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                    Fue instaurada la Escuela Normal de la
                               Constitución, antecedente de la Escuela Normal
                               "Manuel Ávila Camacho" y en 2012 recibió el
                               reconocimiento de Benemérita.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -948,30 +711,50 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia9.jpg")}
-
-                            alt=""
+                    
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia9.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Historia y Cierre de la Escuela Normal Superior de
-                              la Universidad Autónoma de Guerrero{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Constitución de la Escuela Normal Superior de la
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Historia y Cierre de la Escuela Normal Superior de
+                            la Universidad Autónoma de Guerrero{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[9]}
+                              onClick={() => handleExpandClick(9)}
+                              aria-expanded={expanded[9]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[9]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                       Constitución de la Escuela Normal Superior de la
                               Universidad Autónoma de Guerrero, imparte cursos
                               intensivos de verano para formar a maestros de
                               enseñanza media. El 25 de abril de 1985 se decretó
                               la extinción de la institución formadora y en el
                               ciclo 1986-1987 se impartió el último curso de
                               verano (Wences, s/f, Tomo II:218){" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -983,28 +766,48 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia10.jpg")}
-
-                            alt=""
+                    
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia10.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Fundación de la Escuela Normal Superior de Puebla{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se estableció la Escuela Normal Superior de Puebla
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                         Fundación de la Escuela Normal Superior de Puebla{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[10]}
+                              onClick={() => handleExpandClick(10)}
+                              aria-expanded={expanded[10]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[10]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                     Se estableció la Escuela Normal Superior de Puebla
                               (ENSEP) de sostenimiento estatal. En 1961 se
                               establecieron los cursos intensivos o de verano,
                               junto con los cursos ordinarios. Se fundaron 7
                               subsedes en la entidad; la última en 1997 (ENSEP,
                               s/f: 2).{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1016,25 +819,45 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia11.jpg")}
-
-                            alt=""
+               
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia11.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Escuela de la Universidad "Labastida"{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Surgió la Escuela Normal Superior de la
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                         Escuela de la Universidad "Labastida"{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[11]}
+                              onClick={() => handleExpandClick(11)}
+                              aria-expanded={expanded[11]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[11]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                     Surgió la Escuela Normal Superior de la
                               Universidad “Labastida”, Monterrey, N.L.,
                               institución formadora particular.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1046,26 +869,46 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia12.jpg")}
-
-                            alt=""
+                     
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia12.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Colegio "Benavente"{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Fundación del Colegio "Benavente" Puebla,
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                         Colegio "Benavente"{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[12]}
+                              onClick={() => handleExpandClick(12)}
+                              aria-expanded={expanded[12]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[12]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                    Fundación del Colegio "Benavente" Puebla,
                               posteriormente denominado Escuela Normal Superior
                               “Benavente”, Puebla. Institución formadora de
                               sostenimiento particular.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1077,28 +920,48 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia13.jpg")}
-
-                            alt=""
+                   
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia13.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
                               Creación de la ENS de Nayarit{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se creó la Escuela Normal Superior de Nayarit
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[13]}
+                              onClick={() => handleExpandClick(13)}
+                              aria-expanded={expanded[13]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[13]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                        Se creó la Escuela Normal Superior de Nayarit
                               dentro del Instituto del Estado o Universidad
                               Autónoma de Nayarit. Por el Decreto 4876, 7 de
                               enero de 1967, se establece como organismo
                               público, con personalidad pública y patrimonio
                               propios{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1110,25 +973,45 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia14.jpg")}
-
-                            alt=""
+                     
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia14.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Fundación de la ENS de Chihuahua{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se fundó la Escuela Normal Superior de Chihuahua
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                             Fundación de la ENS de Chihuahua{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[14]}
+                              onClick={() => handleExpandClick(14)}
+                              aria-expanded={expanded[14]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[14]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                     Se fundó la Escuela Normal Superior de Chihuahua
                               “Porfirio Parra” como institución educativa de
                               control público.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1140,18 +1023,39 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia15.jpg")}
-
-                            alt=""
+                       
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia15.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">Eventos generales </h4>
-                            <p class="card-text m-0">
-                              Fue constituida la Escuela Normal Superior de
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                             Eventos generales 
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[15]}
+                              onClick={() => handleExpandClick(15)}
+                              aria-expanded={expanded[15]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[15]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                        Fue constituida la Escuela Normal Superior de
                               Chihuahua, Prof. José E. Medrano”. Inicia
                               funciones con los planes de estudio y reglamentos
                               de la Escuela Normal Superior de la Ciudad de
@@ -1166,9 +1070,10 @@ export default function About() {
                               Escuela Normal de Tlalnepantla como instituciones
                               públicas estatales en la formación de maestros de
                               secundaria.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1180,26 +1085,46 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia16.jpg")}
-
-                            alt=""
+                   
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia16.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Fundación de escuelas{" "}
-                            </h4>
-                            <p class="card-text m-0">
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Fundación de escuelas{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[16]}
+                              onClick={() => handleExpandClick(16)}
+                              aria-expanded={expanded[16]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[16]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
                               Se fundaron: la Escuela Normal Superior del Estado
                               de Nuevo León, “Prof. Moisés Sáenz Garza” y la
                               Escuela Normal Oficial "Lic. Benito Juárez" como
                               centros de formación de carácter público estatal.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1211,25 +1136,45 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia17.jpg")}
-
-                            alt=""
+                    
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia17.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Constitución de la Escuela Normal de Chalco{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se constituyó la Escuela Normal de Chalco, como
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Constitución de la Escuela Normal de Chalco{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[17]}
+                              onClick={() => handleExpandClick(17)}
+                              aria-expanded={expanded[17]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[17]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                                Se constituyó la Escuela Normal de Chalco, como
                               institución pública estatal, en la formación de
                               maestros de secundaria en varias especialidades.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1241,28 +1186,48 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia18.jpg")}
-
-                            alt=""
+                    
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia18.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Instituciones formadoras particulares{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se establecieron la Escuela Normal Superior “Juana
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           Instituciones formadoras particulares{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[18]}
+                              onClick={() => handleExpandClick(18)}
+                              aria-expanded={expanded[18]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[18]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                             Se establecieron la Escuela Normal Superior “Juana
                               de Asbaje”, Zamora, Michoacán y la Escuela Normal
                               Superior “Instituto América”, León, Guanajuato,
                               como instituciones formadoras particulares. La
                               primera incorporada a la SEP y la segunda al
                               gobierno el Estado.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1274,28 +1239,48 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia19.jpg")}
-
-                            alt=""
+                     
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia19.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Creación de escuelas{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Fueron creadas: la Escuela Normal Superior del
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           Creación de escuelas{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[19]}
+                              onClick={() => handleExpandClick(19)}
+                              aria-expanded={expanded[19]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[19]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                            Fueron creadas: la Escuela Normal Superior del
                               Sureste “Lic. Benito Juárez”, Oaxaca (cerrada) y
                               la Escuela Normal Superior Anexa al Instituto
                               “Justo Sierra”, León, Gto. Ambas escuelas
                               particulares. La primera fue cerrada y la segunda
                               fue incorprada al gobierno del Estado.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1307,20 +1292,40 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia20.jpg")}
+                     
 
-                            alt=""
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia20.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Concepción de escuelas{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se concibieron: la Escuela Normal Superior “Flores
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           Concepción de escuelas{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[20]}
+                              onClick={() => handleExpandClick(20)}
+                              aria-expanded={expanded[20]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[20]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                                  Se concibieron: la Escuela Normal Superior “Flores
                               Magón” y la Escuela Normal Superior de Tlaxcala.
                               La primera particular estuvo funcionando sin
                               autorización, por lo que fue clausurada y la
@@ -1331,9 +1336,10 @@ export default function About() {
                               del Estado (IESE), bajo el control de la
                               Federación de Estudiantes Tlaxcaltecas (FET) y del
                               PRI.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1345,20 +1351,39 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia21.jpg")}
-
-                            alt=""
+                      
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia21.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Fundación de nuevas ENS{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se fundaron: la Escuela Normal Superior Oficial de
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Fundación de nuevas ENS{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[21]}
+                              onClick={() => handleExpandClick(21)}
+                              aria-expanded={expanded[21]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[21]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                               Se fundaron: la Escuela Normal Superior Oficial de
                               Guanajuato, la Escuela Normal Superior del Estado
                               de México, la Escuela Normal Núm. 1 de Toluca como
                               instituciones públicas estatales y la Escuela
@@ -1371,9 +1396,10 @@ export default function About() {
                               primeras de sostenimiento estatal y la última
                               particular que pasó a ser de sostenimiento estatal
                               (Araujo y Estrada, 2009: 43){" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1385,19 +1411,38 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia22.jpg")}
-
-                            alt=""
+                      
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia22.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Creación de la ENS de Tamaulipas{" "}
-                            </h4>
-                            <p class="card-text m-0">
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Creación de la ENS de Tamaulipas{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[22]}
+                              onClick={() => handleExpandClick(22)}
+                              aria-expanded={expanded[22]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[22]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
                               Fue creada la Escuela Normal Superior de
                               Tamaulipas, de sostenimiento privado. Por acuerdo
                               del 2 de julio de 1970 se otorgó a “Promotora de
@@ -1405,9 +1450,10 @@ export default function About() {
                               Civil”, autorización para que imparta enseñanza de
                               Normal Superior en la que se denominaría “Escuela
                               Normal Superior de Tamaulipas”.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1419,26 +1465,48 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia23.jpg")}
-
-                            alt=""
+                     
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia23.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">Nuevas ENS </h4>
-                            <p class="card-text m-0">
-                              Surgieron: la Escuela Normal Superior del Sur de
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           Nuevas ENS 
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[23]}
+                              onClick={() => handleExpandClick(23)}
+                              aria-expanded={expanded[23]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[23]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                             Surgieron: la Escuela Normal Superior del Sur de
                               Tamaulipas, la Escuela Normal Superior de Oaxaca,
                               A.C., la Escuela Normal Superior de Yucatán,
                               “Antonio Betancourt Pérez” y la Escuela Normal de
                               Tejupilco. Las dos primeras particulares y las dos
                               últimas públicas estatales.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1450,23 +1518,45 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia24.jpg")}
-
-                            alt=""
+                    
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia24.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">ENS de Celaya </h4>
-                            <p class="card-text m-0">
-                              Se concibió la Escuela Normal Superior de Celaya
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           ENS de Celaya 
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[24]}
+                              onClick={() => handleExpandClick(24)}
+                              aria-expanded={expanded[24]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[24]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                           Se concibió la Escuela Normal Superior de Celaya
                               como Asociación Civil de sostenimiento particular,
                               incorporada al gobierno del Estado.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1478,20 +1568,39 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia25.jpg")}
-
-                            alt=""
+                        
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia25.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Establecimiento de escuelas{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se establecieron: la Escuela Normal Superior de
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                          Establecimiento de escuelas{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[25]}
+                              onClick={() => handleExpandClick(25)}
+                              aria-expanded={expanded[25]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[25]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                Se establecieron: la Escuela Normal Superior de
                               Chiapas de sostenimiento privado y por decreto No.
                               57 pasó a ser estatal, la Escuela Normal Superior
                               de Jalisco y la Escuela Normal Superior de
@@ -1504,9 +1613,10 @@ export default function About() {
                               Escuela Normal de Naucalpan, como institución
                               pública estatal en la formación de maestros de
                               secundaria.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1518,20 +1628,39 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia26.jpg")}
-
-                            alt=""
+                       
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia26.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Fueron constituidas:{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              La Escuela Normal Superior de Sinaloa, la Escuela
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                         Fueron constituidas:{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[26]}
+                              onClick={() => handleExpandClick(26)}
+                              aria-expanded={expanded[26]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[26]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                La Escuela Normal Superior de Sinaloa, la Escuela
                               Normal Superior de la Laguna, Cursos Intensivos,
                               A.C., Durango, la Escuela Normal Superior de
                               Durango y la Escuela Normal Superior “Justo
@@ -1546,9 +1675,10 @@ export default function About() {
                               Normal No. 2 de Nezahualcóyotl como instituciones
                               públicas estatales, en la formación de maestros de
                               secundaria.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1560,24 +1690,46 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia27.jpg")}
-
-                            alt=""
+                    
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia27.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">Se crearon: </h4>
-                            <p class="card-text m-0">
-                              La Escuela Normal San Felipe del Progreso y la
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                         Se crearon:{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[27]}
+                              onClick={() => handleExpandClick(27)}
+                              aria-expanded={expanded[27]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[27]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                 La Escuela Normal San Felipe del Progreso y la
                               Escuela Normal de Texcoco, como instituciones
                               públicas estatales en la formación de maestros de
                               secundaria.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1589,20 +1741,39 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia28.jpg")}
-
-                            alt=""
+                      
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia28.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Publicación del Acuerdo{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Por el cual se establece el bachillerato y los
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                        Publicación del Acuerdo{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[28]}
+                              onClick={() => handleExpandClick(28)}
+                              aria-expanded={expanded[28]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[28]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                    Por el cual se establece el bachillerato y los
                               planes de estudio de Educación Normal a nivel
                               Licenciatura. Se fundaron: la Escuela Normal
                               Superior del Estado Baja California Sur, “Prof.
@@ -1613,9 +1784,10 @@ export default function About() {
                               particulares. La primera se incorporó al gobierno
                               del Estado como organismo público con personalidad
                               jurídica y patrimonio propios.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1627,21 +1799,40 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia29.jpg")}
-
-                            alt=""
+                    
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia29.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Creación y Organización de Escuelas Normales
-                              Superiores{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se estableció la Dirección de Educación Normal
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                             Creación y Organización de Escuelas Normales
+                             Superiores{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[29]}
+                              onClick={() => handleExpandClick(29)}
+                              aria-expanded={expanded[29]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[29]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                      Se estableció la Dirección de Educación Normal
                               Superior y Especialidades para administrar,
                               dirigir y supervisar el funcionamiento de la
                               Escuela Normal Superior de México y de las 5
@@ -1659,9 +1850,10 @@ export default function About() {
                               gobiernos de los Estados. La Escuela Normal
                               Superior de Chiapas por convenio de 1977 transita
                               del sostenimiento estatal al federal.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1673,24 +1865,46 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia30.jpg")}
-
-                            alt=""
+                 
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia30.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">Se abrieron: </h4>
-                            <p class="card-text m-0">
-                              La Escuela Normal de Atizapán de Zaragoza y la
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                             Se abrieron:
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[30]}
+                              onClick={() => handleExpandClick(30)}
+                              aria-expanded={expanded[30]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[30]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                   La Escuela Normal de Atizapán de Zaragoza y la
                               Escuela Normal No. 4 de Nezahualcóyotl, como
                               instituciones públicas estatales, en la formación
                               de maestros de secundaria.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1702,22 +1916,41 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia31.jpg")}
-
-                            alt=""
+                    
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia31.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Transformaciones en la Dirección de Educación
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                               Transformaciones en la Dirección de Educación
                               Normal Superior y Surgimiento de Nuevas
                               Instituciones{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Desaparece la naciente Dirección de Educación
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[31]}
+                              onClick={() => handleExpandClick(31)}
+                              aria-expanded={expanded[31]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[31]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                 Desaparece la naciente Dirección de Educación
                               Normal Superior y Especialidades, se convierte en
                               un Departamento y se estableció el Consejo
                               Nacional Consultivo de Educación Normal como
@@ -1726,9 +1959,10 @@ export default function About() {
                               Estatales. (Gámez, 1990: 14). Surgió la Escuela
                               Normal Superior de Ciudad Madero A.C., Tamaulipas,
                               como institución formadora particular.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1740,29 +1974,49 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia32.jpg")}
-
-                            alt=""
+                     
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia32.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Creación de ENS Federal en Veracruz{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se creó la Escuela Normal Superior Federal para
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                             Creación de ENS Federal en Veracruz{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[32]}
+                              onClick={() => handleExpandClick(32)}
+                              aria-expanded={expanded[32]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[32]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+               Se creó la Escuela Normal Superior Federal para
                               Cursos Intensivos en Veracruz, institución
                               educativa federal, como parte del proceso de
                               regionalización de la formación docente de
                               maestros, con tres departamentos de Control
                               escolar, Titulación e Investigación, Área
                               académica y Planeación Educativa.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1774,18 +2028,39 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia33.jpg")}
-
-                            alt=""
+                      
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia33.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">Se constituyen: </h4>
-                            <p class="card-text m-0">
-                              La Escuela Normal Superior Federal Cursos
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                             Se constituyen:
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[33]}
+                              onClick={() => handleExpandClick(33)}
+                              aria-expanded={expanded[33]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[33]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+               La Escuela Normal Superior Federal Cursos
                               Intensivos Campeche, Escuela Normal Superior de
                               Querétaro y la Escuela Normal Superior de Santa
                               Ana, Sonora, como instituciones de formación de
@@ -1798,9 +2073,10 @@ export default function About() {
                               Hermosillo: Navojoa, Nacozari, Ciudad Obregón, San
                               Luis Río Colorado y Sahuaripa. Actualmente ya no
                               operan las subsedes de Nacozari y Sahuaripa.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1812,25 +2088,47 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia34.jpg")}
-
-                            alt=""
+                 
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia34.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">Se concibió: </h4>
-                            <p class="card-text m-0">
-                              La Escuela Normal Superior del Estado de Puebla,
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Se concibió:
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[34]}
+                              onClick={() => handleExpandClick(34)}
+                              aria-expanded={expanded[34]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[34]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+              La Escuela Normal Superior del Estado de Puebla,
                               como institución formadora de carácter público
                               estatal. Se publicó el Acuerdo que autorizó la
                               impartición de cursos intensivos en Campeche y
                               Michoacán (Gámez, 1990: 15).{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1842,25 +2140,47 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia35.jpg")}
-
-                            alt=""
+                       
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia35.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">ENS de Morelia </h4>
-                            <p class="card-text m-0">
-                              Surgió la Escuela Normal Superior de Morelia,
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           ENS de Morelia
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[35]}
+                              onClick={() => handleExpandClick(35)}
+                              aria-expanded={expanded[35]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[35]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+              Surgió la Escuela Normal Superior de Morelia,
                               Michoacán, como institución formadora federal para
                               ofrecer cursos intensivos a estudiantes
                               procedentes de los estados de Guerrero, Jalisco,
                               Colima, Guanajuato y Michoacán.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1872,21 +2192,40 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia36.jpg")}
-
-                            alt=""
+                       
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia36.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
                               Escuela Particular Normal Superior "Lic. Benito
                               Juárez"{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se fundó la Escuela Particular Normal Superior
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[36]}
+                              onClick={() => handleExpandClick(36)}
+                              aria-expanded={expanded[36]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[36]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+          Se fundó la Escuela Particular Normal Superior
                               “Lic. Benito Juárez”, (EPNSBJ), Morelos, como
                               iniciativa de la delegación XIX del SNTE,
                               "resultado del conflicto de intereses al interior
@@ -1894,9 +2233,10 @@ export default function About() {
                               del profesorado que laboraba en la Escuela
                               Particular Normal Superior del Estado (EPNSE)
                               (González, Arredondo, Espinosa, 2009: 145){" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1908,22 +2248,41 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia37.jpg")}
-
-                            alt=""
+                     
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia37.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Transformación de la Escuela Normal Superior
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                                 Transformación de la Escuela Normal Superior
                               Veracruzana Dr. Manuel Suárez Trujillo y
                               Surgimiento de Nuevas Instituciones{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se estableció la Escuela Normal Superior
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[37]}
+                              onClick={() => handleExpandClick(37)}
+                              aria-expanded={expanded[37]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[37]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+         Se estableció la Escuela Normal Superior
                               Veracruzana Dr. Manuel Suárez Trujillo como
                               institución formadora pública estatal que ofreció
                               la Licenciatura en Educación Media en modalidad
@@ -1945,9 +2304,10 @@ export default function About() {
                               del gobierno estatal y la Escuela Normal Superior
                               "Prof. Salomón Barrancos Aguilar" del Instituto
                               Campechano como institución pública estatal.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1959,26 +2319,48 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia38.jpg")}
-
-                            alt=""
+               
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia38.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">Surgieron: </h4>
-                            <p class="card-text m-0">
-                              La Escuela Normal Superior Federal de Oaxaca, la
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                               Surgieron:
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[38]}
+                              onClick={() => handleExpandClick(38)}
+                              aria-expanded={expanded[38]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[38]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+        La Escuela Normal Superior Federal de Oaxaca, la
                               Escuela Normal Superior Federalizada del Estado de
                               Puebla (ENSFEP) y la Escuela Normal Superior de
                               Zacatecas. Las dos primeras como instituciones
                               públicas federales; la tercera como institución
                               educativa particular.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
@@ -1990,30 +2372,51 @@ export default function About() {
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
-                        <div class="card border-0 shadow">
-                          <img
-                            class="card-img-top img-fluid"
-                            loading="lazy"
-                            src={require("../../assets/img/historia39.jpg")}
-
-                            alt=""
+                   
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            width="100%"
+                            image={require("../../assets/img/historia39.jpg")}
+                            alt="Historia"
                           />
-                          <div class="card-body p-xl-4">
-                            <h4 class="card-title mb-2">
-                              Escuela Normal "Vicente Guerrero"{" "}
-                            </h4>
-                            <p class="card-text m-0">
-                              Se creó la Escuela Normal "Vicente Guerrero", como
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                               Escuela Normal "Vicente Guerrero"{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[39]}
+                              onClick={() => handleExpandClick(39)}
+                              aria-expanded={expanded[39]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[39]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+      Se creó la Escuela Normal "Vicente Guerrero", como
                               institución formadora pública de carácter estatal
                               y la Escuela Normal "Carrillo Cárdenas",
                               institución privada.{" "}
-                            </p>
-                          </div>
-                        </div>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
                       </div>
                     </div>
                   </li>
-                 {/*  <li class="timeline-item right">
+                  {/*  <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
                         <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">

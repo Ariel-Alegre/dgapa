@@ -18,6 +18,9 @@ const RegisterSchool = () => {
     year_of_operation: "",
     province: "",
     sic: "",
+    urlYoutube: "",
+
+    
     postgrado1: "",
     postgrado2: "",
     beca1: "",
@@ -102,6 +105,9 @@ const RegisterSchool = () => {
       data.append("year_of_operation", formattedDate);
       data.append("province", formData.province);
       data.append("sic", formData.sic);
+      data.append("urlYoutube", formData.urlYoutube);
+
+      
       data.append("postgrado1", formData.postgrado1);
       data.append("postgrado2", formData.postgrado2);
       data.append("beca1", formData.beca1);
@@ -518,6 +524,17 @@ const RegisterSchool = () => {
           value={formData.sic}
           onChange={handleInputChange}
           placeholder="sic" // Placeholder para indicar el formato esperado
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Enlace de youtube:</label>
+        <input
+          type="text" // Cambiado a tipo "text" para permitir el formato
+          name="urlYoutube"
+          value={formData.urlYoutube}
+          onChange={handleInputChange}
+          placeholder="Enlace de youtube" // Placeholder para indicar el formato esperado
         />
       </div>
       <div className="form-group">

@@ -87,7 +87,6 @@ module.exports = {
       const parsedProfesores = profesores ? JSON.parse(profesores) : school.profesores;
       const parsedProfesoresMaestrias = profesoresMaestrias ? JSON.parse(profesoresMaestrias) : school.profesoresMaestrias;
       const parsedProfesoresConDoctorados = profesoresConDoctorados ? JSON.parse(profesoresConDoctorados) : school.profesoresConDoctorados;
-      const parsedUrlYoutube = urlYoutube ? JSON.parse(urlYoutube) : school.urlYoutube;
 
       
       // Actualizar los datos de la escuela en la base de datos

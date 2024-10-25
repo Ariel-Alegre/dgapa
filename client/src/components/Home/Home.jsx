@@ -213,132 +213,196 @@ function App() {
     agu: {
       name: "Aguascalientes",
       description: `Cantidad de escuelas: ${aguSchools.length}`,
+      name_school: aguSchools && aguSchools.map((data) => data.name)
+
     },
     bcn: {
       name: "Baja California",
       description: `Cantidad de escuelas: ${bcnSchools.length}`,
+      name_school: bcnSchools && bcnSchools.map((data) => data.name)
+
     },
 
     bcs: {
       name: "Baja California Sur",
       description: `Cantidad de escuelas: ${bcsSchools.length}`,
+      name_school: bcsSchools && bcsSchools.map((data) => data.name)
+
     },
 
     cam: {
       name: "Campeche",
       description: `Cantidad de escuelas: ${camSchools.length}`,
+      name_school: camSchools && camSchools.map((data) => data.name)
+
     },
     chp: {
       name: "Chiapas",
       description: `Cantidad de escuelas: ${chpSchools.length}`,
+      name_school: chpSchools && chpSchools.map((data) => data.name)
+
     },
     chh: {
       name: "Chihuahua",
       description: `Cantidad de escuelas: ${chhSchools.length}`,
+      name_school: chhSchools && chhSchools.map((data) => data.name)
+
     },
     coa: {
       name: "Coahuila",
       description: `Cantidad de escuelas: ${coaSchools.length}`,
+      name_school: coaSchools && coaSchools.map((data) => data.name)
+
     },
     col: {
       name: "Colima",
       description: `Cantidad de escuelas: ${colSchools.length}`,
+      name_school: colSchools && colSchools.map((data) => data.name)
+
     },
     dif: {
       name: "Ciudad de México",
       description: `Cantidad de escuelas: ${difSchools.length}`,
+      name_school: difSchools && difSchools.map((data) => data.name)
+
     },
     dur: {
       name: "Durango",
       description: `Cantidad de escuelas: ${durSchools.length}`,
+      name_school: durSchools && durSchools.map((data) => data.name)
+
     },
     gua: {
       name: "Guanajuato",
       description: `Cantidad de escuelas: ${guaSchools.length}`,
+      name_school: guaSchools && guaSchools.map((data) => data.name)
+
     },
     gro: {
       name: "Guerrero",
       description: `Cantidad de escuelas: ${groSchools.length}`,
+      name_school: groSchools && groSchools.map((data) => data.name)
+
     },
     hid: {
       name: "Hidalgo",
       description: `Cantidad de escuelas: ${hidSchools.length}`,
+      name_school: hidSchools && hidSchools.map((data) => data.name)
+
     },
     jal: {
       name: "Jalisco",
       description: `Cantidad de escuelas: ${jalSchools.length}`,
+      name_school: jalSchools && jalSchools.map((data) => data.name)
+
     },
     mex: {
       name: "Estado de México",
       description: `Cantidad de escuelas: ${mexSchools.length}`,
+      name_school: mexSchools && mexSchools.map((data) => data.name)
+
     },
     mic: {
       name: "Michoacán",
       description: `Cantidad de escuelas: ${micSchools.length}`,
+      name_school: micSchools && micSchools.map((data) => data.name)
+
     },
     mor: {
       name: "Morelos",
       description: `Cantidad de escuelas: ${morSchools.length}`,
+      name_school: morSchools && morSchools.map((data) => data.name)
+
     },
     nay: {
       name: "Nayarit",
       description: `Cantidad de escuelas: ${naySchools.length}`,
+      name_school: naySchools && naySchools.map((data) => data.name)
+
     },
     nel: {
       name: "Nuevo León",
       description: `Cantidad de escuelas: ${nelSchools.length}`,
+      name_school: nelSchools && nelSchools.map((data) => data.name)
+
     },
     oax: {
       name: "Oaxaca",
       description: `Cantidad de escuelas: ${oaxSchools.length}`,
+      name_school: oaxSchools && oaxSchools.map((data) => data.name)
+
     },
     pue: {
       name: "Puebla",
       description: `Cantidad de escuelas: ${pueSchools.length}`,
+      name_school: pueSchools && pueSchools.map((data) => data.name)
+
     },
     que: {
       name: "Querétaro",
       description: `Cantidad de escuelas: ${queSchools.length}`,
+      name_school: queSchools && queSchools.map((data) => data.name)
+
     },
     roo: {
       name: "Quintana Roo",
       description: `Cantidad de escuelas: ${rooSchools.length}`,
+      name_school: rooSchools && rooSchools.map((data) => data.name)
+
     },
     slp: {
       name: "San Luis Potosí",
       description: `Cantidad de escuelas: ${slpSchools.length}`,
+      name_school: slpSchools && slpSchools.map((data) => data.name)
+
     },
     sin: {
       name: "Sinaloa",
       description: `Cantidad de escuelas: ${sinSchools.length}`,
+      name_school: sinSchools && sinSchools.map((data) => data.name)
+
     },
     son: {
       name: "Sonora",
       description: `Cantidad de escuelas: ${sonSchools.length}`,
+      name_school: sonSchools && sonSchools.map((data) => data.name)
+
     },
     tab: {
       name: "Tabasco",
       description: `Cantidad de escuelas: ${tabSchools.length}`,
+      name_school: tabSchools && tabSchools.map((data) => data.name)
+
     },
     tam: {
       name: "Tamaulipas",
       description: `Cantidad de escuelas: ${tamSchools.length}`,
+      name_school: tamSchools && tamSchools.map((data) => data.name)
+
     },
     tla: {
       name: "Tlaxcala",
       description: `Cantidad de escuelas: ${tlaSchools.length}`,
+      name_school: tlaSchools && tlaSchools.map((data) => data.name)
+
     },
     ver: {
       name: "Veracruz",
       description: `Cantidad de escuelas: ${verSchools.length}`,
+      name_school: verSchools && verSchools.map((data) => data.name)
+
     },
     yuc: {
       name: "Yucatán",
       description: `Cantidad de escuelas: ${yucSchools.length}`,
+      name_school: yucSchools && yucSchools.map((data) => data.name)
+
     },
     zac: {
       name: "Zacatecas",
       description: `Cantidad de escuelas: ${zacSchools.length}`,
+      name_school: zacSchools && zacSchools.map((data) => data.name)
+
     },
   };
 
@@ -408,7 +472,7 @@ function App() {
             id="hero-carousel"
             class="carousel slide"
             data-bs-ride="carousel"
-            data-bs-interval="5000"
+            data-bs-interval="3000"
           >
             <div class="carousel-item">
               <img src={require("../../assets/img/carrusel-1.png")} alt="" />
@@ -852,6 +916,16 @@ function App() {
                 >
                   <h4>{hoveredRegion.name}</h4>
                   <p>{hoveredRegion.description}</p>
+                  {hoveredRegion && hoveredRegion.name_school && Array.isArray(hoveredRegion.name_school) && (
+  <ul>
+    {hoveredRegion.name_school.map((school, index) => (
+      <li key={index}>{school}</li>
+    ))}
+  </ul>
+)}
+
+
+               
                 </Box>
               )}
             </div>

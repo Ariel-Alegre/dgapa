@@ -45,6 +45,7 @@ import Veracruz from './pages/SchoolProvinces/Veracruz';
 import Yucatán from './pages/SchoolProvinces/Yucatán';
 import Zacatecas from './pages/SchoolProvinces/Zacatecas';
 import Login from './pages/Login';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -91,6 +92,8 @@ function App() {
         <Route path="/Zacatecas" element={<Zacatecas/>} />
         <Route path="/Querétaro" element={<Queratero/>} />
         <Route path="/Durango" element={<Durango/>} />
+        <Route path="/politica-privacidad" element={<PrivacyPolicy/>} />
+
 
 
         <Route path="/iniciar-sesión" element={<Login/>} />

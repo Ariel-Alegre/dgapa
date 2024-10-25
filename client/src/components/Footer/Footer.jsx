@@ -79,6 +79,17 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Términos</h4>
+            <ul>
+              <li>
+                <Link to="/politica-privacidad">Política de Privacidad</Link>
+              </li>
+           
+            </ul>
+          </div>
    
         </div>
       </div>
