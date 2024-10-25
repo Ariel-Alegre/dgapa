@@ -29,6 +29,10 @@ module.exports = (sequelize) => {
     sic: {
       type: DataTypes.STRING(1000),
     },
+    urlYoutube: {
+      type: DataTypes.STRING(1000),
+    },
+
 
     image: {
       type: DataTypes.STRING(1000),
