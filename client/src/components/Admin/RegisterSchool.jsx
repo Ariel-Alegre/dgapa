@@ -26,6 +26,8 @@ const RegisterSchool = () => {
     beca1: "",
     beca2: "",
     alumnos: [],
+    alumnas: [],
+
     egresados: [],
     doctoresJubilados: [],
     doctoresCandidatos: [],
@@ -114,6 +116,9 @@ const RegisterSchool = () => {
       data.append("beca2", formData.beca2);
       if (formData.alumnos) {
         data.append("alumnos", JSON.stringify(formData.alumnos));
+      }
+      if (formData.alumnas) {
+        data.append("alumnas", JSON.stringify(formData.alumnas));
       }
       if (formData.egresados) {
         data.append("egresados", JSON.stringify(formData.egresados));
@@ -210,6 +215,24 @@ const RegisterSchool = () => {
         fechaDesdeAlumnos: "",
         fechaHastaAlumnos: "",
         cantidadAlumnos: "",
+      }));
+    }
+  };
+
+  const handleAddAlumnas = (e) => {
+    e.preventDefault();
+    const { fechaDesdeAlumnas, fechaHastaAlumnas, cantidadAlumnas } = formData;
+    if (fechaDesdeAlumnas && fechaHastaAlumnas && cantidadAlumnas) {
+      handleAddToList("alumnas", {
+        fechaDesdeAlumnas,
+        fechaHastaAlumnas,
+        cantidadAlumnas,
+      });
+      setFormData((prev) => ({
+        ...prev,
+        fechaDesdeAlumnas: "",
+        fechaHastaAlumnas: "",
+        cantidadAlumnas: "",
       }));
     }
   };
@@ -581,13 +604,13 @@ const RegisterSchool = () => {
       </div>
       <h2>Alumnos matriculados</h2>
       <input
-        type="date"
+        type="text"
         name="fechaDesdeAlumnos"
         value={formData.fechaDesdeAlumnos}
         onChange={handleInputChange}
       />
       <input
-        type="date"
+        type="text"
         name="fechaHastaAlumnos"
         value={formData.fechaHastaAlumnos}
         onChange={handleInputChange}
@@ -598,9 +621,9 @@ const RegisterSchool = () => {
         value={formData.cantidadAlumnos}
         onChange={handleInputChange}
       />
-      <button onClick={handleAddAlumnos}>Agregar</button>
+        <button onClick={handleAddAlumnos}>Agregar</button>
       <ul className="record-list">
-        {formData.alumnos.map((registro, index) => (
+        {formData.alumnos && formData.alumnos.map((registro, index) => (
           <li key={index}>
             <span>{`Desde: ${registro.fechaDesdeAlumnos}, Hasta: ${registro.fechaHastaAlumnos}, Cantidad: ${registro.cantidadAlumnos}`}</span>
             <button onClick={() => handleDeleteFromList("alumnos", index)}>
@@ -610,15 +633,46 @@ const RegisterSchool = () => {
         ))}
       </ul>
 
+<h2>Alumnas matriculadas</h2>
+      <input
+        type="text"
+        name="fechaDesdeAlumnas"
+        value={formData.fechaDesdeAlumnas}
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        name="fechaHastaAlumnas"
+        value={formData.fechaHastaAlumnas}
+        onChange={handleInputChange}
+      />
+      <input
+        type="number"
+        name="cantidadAlumnas"
+        value={formData.cantidadAlumnas}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleAddAlumnas}>Agregar</button>
+      <ul className="record-list">
+        {formData.alumnas && formData.alumnas.map((registro, index) => (
+          <li key={index}>
+            <span>{`Desde: ${registro.fechaDesdeAlumnas}, Hasta: ${registro.fechaHastaAlumnas}, Cantidad: ${registro.cantidadAlumnas}`}</span>
+            <button onClick={() => handleDeleteFromList("alumnas", index)}>
+              Eliminar
+            </button>
+          </li>
+        ))}
+      </ul>
+
       <h2>Egresados y titulados</h2>
       <input
-        type="date"
+        type="text"
         name="fechaDesdeEgresados"
         value={formData.fechaDesdeEgresados}
         onChange={handleInputChange}
       />
       <input
-        type="date"
+        type="text"
         name="fechaHastaEgresados"
         value={formData.fechaHastaEgresados}
         onChange={handleInputChange}
