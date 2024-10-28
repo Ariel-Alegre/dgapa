@@ -63,6 +63,9 @@ module.exports = (sequelize) => {
     alumnos: {
       type: DataTypes.JSON,
     },
+    alumnas: {
+      type: DataTypes.JSON,
+    },
     egresados: {
       type: DataTypes.JSON,
     },

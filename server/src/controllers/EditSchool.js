@@ -14,7 +14,7 @@ module.exports = {
     const {
       schoolId, name, address, province, phone, email, year_of_operation, sic,
       alumnos, egresados, doctoresJubilados, doctoresCandidatos, profesores,
-      profesoresMaestrias, profesoresConDoctorados, postgrado1, postgrado2, beca1, beca2, urlYoutube
+      profesoresMaestrias, profesoresConDoctorados, postgrado1, postgrado2, beca1, beca2, urlYoutube, alumnas
     } = req.body;
 
     try {
@@ -81,6 +81,8 @@ module.exports = {
 
       // Parsear los datos JSON si se envían
       const parsedAlumnos = alumnos ? JSON.parse(alumnos) : school.alumnos;
+      const parsedAlumnas = alumnas ? JSON.parse(alumnos) : school.alumnos;
+
       const parsedEgresados = egresados ? JSON.parse(egresados) : school.egresados;
       const parsedDoctoresJubilados = doctoresJubilados ? JSON.parse(doctoresJubilados) : school.doctoresJubilados;
       const parsedDoctoresCandidatos = doctoresCandidatos ? JSON.parse(doctoresCandidatos) : school.doctoresCandidatos;
@@ -100,6 +102,7 @@ module.exports = {
         sic: sic || school.sic,
         urlYoutube: urlYoutube || school.urlYoutube,
         alumnos: parsedAlumnos,
+        alumnas: parsedAlumnos,
         egresados: parsedEgresados,
         doctoresJubilados: parsedDoctoresJubilados,
         doctoresCandidatos: parsedDoctoresCandidatos,
