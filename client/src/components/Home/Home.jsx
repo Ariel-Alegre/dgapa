@@ -243,7 +243,7 @@ function App() {
     (data) => data.province === "Ciudad de México"
   );
   const durSchools = allSchool.filter((data) => data.province === "Durango");
-  console.log(durSchools);
+  console.log(durSchools[0]?.id);
   const guaSchools = allSchool.filter((data) => data.province === "Guanajuato");
   const groSchools = allSchool.filter((data) => data.province === "Guerrero");
   const hidSchools = allSchool.filter((data) => data.province === "Hidalgo");
@@ -325,18 +325,13 @@ function App() {
         )
         .reduce((total, cantidad) => total + cantidad, 0)
     : 0;
-    
-    
-    const candidatoDoctor = durSchools
-    && durSchools
-        .map((data) =>
-          data.doctoresCandidatos.length)
-        const jubiladoDoctor = durSchools
-        && durSchools
-            .map((data) =>
-              data.doctoresJubilados.length)
-        
-    console.log(`Profesores actuales: ${teacher}`);
+
+  const candidatoDoctor =
+    durSchools && durSchools.map((data) => data.doctoresCandidatos.length);
+  const jubiladoDoctor =
+    durSchools && durSchools.map((data) => data.doctoresJubilados.length);
+
+  console.log(`Profesores actuales: ${teacher}`);
 
   console.log(`Total de alumnos: ${totalAlumnos}`);
   console.log(`Porcentaje de hombres: ${porcentajeHombres.toFixed(2)}%`);
@@ -391,6 +386,7 @@ function App() {
       name_school: difSchools && difSchools.map((data) => data.name),
     },
     dur: {
+      id: durSchools && durSchools[0]?.id,
       name: "Durango",
       description: `Cantidad de escuelas: ${durSchools.length}`,
       name_school: durSchools && durSchools.map((data) => data.name),
@@ -402,11 +398,6 @@ function App() {
       master_professor: masterTeacher,
       doctor_candidato: candidatoDoctor,
       doctor_jubilado: jubiladoDoctor,
-
-
-
-      
-
     },
     gua: {
       name: "Guanajuato",
@@ -1066,19 +1057,28 @@ function App() {
             <div>
               {viewInfo && (
                 <div>
-                  <h1>
+                  <div>
                     {modalRegion &&
                       modalRegion.name_school &&
                       Array.isArray(modalRegion.name_school) && (
                         <ul>
                           {modalRegion.name_school.map((school, index) => (
-                            <li style={{ listStyle: "none" }} key={index}>
-                              {school}{" "}
+                            <li style={{ listStyle: "none", }} key={index}>
+                              <h1>
+                                {school}
+                               
+                              </h1> <Link
+                                  to={`/escuelas-detalles/${modalRegion.id}`}
+                                  style={{ margin: "auto" }}
+                                >
+                                  Ver mas detalles
+                                </Link>
                             </li>
                           ))}
                         </ul>
                       )}
-                  </h1>
+                  </div>
+
                   <div className="container-students-doctors">
                     <div className="data-students">
                       <div className="total-students">
@@ -1166,7 +1166,6 @@ function App() {
                               />
                             </div>
                           </div>
-
                           <div className="teacher-current">
                             <div>
                               Jubilados: {modalRegion.doctor_jubilado}
@@ -1178,7 +1177,6 @@ function App() {
                               />
                             </div>
                           </div>
-                          
                         </div>
                       </div>
                     </div>

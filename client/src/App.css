@@ -4023,9 +4023,11 @@ header p {
 .data-map {
   display: flex;
   transition: opacity 0.5s ease, transform 0.5s ease;
+  flex-wrap: wrap;
   transform: translateY(20px); /* inicial */
   gap: 5em;
   place-items: center;
+  justify-content: center;
 }
 
 
@@ -4098,6 +4100,7 @@ border-radius: 1em;
   text-align: center;
 }
 
+
 .students-labels {
   display: flex;
   justify-content: space-around;
@@ -4115,6 +4118,7 @@ border-radius: 1em;
 
 .container-students-doctors {
   display: flex;
+  flex-wrap: wrap;
   gap: 5em;
 }
 
