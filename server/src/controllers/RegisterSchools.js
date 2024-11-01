@@ -10,7 +10,7 @@ cloudinary.config({
 
 module.exports = {
   RegisterSchools: async (req, res) => {
-    const { name, address, province, phone, email, year_of_operation, sic, alumnos, egresados, doctoresJubilados, doctoresCandidatos, profesores, profesoresMaestrias, profesoresConDoctorados, postgrado1, postgrado2, beca1, beca2, urlYoutube, alumnas} = req.body;
+    const { name, address, province, phone, email, year_of_operation, sic, alumnos, egresados, doctoresJubilados, doctoresCandidatos, profesores, profesoresMaestrias, profesoresConDoctorados, postgrado1, postgrado2, beca1, beca2, urlYoutube, alumnas, egresadas } = req.body;
 
     try {
       let logoUrl = null;
@@ -74,6 +74,8 @@ module.exports = {
       const parsedAlumnas = JSON.parse(alumnas);
 
       const parsedEgresados = JSON.parse(egresados);
+      const parsedEgresadas = JSON.parse(egresadas);
+
       const parsedDoctoresJubilados = JSON.parse(doctoresJubilados);
       const parsedDoctoresCandidatos = JSON.parse(doctoresCandidatos);
       const parsedProfesores = JSON.parse(profesores);
@@ -89,13 +91,14 @@ module.exports = {
         year_of_operation,
         sic,
         postgrado1,
-         postgrado2,
-          beca1,
-           beca2,
-           urlYoutube,
+        postgrado2,
+        beca1,
+        beca2,
+        urlYoutube,
         alumnos: parsedAlumnos,
         alumnas: parsedAlumnas,
         egresados: parsedEgresados,
+        egresadas: parsedEgresadas,
         doctoresJubilados: parsedDoctoresJubilados,
         doctoresCandidatos: parsedDoctoresCandidatos,
         profesores: parsedProfesores,

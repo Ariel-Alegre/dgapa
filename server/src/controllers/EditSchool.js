@@ -9,12 +9,11 @@ cloudinary.config({
 });
 
 module.exports = {
-  // Función para editar una escuela existente
   EditSchool: async (req, res) => {
     const {
       schoolId, name, address, province, phone, email, year_of_operation, sic,
       alumnos, egresados, doctoresJubilados, doctoresCandidatos, profesores,
-      profesoresMaestrias, profesoresConDoctorados, postgrado1, postgrado2, beca1, beca2, urlYoutube, alumnas
+      profesoresMaestrias, profesoresConDoctorados, postgrado1, postgrado2, beca1, beca2, urlYoutube, alumnas, egresadas
     } = req.body;
 
     try {
@@ -24,7 +23,7 @@ module.exports = {
         return res.status(404).json({ message: 'Escuela no encontrada' });
       }
 
-      let updatedLogoUrl = school.image;  // Si no se actualiza el logo, mantener el existente
+      let updatedLogoUrl = school.image;
       let updatedPlantel1Url = school.plantel1;
       let updatedPlantel2Url = school.plantel2;
       let updatedPlantel3Url = school.plantel3;
@@ -37,7 +36,7 @@ module.exports = {
           quality: 'auto:best',
           fetch_format: 'auto',
         });
-        updatedLogoUrl = cloudinaryUploadResultLogo.secure_url; // Actualizar la URL del logo
+        updatedLogoUrl = cloudinaryUploadResultLogo.secure_url;
         console.log('Nuevo logo subido a Cloudinary:', updatedLogoUrl);
       }
 
@@ -81,16 +80,15 @@ module.exports = {
 
       // Parsear los datos JSON si se envían
       const parsedAlumnos = alumnos ? JSON.parse(alumnos) : school.alumnos;
-      const parsedAlumnas = alumnas ? JSON.parse(alumnos) : school.alumnos;
-
+      const parsedAlumnas = alumnas ? JSON.parse(alumnas) : school.alumnas;
       const parsedEgresados = egresados ? JSON.parse(egresados) : school.egresados;
+      const parsedEgresadas = egresadas ? JSON.parse(egresadas) : school.egresadas;
       const parsedDoctoresJubilados = doctoresJubilados ? JSON.parse(doctoresJubilados) : school.doctoresJubilados;
       const parsedDoctoresCandidatos = doctoresCandidatos ? JSON.parse(doctoresCandidatos) : school.doctoresCandidatos;
       const parsedProfesores = profesores ? JSON.parse(profesores) : school.profesores;
       const parsedProfesoresMaestrias = profesoresMaestrias ? JSON.parse(profesoresMaestrias) : school.profesoresMaestrias;
       const parsedProfesoresConDoctorados = profesoresConDoctorados ? JSON.parse(profesoresConDoctorados) : school.profesoresConDoctorados;
 
-      
       // Actualizar los datos de la escuela en la base de datos
       const updatedSchool = await school.update({
         name: name || school.name,
@@ -102,8 +100,9 @@ module.exports = {
         sic: sic || school.sic,
         urlYoutube: urlYoutube || school.urlYoutube,
         alumnos: parsedAlumnos,
-        alumnas: parsedAlumnos,
+        alumnas: parsedAlumnas,
         egresados: parsedEgresados,
+        egresadas: parsedEgresadas,
         doctoresJubilados: parsedDoctoresJubilados,
         doctoresCandidatos: parsedDoctoresCandidatos,
         profesores: parsedProfesores,
@@ -113,8 +112,8 @@ module.exports = {
         postgrado2: postgrado2 || school.postgrado2,
         beca1: beca1 || school.beca1,
         beca2: beca2 || school.beca2,
-        image: updatedLogoUrl,  // Actualizar el logo si se subió uno nuevo
-        plantel1: updatedPlantel1Url,  // Actualizar los planteles si se subieron nuevos
+        image: updatedLogoUrl,
+        plantel1: updatedPlantel1Url,
         plantel2: updatedPlantel2Url,
         plantel3: updatedPlantel3Url
       });
@@ -123,7 +122,7 @@ module.exports = {
       console.log("Escuela actualizada correctamente");
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Error en el servidor al actualizar la escuela' });
+      res.status(500).json({ message: 'Error en el servidor al actualizar la escuela', error: error.message });
     }
   }
 };
