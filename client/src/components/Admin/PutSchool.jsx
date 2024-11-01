@@ -2,12 +2,17 @@ import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import { UpdateSchool } from "../../redux/action";
-import { LoadScript, Autocomplete } from "@react-google-maps/api";
-const RegisterSchool = ({ detailsSchool }) => {
+import {
+  LoadScript,
+  Autocomplete,
+} from "@react-google-maps/api";
+const PutSchool = ({ detailsSchool }) => {
   const dispatch = useDispatch();
   const autocompleteRef = useRef(null); // Referencia para el Autocomplete
-  console.log(detailsSchool)
+
   const [formData, setFormData] = useState({
+    schoolId: "",
+
     name: "",
     address: "",
     phone: "",
@@ -23,7 +28,11 @@ const RegisterSchool = ({ detailsSchool }) => {
     beca1: "",
     beca2: "",
     alumnos: [],
+    alumnas: [],
+
     egresados: [],
+    egresadas: [],
+
     doctoresJubilados: [],
     doctoresCandidatos: [],
     profesores: [],
@@ -36,6 +45,7 @@ const RegisterSchool = ({ detailsSchool }) => {
     profesoresTemporales: [],
     profesoresTemporalesMaestria: [],
     profesoresTemporalesDoctorado: [],
+
   });
   const [previewImage, setPreviewImage] = useState(null);
   const [loadingSuccess, setLoadingSuccess] = useState(false);
@@ -94,6 +104,9 @@ const RegisterSchool = ({ detailsSchool }) => {
       )}/${String(date.getMonth() + 1).padStart(2, "0")}/${date.getFullYear()}`;
 
       const data = new FormData();
+
+      data.append("schoolId", formData.schoolId);
+
       data.append("name", formData.name);
       data.append("address", formData.address);
       data.append("phone", formData.phone);
@@ -111,8 +124,15 @@ const RegisterSchool = ({ detailsSchool }) => {
       if (formData.alumnos) {
         data.append("alumnos", JSON.stringify(formData.alumnos));
       }
+      if (formData.alumnas) {
+        data.append("alumnas", JSON.stringify(formData.alumnas));
+      }
       if (formData.egresados) {
         data.append("egresados", JSON.stringify(formData.egresados));
+      }
+
+      if (formData.egresadas) {
+        data.append("egresadas", JSON.stringify(formData.egresadas));
       }
       if (formData.doctoresJubilados) {
         data.append(
@@ -163,53 +183,10 @@ const RegisterSchool = ({ detailsSchool }) => {
       alert("Hubo un error al registrar la escuela.");
     } finally {
       setLoadingSuccess(false);
-      setFormData({
-        name: "",
-        address: "",
-        phone: "",
-        email: "",
-        year_of_operation: "",
-        province: "",
-        sic: "",
-        postgrado1: "",
-        postgrado2: "",
-        beca1: "",
-        beca2: "",
-        alumnos: [],
-        egresados: [],
-        doctoresJubilados: [],
-        doctoresCandidatos: [],
-        profesores: [],
-        profesoresMaestrias: [],
-        profesoresConDoctorados: [],
-        plantel1: null,
-        plantel2: null,
-        plantel3: null,
-        image: null,
-      });
-
-      setPreviewImage(null);
+     
     }
   };
-  React.useEffect(() => {
-    if (detailsSchool) {
-      setFormData({
-        ...formData,
-        schoolId: detailsSchool.id || "",
-        name: detailsSchool.name || "",
-        address: detailsSchool.address || "",
-        phone: detailsSchool.phone || "",
-        email: detailsSchool.email || "",
-        year_of_operation: detailsSchool.year_of_operation || "",
-        province: detailsSchool.province || "",
-        image: detailsSchool.image || null,
-        urlYoutube: detailsSchool.urlYoutube || "",
 
-
-      });
-      setPreviewImage(detailsSchool.image || null);
-    }
-  }, [detailsSchool]);
   const handleAddAlumnos = (e) => {
     e.preventDefault();
     const { fechaDesdeAlumnos, fechaHastaAlumnos, cantidadAlumnos } = formData;
@@ -228,18 +205,78 @@ const RegisterSchool = ({ detailsSchool }) => {
     }
   };
 
+  const handleAddAlumnas = (e) => {
+    e.preventDefault();
+    const { fechaDesdeAlumnas, fechaHastaAlumnas, cantidadAlumnas } = formData;
+    if (fechaDesdeAlumnas && fechaHastaAlumnas && cantidadAlumnas) {
+      handleAddToList("alumnas", {
+        fechaDesdeAlumnas,
+        fechaHastaAlumnas,
+        cantidadAlumnas,
+      });
+      setFormData((prev) => ({
+        ...prev,
+        fechaDesdeAlumnas: "",
+        fechaHastaAlumnas: "",
+        cantidadAlumnas: "",
+      }));
+    }
+  };
+  React.useEffect(() => {
+    if (detailsSchool) {
+      setFormData({
+        ...formData,
+    
+
+
+
+
+ schoolId: detailsSchool.id || "",
+
+    name: detailsSchool.name || "",
+    address: detailsSchool.address || "",
+    phone: detailsSchool.phone || "",
+    email: detailsSchool.email || "",
+    year_of_operation: detailsSchool.year_of_operation || "",
+    province: detailsSchool.province || "",
+    sic: detailsSchool.sic || "",
+    urlYoutube: detailsSchool.urlYoutube || "",
+
+    
+    postgrado1: detailsSchool.postgrado1 || "",
+    postgrado2: detailsSchool.postgrado2 || "",
+    beca1: detailsSchool.beca1 || "",
+    beca2: detailsSchool.beca2 || "",
+    alumnos: detailsSchool.alumnos || [],
+    alumnas: detailsSchool.alumnas || [],
+
+    egresados: detailsSchool.egresados || [],
+    egresadas: detailsSchool.egresadas || [],
+
+    doctoresJubilados: detailsSchool.doctoresJubilados || [],
+    doctoresCandidatos: detailsSchool.doctoresCandidatos || [],
+    profesores: detailsSchool.profesores || [],
+    profesoresMaestrias: detailsSchool.profesoresMaestrias || [],
+    profesoresConDoctorados: detailsSchool.profesoresConDoctorados || [],
+    plantel1:detailsSchool.plantel1 || null,
+    plantel2:detailsSchool.plantel2 || null,
+    plantel3:detailsSchool.plantel3 || null,
+    image: detailsSchool.image || null,
+    profesoresTemporales: detailsSchool.profesoresTemporales || [],
+    profesoresTemporalesMaestria: detailsSchool.profesoresTemporalesMaestria ||  [],
+    profesoresTemporalesDoctorado: detailsSchool.profesoresTemporalesDoctorado || [],
+
+      });
+
+      
+      setPreviewImage(detailsSchool.image || null);
+    }
+  }, [detailsSchool]);
   const handleAddEgresados = (e) => {
     e.preventDefault();
-    const {
-      fechaDesdeEgresados,
-      fechaHastaEgresados,
-      cantidadAlumnosEgresados,
-    } = formData;
-    if (
-      fechaDesdeEgresados &&
-      fechaHastaEgresados &&
-      cantidadAlumnosEgresados
-    ) {
+    const { fechaDesdeEgresados, fechaHastaEgresados, cantidadAlumnosEgresados } =
+      formData;
+    if (fechaDesdeEgresados && fechaHastaEgresados && cantidadAlumnosEgresados) {
       handleAddToList("egresados", {
         fechaDesdeEgresados,
         fechaHastaEgresados,
@@ -253,6 +290,26 @@ const RegisterSchool = ({ detailsSchool }) => {
       }));
     }
   };
+
+  const handleAddEgresadas = (e) => {
+    e.preventDefault();
+    const { fechaDesdeEgresadas, fechaHastaEgresadas, cantidadAlumnasEgresadas } =
+      formData;
+    if (fechaDesdeEgresadas && fechaHastaEgresadas && cantidadAlumnasEgresadas) {
+      handleAddToList("egresadas", {
+        fechaDesdeEgresadas,
+        fechaHastaEgresadas,
+        cantidadAlumnasEgresadas,
+      });
+      setFormData((prev) => ({
+        ...prev,
+        fechaDesdeEgresadas: "",
+        fechaHastaEgresadas: "",
+        cantidadAlumnasEgresadas: "",
+      }));
+    }
+  };
+
 
   const handleAddDocotorJubilados = (e) => {
     e.preventDefault();
@@ -351,6 +408,7 @@ const RegisterSchool = ({ detailsSchool }) => {
     }
   };
 
+
   const handleAddProfesorDoctorado = () => {
     const { textProfeDoctorado } = formData;
 
@@ -365,7 +423,7 @@ const RegisterSchool = ({ detailsSchool }) => {
       }));
     }
   };
-  const handleProfesoresDoctorado = (e) => {
+  const handleProfesoresDoctorado  = (e) => {
     e.preventDefault();
     const {
       fechaDesdeDoctorado,
@@ -396,6 +454,7 @@ const RegisterSchool = ({ detailsSchool }) => {
       }));
     }
   };
+  
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
@@ -405,30 +464,32 @@ const RegisterSchool = ({ detailsSchool }) => {
     });
   };
 
+
   const onPlaceChanged = () => {
     if (autocompleteRef.current) {
       const place = autocompleteRef.current.getPlace();
-
+  
       if (place?.geometry) {
         const addressComponents = place.address_components;
         if (addressComponents) {
+     
           setFormData({
             ...formData,
-            address: place.formatted_address, // Dirección completa
+            address: place.formatted_address,
           });
         } else {
-          console.error("No se pudo obtener los componentes de la dirección.");
+          console.error('No se pudo obtener los componentes de la dirección.');
         }
       } else {
-        console.error("No se pudo obtener la información de geometría.");
+        console.error('No se pudo obtener la información de geometría.');
       }
     }
   };
-
+  
   return (
     <form onSubmit={handleSubmit} className="responsive-form update-form">
       <div className="form-group">
-        <label>Nombre:</label>
+        <label>Nombre de la escuela:</label>
         <input
           type="text"
           name="name"
@@ -439,23 +500,28 @@ const RegisterSchool = ({ detailsSchool }) => {
       <div className="form-group">
         <label>Dirección:</label>
         <LoadScript
-          googleMapsApiKey="AIzaSyBMqv1fgtsDEQQgm4kmLBRtZI7zu-wSldA" // Reemplaza con tu clave API
-          libraries={["places"]} // Necesario para usar Autocomplete
-        >
-          <Autocomplete
-            onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-            onPlaceChanged={onPlaceChanged}
-          >
-            <input
-              type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleInputChange}
-            />
-          </Autocomplete>
-        </LoadScript>
+                    googleMapsApiKey="AIzaSyBMqv1fgtsDEQQgm4kmLBRtZI7zu-wSldA" // Reemplaza con tu clave API
+                    libraries={["places"]} // Necesario para usar Autocomplete
+                  >
+
+                    <Autocomplete
+                      onLoad={(autocomplete) =>
+                        (autocompleteRef.current = autocomplete)
+                      }
+                      onPlaceChanged={onPlaceChanged}
+                    >
+        <input
+          type="text"
+          name="address"
+          value={formData.address}
+          onChange={handleInputChange}
+        />
+                      </Autocomplete>
+
+</LoadScript>
       </div>
 
+     
       <div className="form-group">
         <label>Teléfono:</label>
         <input
@@ -538,6 +604,7 @@ const RegisterSchool = ({ detailsSchool }) => {
           placeholder="sic" // Placeholder para indicar el formato esperado
         />
       </div>
+
       <div className="form-group">
         <label>Enlace de youtube:</label>
         <input
@@ -548,7 +615,6 @@ const RegisterSchool = ({ detailsSchool }) => {
           placeholder="Enlace de youtube" // Placeholder para indicar el formato esperado
         />
       </div>
-      
       <div className="form-group">
         <label>Enlace del primer postgrado:</label>
         <input
@@ -593,24 +659,30 @@ const RegisterSchool = ({ detailsSchool }) => {
       </div>
       <h2>Alumnos matriculados</h2>
       <input
-        type="date"
+        type="text"
         name="fechaDesdeAlumnos"
         value={formData.fechaDesdeAlumnos}
         onChange={handleInputChange}
+        placeholder="Fecha Desde" // Placeholder para indicar el formato esperado
+
       />
       <input
-        type="date"
+        type="text"
         name="fechaHastaAlumnos"
         value={formData.fechaHastaAlumnos}
         onChange={handleInputChange}
+        placeholder="Fecha Hasta" // Placeholder para indicar el formato esperado
+
       />
       <input
         type="number"
         name="cantidadAlumnos"
         value={formData.cantidadAlumnos}
         onChange={handleInputChange}
+        placeholder="Cantidad" // Placeholder para indicar el formato esperado
+
       />
-      <button onClick={handleAddAlumnos}>Agregar</button>
+        <button onClick={handleAddAlumnos}>Agregar</button>
       <ul className="record-list">
         {formData.alumnos && formData.alumnos.map((registro, index) => (
           <li key={index}>
@@ -622,28 +694,71 @@ const RegisterSchool = ({ detailsSchool }) => {
         ))}
       </ul>
 
+<h2>Alumnas matriculadas</h2>
+      <input
+        type="text"
+        name="fechaDesdeAlumnas"
+        value={formData.fechaDesdeAlumnas}
+        onChange={handleInputChange}
+        placeholder="Fecha Desde" // Placeholder para indicar el formato esperado
+
+      />
+      <input
+        type="text"
+        name="fechaHastaAlumnas"
+        value={formData.fechaHastaAlumnas}
+        onChange={handleInputChange}
+        placeholder="Fecha Hasta" // Placeholder para indicar el formato esperado
+
+      />
+      <input
+        type="number"
+        name="cantidadAlumnas"
+        value={formData.cantidadAlumnas}
+        onChange={handleInputChange}
+        placeholder="Cantidad" // Placeholder para indicar el formato esperado
+
+      />
+      <button onClick={handleAddAlumnas}>Agregar</button>
+      <ul className="record-list">
+        {formData.alumnas && formData.alumnas.map((registro, index) => (
+          <li key={index}>
+            <span>{`Desde: ${registro.fechaDesdeAlumnas}, Hasta: ${registro.fechaHastaAlumnas}, Cantidad: ${registro.cantidadAlumnas}`}</span>
+            <button onClick={() => handleDeleteFromList("alumnas", index)}>
+              Eliminar
+            </button>
+          </li>
+        ))}
+      </ul>
+
       <h2>Egresados y titulados</h2>
       <input
-        type="date"
+        type="text"
         name="fechaDesdeEgresados"
         value={formData.fechaDesdeEgresados}
         onChange={handleInputChange}
+        placeholder="Fecha Desde" // Placeholder para indicar el formato esperado
+
       />
       <input
-        type="date"
+        type="text"
         name="fechaHastaEgresados"
         value={formData.fechaHastaEgresados}
         onChange={handleInputChange}
+        placeholder="Fecha Hasta" // Placeholder para indicar el formato esperado
+
       />
       <input
         type="number"
         name="cantidadAlumnosEgresados"
         value={formData.cantidadAlumnosEgresados}
         onChange={handleInputChange}
+        placeholder="Cantidad" // Placeholder para indicar el formato esperado
+
       />
       <button onClick={handleAddEgresados}>Agregar</button>
       <ul className="record-list">
-        {formData.egresados && formData.egresados.map((registro, index) => (
+        {formData.egresados.map((registro, index) => (
           <li key={index}>
             <span>{`Desde: ${registro.fechaDesdeEgresados}, Hasta: ${registro.fechaHastaEgresados}, Cantidad: ${registro.cantidadAlumnosEgresados}`}</span>
             <button onClick={() => handleDeleteFromList("egresados", index)}>
@@ -652,9 +767,45 @@ const RegisterSchool = ({ detailsSchool }) => {
           </li>
         ))}
       </ul>
+
+      <h2>Egresadas y tituladas</h2>
+      <input
+        type="text"
+        name="fechaDesdeEgresadas"
+        value={formData.fechaDesdeEgresadas}
+        onChange={handleInputChange}
+        placeholder="Fecha Desde" // Placeholder para indicar el formato esperado
+
+      />
+      <input
+        type="text"
+        name="fechaHastaEgresadas"
+        value={formData.fechaHastaEgresadas}
+        onChange={handleInputChange}
+        placeholder="Fecha Hasta" // Placeholder para indicar el formato esperado
+
+      />
+      <input
+        type="number"
+        name="cantidadAlumnasEgresadas"
+        value={formData.cantidadAlumnasEgresadas}
+        onChange={handleInputChange}
+        placeholder="Cantidad" // Placeholder para indicar el formato esperado
+
+      />
+      <button onClick={handleAddEgresadas}>Agregar</button>
+      <ul className="record-list">
+        {formData.egresadas.map((registro, index) => (
+          <li key={index}>
+            <span>{`Desde: ${registro.fechaDesdeEgresadas}, Hasta: ${registro.fechaHastaEgresadas}, Cantidad: ${registro.cantidadAlumnasEgresadas}`}</span>
+            <button onClick={() => handleDeleteFromList("egresadas", index)}>
+              Eliminar
+            </button>
+          </li>
+        ))}
+      </ul>
       <h2>Lista de profesores actual</h2>
 
-      {/* Input de fechas */}
       <input
         type="text"
         name="fechaDesde"
@@ -670,7 +821,6 @@ const RegisterSchool = ({ detailsSchool }) => {
         placeholder="Fecha Hasta"
       />
 
-      {/* Campo para agregar un profesor */}
       <input
         type="text"
         name="textProfeactuales"
@@ -679,12 +829,10 @@ const RegisterSchool = ({ detailsSchool }) => {
         placeholder="Nombre del Profesor"
       />
 
-      {/* Botón para agregar profesor temporalmente */}
       <button type="button" onClick={handleAddProfesor}>
         Agregar Profesor
       </button>
 
-      {/* Lista temporal de profesores */}
       <ul>
         {formData.profesoresTemporales &&
           formData.profesoresTemporales.map((profe, i) => (
@@ -692,16 +840,14 @@ const RegisterSchool = ({ detailsSchool }) => {
           ))}
       </ul>
 
-      {/* Botón para agregar el registro completo */}
       <button onClick={handleAddProfesoresActuales}>Agregar Registro</button>
 
-      {/* Lista de registros finales */}
       <ul className="record-list">
-        {formData.profesores && formData.profesores.map((registro, index) => (
+        {formData.profesores.map((registro, index) => (
           <li key={index}>
             <span>{`Desde: ${registro.fechaDesde}, Hasta: ${registro.fechaHasta}`}</span>
             <ul>
-              {registro.textProfeactuales && registro.textProfeactuales.map((profe, i) => (
+              {registro.textProfeactuales.map((profe, i) => (
                 <li key={i}>{`Profesor: ${profe}`}</li>
               ))}
             </ul>
@@ -713,7 +859,6 @@ const RegisterSchool = ({ detailsSchool }) => {
       </ul>
       <h2>Lista de profesores con maestrias</h2>
 
-      {/* Input de fechas */}
       <input
         type="text"
         name="fechaDesdeMaestria"
@@ -729,7 +874,6 @@ const RegisterSchool = ({ detailsSchool }) => {
         placeholder="Fecha Hasta"
       />
 
-      {/* Campo para agregar un profesor */}
       <input
         type="text"
         name="textProfeMaestria"
@@ -738,12 +882,10 @@ const RegisterSchool = ({ detailsSchool }) => {
         placeholder="Nombre del Profesor"
       />
 
-      {/* Botón para agregar profesor temporalmente */}
       <button type="button" onClick={handleAddProfesorMaestria}>
         Agregar Profesor
       </button>
 
-      {/* Lista temporal de profesores */}
       <ul>
         {formData.profesoresTemporalesMaestria &&
           formData.profesoresTemporalesMaestria.map((profe, i) => (
@@ -751,16 +893,14 @@ const RegisterSchool = ({ detailsSchool }) => {
           ))}
       </ul>
 
-      {/* Botón para agregar el registro completo */}
       <button onClick={handleProfesoresMaestria}>Agregar Registro</button>
 
-      {/* Lista de registros finales */}
       <ul className="record-list">
-        {formData.profesoresMaestrias && formData.profesoresMaestrias.map((registro, index) => (
+        {formData.profesoresMaestrias.map((registro, index) => (
           <li key={index}>
             <span>{`Desde: ${registro.fechaDesdeMaestria}, Hasta: ${registro.fechaHastaMaestria}`}</span>
             <ul>
-              {registro.textProfeMaestria && registro.textProfeMaestria.map((profe, i) => (
+              {registro.textProfeMaestria.map((profe, i) => (
                 <li key={i}>{`Profesor: ${profe}`}</li>
               ))}
             </ul>
@@ -773,69 +913,63 @@ const RegisterSchool = ({ detailsSchool }) => {
         ))}
       </ul>
 
+
       <h2>Lista de profesores con doctorados</h2>
 
-      {/* Input de fechas */}
-      <input
-        type="text"
-        name="fechaDesdeDoctorado"
-        value={formData.fechaDesdeDoctorado}
-        onChange={handleInputChange}
-        placeholder="Fecha Desde"
-      />
-      <input
-        type="text"
-        name="fechaHastaDoctorado"
-        value={formData.fechaHastaDoctorado}
-        onChange={handleInputChange}
-        placeholder="Fecha Hasta"
-      />
+<input
+  type="text"
+  name="fechaDesdeDoctorado"
+  value={formData.fechaDesdeDoctorado}
+  onChange={handleInputChange}
+  placeholder="Fecha Desde"
+/>
+<input
+  type="text"
+  name="fechaHastaDoctorado"
+  value={formData.fechaHastaDoctorado}
+  onChange={handleInputChange}
+  placeholder="Fecha Hasta"
+/>
 
-      {/* Campo para agregar un profesor */}
-      <input
-        type="text"
-        name="textProfeDoctorado"
-        value={formData.textProfeDoctorado}
-        onChange={handleInputChange}
-        placeholder="Nombre del Profesor"
-      />
+<input
+  type="text"
+  name="textProfeDoctorado"
+  value={formData.textProfeDoctorado}
+  onChange={handleInputChange}
+  placeholder="Nombre del Profesor"
+/>
 
-      {/* Botón para agregar profesor temporalmente */}
-      <button type="button" onClick={handleAddProfesorDoctorado}>
-        Agregar Profesor
-      </button>
+<button type="button" onClick={handleAddProfesorDoctorado}>
+  Agregar Profesor
+</button>
 
-      {/* Lista temporal de profesores */}
+<ul>
+  {formData.profesoresTemporalesDoctorado &&
+    formData.profesoresTemporalesDoctorado.map((profe, i) => (
+      <li key={i}>{`Profesor: ${profe}`}</li>
+    ))}
+</ul>
+
+<button onClick={handleProfesoresDoctorado}>Agregar Registro</button>
+
+<ul className="record-list">
+  {formData.profesoresConDoctorados.map((registro, index) => (
+    <li key={index}>
+      <span>{`Desde: ${registro.fechaDesdeDoctorado}, Hasta: ${registro.fechaHastaDoctorado}`}</span>
       <ul>
-        {formData.profesoresTemporalesDoctorado &&
-          formData.profesoresTemporalesDoctorado.map((profe, i) => (
-            <li key={i}>{`Profesor: ${profe}`}</li>
-          ))}
-      </ul>
-
-      {/* Botón para agregar el registro completo */}
-      <button onClick={handleProfesoresDoctorado}>Agregar Registro</button>
-
-      {/* Lista de registros finales */}
-      <ul className="record-list">
-        {formData.profesoresConDoctorados && formData.profesoresConDoctorados.map((registro, index) => (
-          <li key={index}>
-            <span>{`Desde: ${registro.fechaDesdeDoctorado}, Hasta: ${registro.fechaHastaDoctorado}`}</span>
-            <ul>
-              {registro.textProfeDoctorado.map((profe, i) => (
-                <li key={i}>{`Profesor: ${profe}`}</li>
-              ))}
-            </ul>
-            <button
-              onClick={() =>
-                handleDeleteFromList("profesoresConDoctorados", index)
-              }
-            >
-              Eliminar
-            </button>
-          </li>
+        {registro.textProfeDoctorado.map((profe, i) => (
+          <li key={i}>{`Profesor: ${profe}`}</li>
         ))}
       </ul>
+      <button
+        onClick={() => handleDeleteFromList("profesoresConDoctorados", index)}
+      >
+        Eliminar
+      </button>
+    </li>
+  ))}
+</ul>
+      
 
       <h2>Doctores jubilados</h2>
       <input
@@ -846,7 +980,7 @@ const RegisterSchool = ({ detailsSchool }) => {
       />
       <button onClick={handleAddDocotorJubilados}>Agregar</button>
       <ul className="record-list">
-        {formData.doctoresJubilados && formData.doctoresJubilados.map((registro, index) => (
+        {formData.doctoresJubilados.map((registro, index) => (
           <li key={index}>
             <span>{` ${registro.doctor}`}</span>
             <button
@@ -867,7 +1001,7 @@ const RegisterSchool = ({ detailsSchool }) => {
       />
       <button onClick={handleAddDoctorCandidatos}>Agregar</button>
       <ul className="record-list">
-        {formData.doctoresCandidatos && formData.doctoresCandidatos.map((registro, index) => (
+        {formData.doctoresCandidatos.map((registro, index) => (
           <li key={index}>
             <span>{` ${registro.doctorCandidato}`}</span>
             <button
@@ -878,7 +1012,6 @@ const RegisterSchool = ({ detailsSchool }) => {
           </li>
         ))}
       </ul>
-      {/* Repite la misma estructura para egresados, doctores y profesores */}
 
       <div>
         <label>PDF 1:</label>
@@ -924,11 +1057,11 @@ const RegisterSchool = ({ detailsSchool }) => {
         {loadingSuccess ? (
           <CircularProgress size={25} thickness={5} sx={{ color: "#fff" }} />
         ) : (
-          "Registrarse"
+          "Actualizar"
         )}
       </button>
     </form>
   );
 };
 
-export default RegisterSchool;
+export default PutSchool;

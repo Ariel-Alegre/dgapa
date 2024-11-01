@@ -1,65 +1,59 @@
-import React, { useState } from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
-const YouTubeVideo = () => {
-  const [url, setUrl] = useState(""); // Estado para almacenar la URL del video
-  const [videoID, setVideoID] = useState(null); // Estado para almacenar el ID del video
+export default function TemporaryDrawer() {
+  const [open, setOpen] = React.useState(false);
 
-  // Extraer el ID del video de la URL de YouTube
-  const getYouTubeID = (url) => {
-    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
-    const match = url.match(regex);
-    return match ? match[1] : null;
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
   };
 
-  // Maneja el cambio en el campo de entrada
-  const handleChange = (event) => {
-    setUrl(event.target.value);
-  };
-
-  // Maneja el envío del formulario
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const id = getYouTubeID(url);
-    setVideoID(id); // Establece el ID del video si es válido
-  };
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={url}
-          onChange={handleChange}
-          placeholder="Pega aquí la URL del video de YouTube"
-          style={{ width: "100%", marginBottom: "10px" }}
-        />
-        <button type="submit">Ver Video</button>
-      </form>
-
-      {videoID ? (
-        <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
-          <iframe
-            title="YouTube Video"
-            width="100%"
-            height="100%"
-            src={`https://www.youtube.com/embed/${videoID}`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-            }}
-          ></iframe>
-        </div>
-      ) : (
-        <div>Por favor, ingresa una URL de video válida.</div>
-      )}
+      <Button onClick={toggleDrawer(true)}>Open drawer</Button>
+      <Drawer open={open} onClose={toggleDrawer(false)}>
+        {DrawerList}
+      </Drawer>
     </div>
   );
-};
-
-export default YouTubeVideo;
+}

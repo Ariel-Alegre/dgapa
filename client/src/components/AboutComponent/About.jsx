@@ -171,7 +171,7 @@ export default function About() {
             <img src={require("../../assets/img/logo-removebg.png")} alt="" />
           </Link>
 
-          <nav id="navmenu" class="navmenu">
+          <nav id="navmenu" className="navmenu">
             <ul>
               <li>
                 <Link to="/">Princípal</Link>
@@ -262,8 +262,8 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1924 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                          <span className="number-history">1924 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -319,8 +319,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1924 </span>
+                      <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1924 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -374,8 +375,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1924 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1924 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -433,8 +435,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1924 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1924 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -491,8 +494,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1942 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1942 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -549,8 +553,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1944 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1944 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -602,8 +607,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1947 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1947 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -654,8 +660,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1950 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1950 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -706,8 +713,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1951 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1951 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -761,8 +769,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1952 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1952 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -814,8 +823,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1954 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1954 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -864,8 +874,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>2015 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">2015 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -915,8 +926,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1958 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1958 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -968,8 +980,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1959 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1959 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1018,8 +1031,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1960 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1960 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1080,8 +1094,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1961 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1961 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1131,8 +1146,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1962 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1962 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1181,8 +1197,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1964 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1964 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1234,8 +1251,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1965 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1965 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1287,8 +1305,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1966 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1966 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1346,8 +1365,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1967 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history"> 1967 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1406,8 +1426,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1969 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1969 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1460,8 +1481,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1971 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1971 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1513,8 +1535,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1972 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1972 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1563,8 +1586,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1973 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1973 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1623,8 +1647,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1974 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1974 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1685,8 +1710,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1975 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1975 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1736,8 +1762,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1976 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1976 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1794,8 +1821,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1977 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1977 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1860,8 +1888,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1978 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1978 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1911,8 +1940,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1979 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1979 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -1969,8 +1999,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1982 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1982 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -2023,8 +2054,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1983 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1983 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -2083,8 +2115,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1984 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1984 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -2135,8 +2168,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1985 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1985 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -2187,8 +2221,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1986 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1986 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -2243,8 +2278,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1987 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1987 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -2314,8 +2350,9 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1988 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1988 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -2367,8 +2404,9 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
-                          <span>1989 </span>
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1989 </span>
                         </div>
                       </div>
                       <div class="timeline-content timeline-indicator">
@@ -2419,7 +2457,8 @@ export default function About() {
                   {/*  <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
                           <span>1993 </span>
                         </div>
                       </div>
@@ -2451,7 +2490,8 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
                           <span>1995 </span>
                         </div>
                       </div>
@@ -2478,7 +2518,8 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
                           <span>1996 </span>
                         </div>
                       </div>
@@ -2506,7 +2547,8 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
                           <span>1997 </span>
                         </div>
                       </div>
@@ -2534,7 +2576,8 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
                           <span>1998 </span>
                         </div>
                       </div>
@@ -2563,7 +2606,8 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
                           <span>1999 </span>
                         </div>
                       </div>
@@ -2589,7 +2633,8 @@ export default function About() {
                   <li class="timeline-item right">
                     <div class="timeline-body ">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
                           <span>2002 </span>
                         </div>
                       </div>
@@ -2622,7 +2667,8 @@ export default function About() {
                   <li class="timeline-item left">
                     <div class="timeline-body d-md-flex justify-content-end">
                       <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column px-2 py-1 text-primary-emphasis bg-primary-subtle border border-success-subtle rounded-2 text-md-end">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
                           <span>2003 </span>
                         </div>
                       </div>
