@@ -5,32 +5,7 @@ import { BsList } from "react-icons/bs";
 const PrivacyPolicy = () => {
   return (
     <div>
-          <header id="header" className="header d-flex align-items-center fixed-top">
-        <div className="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-          <Link to="/" className="logo d-flex align-items-center">
-            <img src={require("../../assets/img/logo-removebg.png")} alt="" />
-          </Link>
-
-          <nav id="navmenu" className="navmenu">
-            <ul>
-              <li>
-                <Link to="/">Princípal</Link>
-              </li>
-              <li>
-                <Link to="/acerca">Nosotros</Link>
-              </li>
-              <li>
-                <Link to="/galeria">Galeria</Link>
-              </li>
-              <li>
-                <Link to="/contacto">Contacto</Link>
-              </li>
-            </ul>
-            <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
-
-          </nav>
-        </div>
-      </header>
+        
     <div className="privacy-policy-container">
       <h1>Política de Privacidad</h1>
       <p>

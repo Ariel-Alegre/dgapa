@@ -158,15 +158,19 @@ h6 {
   background-color: var(--background-color);
 }
 
-.header .logo img {
+
+.logo {
   max-height: 150px;
   margin-right: 8px;
-}
 
+}
 @media screen and (max-width: 768px) {
-  .header .logo img {
+  .logo {
     max-height: 100px;
     margin-right: 8px;
+    display: flex;
+    justify-content: flex-end;
+  
   }
 }
 .header a {
@@ -952,6 +956,7 @@ section,
 
 .hero .carousel-control-prev {
   justify-content: start;
+ 
 }
 
 @media (min-width: 640px) {
@@ -3819,7 +3824,10 @@ button {
   }
 }
 .details-page {
-  margin-top: 8em;
+  margin-top: 12em;
+}
+.about-page {
+  margin-top: 5em;
 }
 
 .info-section {

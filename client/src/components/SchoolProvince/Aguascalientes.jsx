@@ -13,7 +13,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import axios from "axios";
-import { Swiper,  } from "swiper/react";
+import { Swiper } from "swiper/react";
 import AOS from "aos";
 export default function Aguascalientes() {
   const { pathname } = useLocation();
@@ -142,7 +142,9 @@ export default function Aguascalientes() {
   }, [pathname]);
 
   const AllSchool = async () => {
-    const response = await axios.get("https://dgapa-production.up.railway.app/api/escuelas");
+    const response = await axios.get(
+      "http://localhost:3001/api/escuelas"
+    );
     setAllschool(response.data.data);
   };
 
@@ -150,36 +152,13 @@ export default function Aguascalientes() {
     AllSchool();
   }, []);
 
-  const durangoSchools = allSchool.filter((data) => data.province === "Aguascalientes");
+  const durangoSchools = allSchool.filter(
+    (data) => data.province === "Aguascalientes"
+  );
 
   return (
     <div className="about-page">
-      <header id="header" className="header d-flex align-items-center fixed-top">
-        <div className="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-          <Link to="/" className="logo d-flex align-items-center">
-            <img src={require("../../assets/img/logo-removebg.png")} alt="" />
-          </Link>
-
-          <nav id="navmenu" className="navmenu">
-            <ul>
-              <li>
-                <Link to="/">Princípal</Link>
-              </li>
-              <li>
-                <Link to="/acerca">Nosotros</Link>
-              </li>
-              <li>
-                <Link to="/galeria">Galeria</Link>
-              </li>
-              <li>
-                <Link to="/contacto">Contacto</Link>
-              </li>
-            </ul>
-            <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
-
-          </nav>
-        </div>
-      </header>
+      
       <main className="main">
         <section id="about" className="about section" data-aos="fade-up">
           <div className="page-schools dark-background">
@@ -194,7 +173,11 @@ export default function Aguascalientes() {
           <div className="container gallery-card">
             {durangoSchools.length > 0 ? (
               durangoSchools.map((data) => (
-                <Link to={`/escuelas-detalles/${data.id}`} key={data.id} style={{textDecoration: "none"}}>
+                <Link
+                  to={`/escuelas-detalles/${data.id}`}
+                  key={data.id}
+                  style={{ textDecoration: "none" }}
+                >
                   <Card sx={{ maxWidth: 345, width: 345 }}>
                     <CardActionArea>
                       <CardMedia
@@ -231,7 +214,10 @@ export default function Aguascalientes() {
                 </Link>
               ))
             ) : (
-              <Typography variant="h6" sx={{ textAlign: "center", marginTop: 2 }}>
+              <Typography
+                variant="h6"
+                sx={{ textAlign: "center", marginTop: 2 }}
+              >
                 No hay escuelas registradas en Aguascalientes.
               </Typography>
             )}

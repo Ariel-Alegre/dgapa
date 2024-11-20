@@ -1,22 +1,9 @@
 import React, { useEffect, useState } from "react";
-import imagesLoaded from "imagesloaded";
-import Isotope from "isotope-layout";
 import { Link, useLocation } from "react-router-dom";
 import { IoMdArrowUp } from "react-icons/io";
 import { IoMdArrowBack } from "react-icons/io";
 import { IoArrowForward } from "react-icons/io5";
-import { FiZoomIn } from "react-icons/fi";
-import { FaClipboardUser } from "react-icons/fa6";
-import { FaComment } from "react-icons/fa";
-import { LuUserCheck } from "react-icons/lu";
-import { RiSecurePaymentFill } from "react-icons/ri";
-import { RiGitRepositoryPrivateFill } from "react-icons/ri";
-import { TbPigMoney } from "react-icons/tb";
-import { BsList } from "react-icons/bs";
-import { FaCreditCard } from "react-icons/fa6";
-import { FaIdCard } from "react-icons/fa6";
-import { IoLogoPaypal } from "react-icons/io5";
-import { FaWhatsapp } from "react-icons/fa";
+
 import { Box } from "@mui/material";
 import { Swiper } from "swiper/react";
 import AOS from "aos";
@@ -88,6 +75,7 @@ function App() {
   const { pathname } = useLocation();
   const [allSchool, setAllschool] = useState([]);
   const [detailsSchool, setDetailsSchool] = React.useState([]);
+  console.log(detailsSchool)
   const [hoveredRegion, setHoveredRegion] = useState(null);
   const [modalRegion, setModalRegion] = useState(null);
   const [viewInfo, setViewInfo] = useState(false);
@@ -106,7 +94,7 @@ function App() {
   }, [pathname]);
   const AllSchool = async () => {
     const response = await axios.get(
-      "https://dgapa-production.up.railway.app/api/escuelas"
+      "http://localhost:3001/api/escuelas"
     );
     setAllschool(response.data.data);
   };
@@ -114,125 +102,9 @@ function App() {
   useEffect(() => {
     AllSchool();
   }, []);
-  useEffect(() => {
-    const toggleScrolled = () => {
-      const selectBody = document.querySelector("body");
-      const selectHeader = document.querySelector("#header");
-      if (!selectHeader) return;
-      if (
-        !selectHeader.classList.contains("scroll-up-sticky") &&
-        !selectHeader.classList.contains("sticky-top") &&
-        !selectHeader.classList.contains("fixed-top")
-      )
-        return;
-      window.scrollY > 100
-        ? selectBody.classList.add("scrolled")
-        : selectBody.classList.remove("scrolled");
-    };
 
-    // Añadir eventos de scroll
-    document.addEventListener("scroll", toggleScrolled);
-    toggleScrolled(); // Llamar inmediatamente para verificar si la página ya está scrolleada.
-
-    const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
-
-    const mobileNavToogle = () => {
-      document.querySelector("div").classList.toggle("mobile-nav-active"); // Cambiar 'div' por un selector más específico
-      mobileNavToggleBtn.classList.toggle("bi-list");
-      mobileNavToggleBtn.classList.toggle("bi-x");
-    };
-
-    if (mobileNavToggleBtn) {
-      mobileNavToggleBtn.addEventListener("click", mobileNavToogle);
-    }
-
-    document.querySelectorAll("#navmenu a").forEach((navmenu) => {
-      navmenu.addEventListener("click", () => {
-        if (document.querySelector(".mobile-nav-active")) {
-          mobileNavToogle();
-        }
-      });
-    });
-
-    document
-      .querySelectorAll(".navmenu .toggle-dropdown")
-      .forEach((navmenu) => {
-        navmenu.addEventListener("click", function (e) {
-          e.preventDefault();
-          this.parentNode.classList.toggle("active");
-          this.parentNode.nextElementSibling.classList.toggle(
-            "dropdown-active"
-          );
-          e.stopImmediatePropagation();
-        });
-      });
-
-    // Eliminar el preloader inmediatamente si existe
-    const preloader = document.querySelector("#preloader");
-    if (preloader) {
-      preloader.remove();
-    }
-
-    let scrollTop = document.querySelector(".scroll-top");
-    if (scrollTop) {
-      const toggleScrollTop = () => {
-        window.scrollY > 100
-          ? scrollTop.classList.add("active")
-          : scrollTop.classList.remove("active");
-      };
-
-      scrollTop.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      });
-
-      document.addEventListener("scroll", toggleScrollTop);
-      toggleScrollTop(); // Verificar estado inicial del scroll-top
-    }
-
-    // Inicialización de AOS (Animaciones)
-    const aosInit = () => {
-      if (typeof AOS !== "undefined") {
-        AOS.init({
-          duration: 600,
-          easing: "ease-in-out",
-          once: true,
-          mirror: false,
-        });
-        AOS.refresh();
-      }
-    };
-    aosInit(); // Llamar directamente para inicializar sin depender de 'load'
-
-    // Inicialización de Swiper
-    const initSwiper = () => {
-      document
-        .querySelectorAll(".init-swiper")
-        .forEach(function (swiperElement) {
-          const configElement = swiperElement.querySelector(".swiper-config");
-          if (configElement) {
-            let config = JSON.parse(configElement.innerHTML.trim());
-            if (!swiperElement.classList.contains("swiper-tab")) {
-              new Swiper(swiperElement, config);
-            }
-          }
-        });
-    };
-    initSwiper(); // Llamar directamente sin depender de 'load'
-
-    // Limpieza al desmontar el componente
-    return () => {
-      document.removeEventListener("scroll", toggleScrolled);
-      if (mobileNavToggleBtn) {
-        mobileNavToggleBtn.removeEventListener("click", mobileNavToogle);
-      }
-    };
-  }, []);
   const handleMouseEnter = (e, province) => {
-    const provinceSchools = allSchool.filter(
+    const provinceSchools = allSchool && allSchool.filter(
       (data) => data.province === province
     );
 
@@ -276,15 +148,24 @@ function App() {
       setModalRegion({ id: province, name: province, schools: [] });
     }
   };
-
   const handleViewInfo = async (schoolId) => {
     setOpen(false);
     setViewInfo(true);
-    const response = await axios.get(
-      `https://dgapa-production.up.railway.app/api/detail-school/${schoolId}`
-    );
-    setDetailsSchool(response.data.data);
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/detail-school/${schoolId}`
+      );
+  
+     
+  
+      // Guardar los datos parseados en el estado
+      setDetailsSchool(response.data.data);
+    } catch (error) {
+      console.error("Error al obtener los detalles de la escuela:", error);
+    }
   };
+  
+
 
   const handleClose = () => {
     setOpen(false);
@@ -361,12 +242,128 @@ function App() {
     detailsSchool && Array.isArray(detailsSchool.doctoresJubilados)
       ? detailsSchool.doctoresJubilados.length
       : 0;
-
+      useEffect(() => {
+        const toggleScrolled = () => {
+          const selectBody = document.querySelector("body");
+          const selectHeader = document.querySelector("#header");
+          if (!selectHeader) return;
+          if (
+            !selectHeader.classList.contains("scroll-up-sticky") &&
+            !selectHeader.classList.contains("sticky-top") &&
+            !selectHeader.classList.contains("fixed-top")
+          )
+            return;
+          window.scrollY > 100
+            ? selectBody.classList.add("scrolled")
+            : selectBody.classList.remove("scrolled");
+        };
+    
+        // Añadir eventos de scroll
+        document.addEventListener("scroll", toggleScrolled);
+        toggleScrolled(); // Llamar inmediatamente para verificar si la página ya está scrolleada.
+    
+        const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
+    
+        const mobileNavToogle = () => {
+          document.querySelector("div").classList.toggle("mobile-nav-active"); // Cambiar 'div' por un selector más específico
+          mobileNavToggleBtn.classList.toggle("bi-list");
+          mobileNavToggleBtn.classList.toggle("bi-x");
+        };
+    
+        if (mobileNavToggleBtn) {
+          mobileNavToggleBtn.addEventListener("click", mobileNavToogle);
+        }
+    
+        document.querySelectorAll("#navmenu a").forEach((navmenu) => {
+          navmenu.addEventListener("click", () => {
+            if (document.querySelector(".mobile-nav-active")) {
+              mobileNavToogle();
+            }
+          });
+        });
+    
+        document
+          .querySelectorAll(".navmenu .toggle-dropdown")
+          .forEach((navmenu) => {
+            navmenu.addEventListener("click", function (e) {
+              e.preventDefault();
+              this.parentNode.classList.toggle("active");
+              this.parentNode.nextElementSibling.classList.toggle(
+                "dropdown-active"
+              );
+              e.stopImmediatePropagation();
+            });
+          });
+    
+        // Eliminar el preloader inmediatamente si existe
+        const preloader = document.querySelector("#preloader");
+        if (preloader) {
+          preloader.remove();
+        }
+    
+        let scrollTop = document.querySelector(".scroll-top");
+        if (scrollTop) {
+          const toggleScrollTop = () => {
+            window.scrollY > 100
+              ? scrollTop.classList.add("active")
+              : scrollTop.classList.remove("active");
+          };
+    
+          scrollTop.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          });
+    
+          document.addEventListener("scroll", toggleScrollTop);
+          toggleScrollTop(); // Verificar estado inicial del scroll-top
+        }
+    
+        // Inicialización de AOS (Animaciones)
+        const aosInit = () => {
+          if (typeof AOS !== "undefined") {
+            AOS.init({
+              duration: 600,
+              easing: "ease-in-out",
+              once: true,
+              mirror: false,
+            });
+            AOS.refresh();
+          }
+        };
+        aosInit(); // Llamar directamente para inicializar sin depender de 'load'
+    
+        // Inicialización de Swiper
+        const initSwiper = () => {
+          document
+            .querySelectorAll(".init-swiper")
+            .forEach(function (swiperElement) {
+              const configElement = swiperElement.querySelector(".swiper-config");
+              if (configElement) {
+                let config = JSON.parse(configElement.innerHTML.trim());
+                if (!swiperElement.classList.contains("swiper-tab")) {
+                  new Swiper(swiperElement, config);
+                }
+              }
+            });
+        };
+        initSwiper(); // Llamar directamente sin depender de 'load'
+    
+        // Limpieza al desmontar el componente
+        return () => {
+          document.removeEventListener("scroll", toggleScrolled);
+          if (mobileNavToggleBtn) {
+            mobileNavToggleBtn.removeEventListener("click", mobileNavToogle);
+          }
+        };
+      }, []);
   return (
     <div className="index-page">
     
 
-      <header id="header" className="header d-flex align-items-center fixed-top">
+{/*       <header id="header" className="header d-flex align-items-center ">
       <div className="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
         <Link to="/" className="logo d-flex align-items-center">
           <img src={require("../../assets/img/logo-removebg.png")} alt="" />
@@ -375,7 +372,7 @@ function App() {
         <nav id="navmenu" className="navmenu">
             <ul>
               <li>
-                <Link to="/" class="active">Princípal</Link>
+                <Link to="/" class="active">Principal</Link>
               </li>
               <li>
                 <Link to="/acerca" >
@@ -392,8 +389,7 @@ function App() {
             <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
           </nav>
       </div>
-    </header>
-      <main class="main">
+    </header> */}
         <section id="hero" class="hero section dark-background">
           <div class="info d-flex align-items-center">
             <div class="container">
@@ -433,11 +429,11 @@ function App() {
               href="#hero-carousel"
               role="button"
               data-bs-slide="prev"
-            >
+              >
               <span
                 class="carousel-control-prev-icon bi bi-chevron-left"
                 aria-hidden="true"
-              >
+                >
                 <IoMdArrowBack className="icon-color" />
               </span>
             </a>
@@ -456,7 +452,7 @@ function App() {
               </span>
             </a>
           </div>
-        </section>
+        </section> 
 
         <div class="container section-title" data-aos="fade-up">
           <h1>Escuelas Normales Superiores en México</h1>
@@ -1107,7 +1103,6 @@ function App() {
             </div>
           </div>
         </section>
-      </main>
 
       <a
         href="#"

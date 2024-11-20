@@ -168,34 +168,15 @@ const RegisterSchool = () => {
 
       alert("Escuela registrada con éxito!");
     } catch (error) {
-      console.error("Error al registrar la escuela:", error); // Log del error
-      alert("Hubo un error al registrar la escuela.");
+      console.error("Error al registrar la escuela:", error.response || error.message);
+      alert(
+        `Hubo un error al registrar la escuela: ${
+          error.response?.data?.message || "Intenta nuevamente más tarde."
+        }`
+      );
     } finally {
       setLoadingSuccess(false);
-      setFormData({
-        name: "",
-        address: "",
-        phone: "",
-        email: "",
-        year_of_operation: "",
-        province: "",
-        sic: "",
-        postgrado1: "",
-        postgrado2: "",
-        beca1: "",
-        beca2: "",
-        alumnos: [],
-        egresados: [],
-        doctoresJubilados: [],
-        doctoresCandidatos: [],
-        profesores: [],
-        profesoresMaestrias: [],
-        profesoresConDoctorados: [],
-        plantel1: null,
-        plantel2: null,
-        plantel3: null,
-        image: null,
-      });
+   
 
       setPreviewImage(null);
     }

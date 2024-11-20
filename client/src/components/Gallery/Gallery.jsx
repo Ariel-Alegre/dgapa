@@ -141,7 +141,7 @@ export default function Gallery() {
   }, [pathname]);
 
  const AllGallery = async() => {
-  const response = await axios.get("https://dgapa-production.up.railway.app/api/gallerys");
+  const response = await axios.get("http://localhost:3001/api/gallerys");
   setAllPhoto(response.data.data)
 
  }
@@ -151,7 +151,7 @@ export default function Gallery() {
   }, []);
   return (
     <div class="about-page">
-      <header id="header" class="header d-flex align-items-center fixed-top">
+{/*       <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
           <Link to="/" class="logo d-flex align-items-center">
             <img src={require("../../assets/img/logo-removebg.png")} alt="" />
@@ -178,7 +178,7 @@ export default function Gallery() {
 
           </nav>
         </div>
-      </header>
+      </header> */}
       <main class="main">
         <div class="page-title dark-background">
           <div

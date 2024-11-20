@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BsList } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Global } from "../../assets/utils/utils";
 import EmailIcon from "@mui/icons-material/Email";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import { IoMdArrowUp } from "react-icons/io";
+
 import {
   GoogleMap,
   LoadScript,
@@ -27,11 +29,16 @@ const defaultCenter = {
 };
 
 const SchoolDetails = () => {
+  const { pathname } = useLocation();
+
   const { schoolId } = useParams();
   const [detailsSchool, setDetailsSchool] = React.useState([]);
+  console.log(detailsSchool)
   const [center, setCenter] = React.useState(defaultCenter); // Coordenadas del mapa
   const [videoID, setVideoID] = React.useState(null); // Estado para almacenar el ID del video
-
+  useEffect(() => {
+    window.scrollTo(0, 20);
+  }, [pathname]);
   const getYouTubeID = (url) => {
     const regex =
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
@@ -168,11 +175,19 @@ const SchoolDetails = () => {
     };
   }, []);
   const OneSchool = async () => {
-    const response = await axios.get(
-      `https://dgapa-production.up.railway.app/api/detail-school/${schoolId}`
-    );
-    setDetailsSchool(response.data.data);
+    try {
+      // Hacer una solicitud GET para obtener los detalles de la escuela
+      const response = await axios.get(
+        `http://localhost:3001/api/detail-school/${schoolId}`
+      );
+      
+      // Guardar los detalles de la escuela en el estado
+      setDetailsSchool(response.data.data);
+    } catch (error) {
+      console.error("Error al obtener los detalles de la escuela:", error);
+    }
   };
+  
 
   React.useEffect(() => {
     OneSchool();
@@ -207,7 +222,7 @@ const SchoolDetails = () => {
       };
 
       // Geocodifica la dirección cuando está disponible
-      geocodeAddress(detailsSchool.address);
+      geocodeAddress(detailsSchool?.address);
     } else if (
       !window.google ||
       !window.google.maps ||
@@ -219,31 +234,7 @@ const SchoolDetails = () => {
 
   return (
     <div>
-      <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-          <Link to="/" class="logo d-flex align-items-center">
-            <img src={require("../../assets/img/logo-removebg.png")} alt="" />
-          </Link>
-
-          <nav id="navmenu" class="navmenu">
-            <ul>
-              <li>
-                <Link to="/">Princípal</Link>
-              </li>
-              <li>
-                <Link to="/acerca">Nosotros</Link>
-              </li>
-              <li>
-                <Link to="/galeria">Galeria</Link>
-              </li>
-              <li>
-                <Link to="/contacto">Contacto</Link>
-              </li>
-            </ul>
-            <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
-          </nav>
-        </div>
-      </header>
+      
       <div class="container details-page">
         <div class="row">
           <div class="col-md-3 order-last d-none d-sm-block">
@@ -391,9 +382,9 @@ const SchoolDetails = () => {
                         </div>
                       </div>
                       <p data-aos="fade-up" class="lead">
-                        {detailsSchool.address}
+                        {detailsSchool && detailsSchool.address}
                         <br />
-                        {detailsSchool.province}
+                        {detailsSchool && detailsSchool.province}
                       </p>
                       <LoadScript
                         googleMapsApiKey="AIzaSyBMqv1fgtsDEQQgm4kmLBRtZI7zu-wSldA" // Reemplaza con tu clave API
@@ -952,10 +943,10 @@ const SchoolDetails = () => {
                                     <h6>Modalidad escolarizada</h6>
                                   </div>
                                 </div>
-                                {detailsSchool?.alumnos && (
+                                {detailsSchool && detailsSchool?.alumnos && (
 
                                 <div className="cardalumn-container">
-                                  {detailsSchool?.alumnos &&
+                                  {detailsSchool.alumnos &&
                                     detailsSchool.alumnos.map((data, index) => (
                                       <div
                                         className="row justify-content-center"
@@ -1540,11 +1531,20 @@ const SchoolDetails = () => {
                 </div>
               </div>
                 ):null}
-
+ <a
+        href="#"
+        id="scroll-top"
+        class="scroll-top d-flex align-items-center justify-content-center"
+      >
+        <i class="bi bi-arrow-up-short">
+          <IoMdArrowUp className="icon-color" />
+        </i>
+      </a>
             </div>
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

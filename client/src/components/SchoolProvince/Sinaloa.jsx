@@ -142,7 +142,7 @@ export default function Sinaloa() {
   }, [pathname]);
 
   const AllSchool = async () => {
-    const response = await axios.get("https://dgapa-production.up.railway.app/api/escuelas");
+    const response = await axios.get("http://localhost:3001/api/escuelas");
     setAllschool(response.data.data);
   };
 
@@ -154,32 +154,7 @@ export default function Sinaloa() {
 
   return (
     <div className="about-page">
-      <header id="header" className="header d-flex align-items-center fixed-top">
-        <div className="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-          <Link to="/" className="logo d-flex align-items-center">
-            <img src={require("../../assets/img/logo-removebg.png")} alt="" />
-          </Link>
-
-          <nav id="navmenu" className="navmenu">
-            <ul>
-              <li>
-                <Link to="/">Princípal</Link>
-              </li>
-              <li>
-                <Link to="/acerca">Nosotros</Link>
-              </li>
-              <li>
-                <Link to="/galeria">Galeria</Link>
-              </li>
-              <li>
-                <Link to="/contacto">Contacto</Link>
-              </li>
-            </ul>
-            <BsList className="mobile-nav-toggle d-xl-none bi bi-list" />
-
-          </nav>
-        </div>
-      </header>
+     
       <main className="main">
         <section id="about" className="about section" data-aos="fade-up">
           <div className="page-schools dark-background">
