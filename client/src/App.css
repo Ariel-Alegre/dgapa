@@ -3930,7 +3930,7 @@ h3 {
 /* PrivacyPolicy.css */
 .privacy-policy-container {
   max-width: 800px;
-  margin: 5em auto;
+  margin: 10em auto;
   padding: 20px;
   font-family: Arial, sans-serif;
   color: #333;
@@ -3939,8 +3939,9 @@ h3 {
 .privacy-policy-container h1 {
   font-size: 2em;
   margin-bottom: 20px;
-  color: #333;
   text-align: center;
+  color: #0073e6;
+
 }
 
 .privacy-policy-container h2 {
@@ -4213,3 +4214,35 @@ color: white;
 }
 
 
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.custom-table {
+  width: 50%;
+  border-collapse: collapse;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.custom-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  text-align: center;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.custom-table tr:hover {
+  background-color: #f1f1f1;
+}

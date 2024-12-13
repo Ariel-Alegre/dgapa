@@ -87,7 +87,7 @@ const PostGallery = () => {
 
     setUploading(true);
     try {
-      const response = await axios.post("http://localhost:3001/api/post-gallery", formData, {
+      const response = await axios.post("https://dgapa-production-a45f.up.railway.app/api/post-gallery", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

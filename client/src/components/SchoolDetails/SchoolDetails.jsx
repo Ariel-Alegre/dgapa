@@ -18,6 +18,30 @@ import {
 } from "@react-google-maps/api";
 import { Swiper } from "swiper/react";
 import AOS from "aos";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import { styled } from "@mui/material/styles";
+
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+  transform: expand ? "rotate(180deg)" : "rotate(0deg)",
+}));
+
+
+
 const containerStyle = {
   width: "345px",
   height: "250px",
@@ -30,10 +54,15 @@ const defaultCenter = {
 
 const SchoolDetails = () => {
   const { pathname } = useLocation();
-
+    const [expanded, setExpanded] = React.useState({});
+    const handleExpandClick = (cardId) => {
+      setExpanded((prevExpanded) => ({
+        ...prevExpanded,
+        [cardId]: !prevExpanded[cardId],
+      }));
+    };
   const { schoolId } = useParams();
   const [detailsSchool, setDetailsSchool] = React.useState([]);
-  console.log(detailsSchool)
   const [center, setCenter] = React.useState(defaultCenter); // Coordenadas del mapa
   const [videoID, setVideoID] = React.useState(null); // Estado para almacenar el ID del video
   useEffect(() => {
@@ -178,16 +207,15 @@ const SchoolDetails = () => {
     try {
       // Hacer una solicitud GET para obtener los detalles de la escuela
       const response = await axios.get(
-        `http://localhost:3001/api/detail-school/${schoolId}`
+        `https://dgapa-production-a45f.up.railway.app/api/detail-school/${schoolId}`
       );
-      
+
       // Guardar los detalles de la escuela en el estado
       setDetailsSchool(response.data.data);
     } catch (error) {
       console.error("Error al obtener los detalles de la escuela:", error);
     }
   };
-  
 
   React.useEffect(() => {
     OneSchool();
@@ -234,7 +262,6 @@ const SchoolDetails = () => {
 
   return (
     <div>
-      
       <div class="container details-page">
         <div class="row">
           <div class="col-md-3 order-last d-none d-sm-block">
@@ -256,7 +283,7 @@ const SchoolDetails = () => {
                   <a class="vinculos nav-link" href="#item-convocatorias">
                     Convocatorias
                   </a>
-                {/*   <nav class="nav nav-pills flex-column">
+                  {/*   <nav class="nav nav-pills flex-column">
                     <a
                       class="vinculos nav-link ms-3"
                       href="#item-convocatorias-escuelas"
@@ -279,7 +306,7 @@ const SchoolDetails = () => {
                   <a class="vinculos nav-link" href="#item-alumnos">
                     Histórico de alumnos
                   </a>
-              {/*     <nav class="nav nav-pills flex-column">
+                  {/*     <nav class="nav nav-pills flex-column">
                     <a
                       class="vinculos nav-link ms-3"
                       href="#item-numero-alumnos-matriculados"
@@ -302,7 +329,7 @@ const SchoolDetails = () => {
                   <a class="vinculos nav-link" href="#item-edades">
                     Profesorado
                   </a>
-               {/*    <nav class="nav nav-pills flex-column">
+                  {/*    <nav class="nav nav-pills flex-column">
                     <a
                       class="vinculos nav-link ms-3"
                       href="#item-edades-profesorado-actual"
@@ -325,7 +352,7 @@ const SchoolDetails = () => {
                   <a class="vinculos nav-link" href="#item-doctores">
                     Doctores con SNI
                   </a>
-              {/*     <nav class="nav nav-pills flex-column">
+                  {/*     <nav class="nav nav-pills flex-column">
                     <a
                       class="vinculos nav-link ms-3"
                       href="#item-doctores-jubilados"
@@ -339,7 +366,7 @@ const SchoolDetails = () => {
                       Número de doctores candidatos
                     </a>
                   </nav> */}
-               {/*    <nav class="nav nav-pills flex-column">
+                  {/*    <nav class="nav nav-pills flex-column">
                     <a class="vinculos nav-link" href="#item-4-2">
                       Tabla de datos
                     </a>
@@ -448,7 +475,7 @@ const SchoolDetails = () => {
                           <p class="lead fw-semibold mb-0">Año de fundación</p>{" "}
                           {detailsSchool?.year_of_operation}
                         </div>
-                        <div
+                        {/*     <div
                           data-aos="fade-up"
                           class="col d-flex flex-column align-items-start justify-content-start"
                         >
@@ -457,7 +484,7 @@ const SchoolDetails = () => {
                           </i>
                           <p class="lead fw-semibold mb-0">Teléfono/s</p>
                           {detailsSchool?.phone}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -611,7 +638,6 @@ const SchoolDetails = () => {
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
                                           class="card-pdf"
-
                                           x="48"
                                           y="48"
                                           viewBox="0 0 512 512"
@@ -675,7 +701,6 @@ const SchoolDetails = () => {
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
                                           class="card-pdf"
-
                                           x="48"
                                           y="48"
                                           viewBox="0 0 512 512"
@@ -903,8 +928,11 @@ const SchoolDetails = () => {
                   </div>
                 </div>
               ) : null}
-              {detailsSchool.alumnos && detailsSchool.alumnos.length > 0 ||  detailsSchool.alumnas && detailsSchool.alumnas.length > 0 ||  detailsSchool.egresados && detailsSchool.egresados.length > 0 ||  detailsSchool.egresadas && detailsSchool.egresadas.length > 0? (
-
+              {(detailsSchool.alumnos && detailsSchool.alumnos.length > 0) ||
+              (detailsSchool.alumnas && detailsSchool.alumnas.length > 0) ||
+              (detailsSchool.egresados && detailsSchool.egresados.length > 0) ||
+              (detailsSchool.egresadas &&
+                detailsSchool.egresadas.length > 0) ? (
                 <div class="row">
                   <div id="item-alumnos" class="py-5">
                     <div data-aos="fade-up" class="container">
@@ -922,7 +950,7 @@ const SchoolDetails = () => {
                               aria-expanded="true"
                               aria-controls="collapseAlumnos"
                             >
-                              Histórico de Alumnos y  Alumnas
+                              Histórico de Alumnos
                             </button>
                           </h2>
                           <div
@@ -935,7 +963,7 @@ const SchoolDetails = () => {
                               <section class="container">
                                 <div class="row mb-3">
                                   <div class="col d-flex align-items-center">
-                                    <h4>Alumnos y Alumnas matriculados</h4>
+                                    <h4>Alumnos matriculados</h4>
                                   </div>
                                 </div>
                                 <div class="row mb-3">
@@ -944,232 +972,447 @@ const SchoolDetails = () => {
                                   </div>
                                 </div>
                                 {detailsSchool && detailsSchool?.alumnos && (
-
-                                <div className="cardalumn-container">
-                                  {detailsSchool.alumnos &&
-                                    detailsSchool.alumnos.map((data, index) => (
-                                      <div
-                                        className="row justify-content-center"
-                                        key={index}
-                                      >
-                                        <div className="col-md-6 col-lg-3 my-3">
-                                          <div className="alumn-card text-center shadow-sm">
-                                            <div className="card-body">
-                                              <p className="card-text mb-0">
-                                                Ciclo escolar{" "}
-                                                {(data.fechaDesdeAlumnos &&
-                                                  data.fechaDesdeAlumnos.split(
-                                                    "-"
-                                                  )[0]) ||
-                                                  ""}{" "}
-                                                -{" "}
-                                                {(data.fechaDesdeAlumnos &&
-                                                  data.fechaDesdeAlumnos.split(
-                                                    "-"
-                                                  )[0]) ||
-                                                  ""}
-                                              </p>
-                                              <hr />
-                                              <p>
-                                                <b className="fs-2 text-primary mb-2">
-                                                  {data.cantidadAlumnos}
-                                                  <br />
-                                                  <span className="fs-4 fw-medium">
-                                                    Alumnos
-                                                  </span>
-                                                </b>
-                                              </p>
+                                  <div className="cardalumn-container">
+                                    {detailsSchool.alumnos &&
+                                      detailsSchool.alumnos.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {data.cantidadAlumnos}
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Alumnos
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      </div>
-                                    ))}
-                                </div>
+                                        )
+                                      )}
+                                  </div>
                                 )}
 
-{detailsSchool?.alumnas && (
-
-                                <div className="cardalumn-container">
-                                  {detailsSchool?.alumnas &&
-                                    detailsSchool.alumnas.map((data, index) => (
-                                      <div
-                                        className="row justify-content-center"
-                                        key={index}
-                                      >
-                                        <div className="col-md-6 col-lg-3 my-3">
-                                          <div className="alumn-card text-center shadow-sm">
-                                            <div className="card-body">
-                                              <p className="card-text mb-0">
-                                                Ciclo escolar{" "}
-                                                {(data.fechaDesdeAlumnas &&
-                                                  data.fechaDesdeAlumnas.split(
-                                                    "-"
-                                                  )[0]) ||
-                                                  ""}{" "}
-                                                -{" "}
-                                                {(data.fechaDesdeAlumnas &&
-                                                  data.fechaDesdeAlumnas.split(
-                                                    "-"
-                                                  )[0]) ||
-                                                  ""}
-                                              </p>
-                                              <hr />
-                                              <p>
-                                                <b className="fs-2 text-primary mb-2">
-                                                  {data.cantidadAlumnas}
-                                                  <br />
-                                                  <span className="fs-4 fw-medium">
-                                                    Alumnas
-                                                  </span>
-                                                </b>
-                                              </p>
+                                {detailsSchool?.alumnas && (
+                                  <div className="cardalumn-container">
+                                    {detailsSchool?.alumnas &&
+                                      detailsSchool.alumnas.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeAlumnas &&
+                                                      data.fechaDesdeAlumnas.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeAlumnas &&
+                                                      data.fechaDesdeAlumnas.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {data.cantidadAlumnas}
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Alumnas
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      </div>
-                                    ))}
-                                </div>
+                                        )
+                                      )}
+                                  </div>
                                 )}
-
                               </section>
                             </div>
                           </div>
                         </div>
                       </div>
-{detailsSchool?.egresados || detailsSchool?.egresadas ? (
 
 
-                      <div id="item-numero-maestros-egresados-mixta">
+                      <div id="item-numero-alumnos-matriculados">
                         <div class="accordion-item">
-                          <h2
-                            class="accordion-header"
-                            id="headingMaestrosMixta"
-                          >
+                          <h2 class="accordion-header" id="headingAlumnos2">
                             <button
                               class="accordion-button collapsed"
                               type="button"
                               data-bs-toggle="collapse"
-                              data-bs-target="#collapseMaestrosMixta"
-                              aria-expanded="false"
-                              aria-controls="collapseMaestrosMixta"
+                              data-bs-target="#collapseAlumnos2"
+                              aria-expanded="true"
+                              aria-controls="collapseAlumnos2"
                             >
-                              Maestros Egresados (Modalidad Mixta)
+                              Matricula, egresados y titulados
                             </button>
                           </h2>
                           <div
-                            id="collapseMaestrosMixta"
+                            id="collapseAlumnos2"
                             class="accordion-collapse collapse"
-                            aria-labelledby="headingMaestrosMixta"
-                            data-bs-parent="#accordionAlumnos"
+                            aria-labelledby="headingAlumnos2"
+                            data-bs-parent="#accordionAlumnos2"
                           >
                             <div class="accordion-body">
                               <section class="container">
-                                <div class="row my-3">
+                                <div class="row mb-3">
                                   <div class="col d-flex align-items-center">
-                                    <h4>Egresados y titulados</h4>
+                                    <h4>Matricula, egresados y titulados</h4>
                                   </div>
                                 </div>
-                                <div class="row my-3">
+                                <div class="row mb-3">
                                   <div class="col d-flex align-items-center">
                                     <h6>Modalidad mixta</h6>
                                   </div>
                                 </div>
-                                <div className="cardalumn-container">
-                                  {detailsSchool?.egresados &&
-                                    detailsSchool.egresados.map(
-                                      (data, index) => (
-                                        <div
-                                          className="row justify-content-center d-flex"
-                                          key={index}
-                                        >
-                                          <div className="col-md-6 col-lg-3 my-3 ">
-                                            <div className="alumn-card text-center shadow-sm">
-                                              <div className="card-body">
-                                                <p className="card-text mb-0">
-                                                  Ciclo escolar{" "}
-                                                  {(data.fechaDesdeEgresados &&
-                                                    data.fechaHastaEgresados.split(
-                                                      "-"
-                                                    )[0]) ||
-                                                    ""}{" "}
-                                                  -{" "}
-                                                  {(data.fechaDesdeEgresados &&
-                                                    data.fechaHastaEgresados.split(
-                                                      "-"
-                                                    )[0]) ||
-                                                    ""}
-                                                </p>
-                                                <hr />
-                                                <p>
-                                                  <b className="fs-2 text-primary mb-2">
-                                                    {data.cantidadAlumnosEgresados}
-                                                    <br />
-                                                    <span className="fs-4 fw-medium">
-                                                      Alumnos
-                                                    </span>
-                                                  </b>
-                                                </p>
+                                {detailsSchool && detailsSchool?.alumnos && (
+                                  <div className="cardalumn-container">
+                                    {detailsSchool.alumnos &&
+                                      detailsSchool.alumnos.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {data.cantidadAlumnos}
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Alumnos
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
                                               </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      )
-                                    )}
-                                </div>
-                                <div className="cardalumn-container">
-                                  {detailsSchool?.egresadas &&
-                                    detailsSchool.egresadas.map(
-                                      (data, index) => (
-                                        <div
-                                          className="row justify-content-center d-flex"
-                                          key={index}
-                                        >
-                                          <div className="col-md-6 col-lg-3 my-3 ">
-                                            <div className="alumn-card text-center shadow-sm">
-                                              <div className="card-body">
-                                                <p className="card-text mb-0">
-                                                  Ciclo escolar{" "}
-                                                  {(data.fechaDesdeEgresadas &&
-                                                    data.fechaHastaEgresadas.split(
-                                                      "-"
-                                                    )[0]) ||
-                                                    ""}{" "}
-                                                  -{" "}
-                                                  {(data.fechaDesdeEgresadas &&
-                                                    data.fechaHastaEgresadas.split(
-                                                      "-"
-                                                    )[0]) ||
-                                                    ""}
-                                                </p>
-                                                <hr />
-                                                <p>
-                                                  <b className="fs-2 text-primary mb-2">
-                                                    {data.cantidadAlumnasEgresadas}
-                                                    <br />
-                                                    <span className="fs-4 fw-medium">
-                                                      Alumnas
-                                                    </span>
-                                                  </b>
-                                                </p>
+                                        )
+                                      )}
+                                  </div>
+                                )}
+
+                                {detailsSchool?.alumnas && (
+                                  <div className="cardalumn-container">
+                                    {detailsSchool?.alumnas &&
+                                      detailsSchool.alumnas.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeAlumnas &&
+                                                      data.fechaDesdeAlumnas.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeAlumnas &&
+                                                      data.fechaDesdeAlumnas.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {data.cantidadAlumnas}
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Alumnas
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
                                               </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      )
-                                    )}
-                                </div>
+                                        )
+                                      )}
+                                  </div>
+                                )}
                               </section>
                             </div>
                           </div>
                         </div>
                       </div>
-):null}
+
+
+                      
+                      {detailsSchool?.egresados || detailsSchool?.egresadas ? (
+                        <div id="item-numero-maestros-egresados-mixta">
+                          <div class="accordion-item">
+                            <h2
+                              class="accordion-header"
+                              id="headingMaestrosMixta"
+                            >
+                              <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseMaestrosMixta"
+                                aria-expanded="false"
+                                aria-controls="collapseMaestrosMixta"
+                              >
+                                Maestros Egresados (Modalidad Mixta)
+                              </button>
+                            </h2>
+                            <div
+                              id="collapseMaestrosMixta"
+                              class="accordion-collapse collapse"
+                              aria-labelledby="headingMaestrosMixta"
+                              data-bs-parent="#accordionAlumnos"
+                            >
+                              <div class="accordion-body">
+                                <section class="container">
+                                  <div class="row my-3">
+                                    <div class="col d-flex align-items-center">
+                                      <h4>Egresados y titulados</h4>
+                                    </div>
+                                  </div>
+                                  <div class="row my-3">
+                                    <div class="col d-flex align-items-center">
+                                      <h6>Modalidad mixta</h6>
+                                    </div>
+                                  </div>
+                                  <div className="cardalumn-container">
+                                    {detailsSchool?.egresados &&
+                                      detailsSchool.egresados.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center d-flex"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3 ">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeEgresados &&
+                                                      data.fechaHastaEgresados.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeEgresados &&
+                                                      data.fechaHastaEgresados.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {
+                                                        data.cantidadAlumnosEgresados
+                                                      }
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Alumnos
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
+                                  </div>
+                                  <div className="cardalumn-container">
+                                    {detailsSchool?.egresadas &&
+                                      detailsSchool.egresadas.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center d-flex"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3 ">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeEgresadas &&
+                                                      data.fechaHastaEgresadas.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeEgresadas &&
+                                                      data.fechaHastaEgresadas.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {
+                                                        data.cantidadAlumnasEgresadas
+                                                      }
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Alumnas
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
+                                  </div>
+                                </section>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : null}
 
                       <hr />
                     </div>
                   </div>
+                  
                 </div>
-              ): null}
+              ) : null}
+
+
+
+
+
+
+
+<div
+                      data-aos="fade-up"
+                      data-aos-duration="3000"
+                      class="container"
+                    >
+                      <h2 style={{textAlign: "center"}}>NOMBRAMIENTOS</h2>
+                    </div>
+<div className="table-container">
+      <table className="custom-table">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>NOMBRE</th>
+            <th>NOMBRAMIENTO </th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dato 1</td>
+            <td>Dato 2</td>
+            <td>Dato 2</td>
+
+          </tr>
+          <tr>
+            <td>Dato 3</td>
+            <td>Dato 4</td>
+            <td>Dato 4</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+<div
+                      data-aos="fade-up"
+                      data-aos-duration="3000"
+                      class="container"
+                    >
+                      <h2 style={{textAlign: "center"}}>No. DE DOCENTES CON ESPECIALIDAD</h2>
+                    </div>
+<div className="table-container">
+      <table className="custom-table">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>OFERTA</th>
+            <th>ESPECIALIDAD</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dato 1</td>
+            <td>Dato 2</td>
+            <td>Dato 2</td>
+
+          </tr>
+          <tr>
+            <td>Dato 3</td>
+            <td>Dato 4</td>
+            <td>Dato 4</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+              
 
               {(detailsSchool.profesoresMaestrias &&
                 detailsSchool.profesoresMaestrias.length > 0) ||
@@ -1181,6 +1424,7 @@ const SchoolDetails = () => {
                   <div data-aos="fade-up" class="container">
                     <h2>Profesorado </h2>
                   </div>
+                  
                   <div class="accordion px-3" id="accordionProfesores">
                     <div id="item-edades-profesorado-actual">
                       <div class="accordion-item">
@@ -1392,159 +1636,935 @@ const SchoolDetails = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                        {detailsSchool.profesoresMaestrias &&
+                    detailsSchool.profesoresMaestrias.length > 0 ? (
+                         <div
+                            id="collapseAlumnos"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingAlumnos"
+                            data-bs-parent="#accordionAlumnos"
+                          >
+                            <div class="accordion-body">
+                              <section class="container">
+                                <div class="row mb-3">
+                                  <div class="col d-flex align-items-center">
+                                    <h4>Alumnos matriculados</h4>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col d-flex align-items-center">
+                                    <h6>Modalidad escolarizada</h6>
+                                  </div>
+                                </div>
+                                {detailsSchool && detailsSchool?.alumnos && (
+                                  <div className="cardalumn-container">
+                                    {detailsSchool.alumnos &&
+                                      detailsSchool.alumnos.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {data.cantidadAlumnos}
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Alumnos
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
+                                  </div>
+                                )}
+
+                                {detailsSchool?.alumnas && (
+                                  <div className="cardalumn-container">
+                                    {detailsSchool?.alumnas &&
+                                      detailsSchool.alumnas.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeAlumnas &&
+                                                      data.fechaDesdeAlumnas.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeAlumnas &&
+                                                      data.fechaDesdeAlumnas.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {data.cantidadAlumnas}
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Alumnas
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
+                                  </div>
+                                )}
+                              </section>
+                            </div>
+                          </div>
                     ) : null}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                      <div id="item-numero-alumnos-matriculados">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingMaestro3">
+                            <button
+                              class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseMaestro3"
+                              aria-expanded="true"
+                              aria-controls="collapseMaestro3"
+                            >
+                          Matricula docente
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseMaestro3"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingAlumnos"
+                            data-bs-parent="#accordionAlumnos"
+                          >
+                            <div class="accordion-body">
+                              <section class="container">
+                                <div class="row mb-3">
+                                  <div class="col d-flex align-items-center">
+                                    <h4>Docentes matriculados</h4>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col d-flex align-items-center">
+                                    <h6>Modalidad mixta</h6>
+                                  </div>
+                                </div>
+                                {detailsSchool && detailsSchool?.alumnos && (
+                                  <div className="cardalumn-container">
+                                    {detailsSchool.alumnos &&
+                                      detailsSchool.alumnos.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {data.cantidadAlumnos}
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Docentes
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
+                                  </div>
+                                )}
+
+                              </section>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+             
+
+
+               
+
+                      <hr />
+                      </div>
+
+                      
+                    ) : null}
+
+
+
+                    
                   </div>
+              
+                  
                 </div>
               ) : null}
-  {(detailsSchool.doctoresCandidatos &&
+
+
+              {(detailsSchool.doctoresCandidatos &&
                 detailsSchool.doctoresCandidatos.length > 0) ||
               (detailsSchool.doctoresJubilados &&
                 detailsSchool.doctoresJubilados.length > 0) ? (
-
-              <div class="row">
-                <div id="item-doctores" class="my-3">
-                  <div
-                    data-aos="fade-up"
-                    data-aos-duration="3000"
-                    class="container"
-                  >
-                    <h2>Doctores con SNI </h2>
-                  </div>
-                  <div class="accordion px-3" id="accordionDoctores">
-                    <div id="item-doctores-jubilados">
-                      <div class="accordion-item">
-                        <h2
-                          class="accordion-header"
-                          id="headingDoctoresJubilados"
-                        >
-                          <button
-                            class="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#collapseDoctoresJubilados"
-                            aria-expanded="true"
-                            aria-controls="collapseDoctoresJubilados"
+                <div class="row">
+                  <div id="item-doctores" class="my-3">
+                    <div
+                      data-aos="fade-up"
+                      data-aos-duration="3000"
+                      class="container"
+                    >
+                      <h2>Doctores con SNI </h2>
+                    </div>
+                    <div class="accordion px-3" id="accordionDoctores">
+                      <div id="item-doctores-jubilados">
+                        <div class="accordion-item">
+                          <h2
+                            class="accordion-header"
+                            id="headingDoctoresJubilados"
                           >
-                            Doctores con SNI jubilados
-                          </button>
-                        </h2>
-                        <div
-                          id="collapseDoctoresJubilados"
-                          class="accordion-collapse collapse"
-                          aria-labelledby="headingDoctoresJubilados"
-                          data-bs-parent="#accordionDoctores"
-                        >
-                          <div class="accordion-body">
-                            <section class="container">
-                              <h4 class="mb-4">Lista de doctores jubilados</h4>
-                              <div class="row my-3 justify-content-center">
-                                <div class="col-md-5 d-flex justify-content-center align-items-center">
-                                  <div
-                                    id="simple-list-item-3"
-                                    class="card text-center w-100"
-                                  >
-                                    <div class="card-header fs-3 fw-bold">
-                                      Lista de nombres del ciclo historico{" "}
-                                    </div>
+                            <button
+                              class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseDoctoresJubilados"
+                              aria-expanded="true"
+                              aria-controls="collapseDoctoresJubilados"
+                            >
+                              Doctores con SNI jubilados
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseDoctoresJubilados"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingDoctoresJubilados"
+                            data-bs-parent="#accordionDoctores"
+                          >
+                            <div class="accordion-body">
+                              <section class="container">
+                                <h4 class="mb-4">
+                                  Lista de doctores jubilados
+                                </h4>
+                                <div class="row my-3 justify-content-center">
+                                  <div class="col-md-5 d-flex justify-content-center align-items-center">
+                                    <div
+                                      id="simple-list-item-3"
+                                      class="card text-center w-100"
+                                    >
+                                      <div class="card-header fs-3 fw-bold">
+                                        Lista de nombres del ciclo historico{" "}
+                                      </div>
 
-                                    {detailsSchool?.doctoresJubilados &&
-                                      detailsSchool?.doctoresJubilados.map(
-                                        (data, index) => (
-                                          <div class="card-body m-0 p-0">
-                                            <ol class="list-group">
-                                              <li
-                                                key={index}
-                                                class="list-group-item"
-                                              >
-                                                {index + 1}. {data.doctor}
-                                              </li>
-                                            </ol>
-                                          </div>
-                                        )
-                                      )}
+                                      {detailsSchool?.doctoresJubilados &&
+                                        detailsSchool?.doctoresJubilados.map(
+                                          (data, index) => (
+                                            <div class="card-body m-0 p-0">
+                                              <ol class="list-group">
+                                                <li
+                                                  key={index}
+                                                  class="list-group-item"
+                                                >
+                                                  {index + 1}. {data.doctor}
+                                                </li>
+                                              </ol>
+                                            </div>
+                                          )
+                                        )}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </section>
+                              </section>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div id="item-doctores-candidatos">
-                      <div class="accordion-item">
-                        <h2
-                          class="accordion-header"
-                          id="headingDoctoresCandidatos"
-                        >
-                          <button
-                            class="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#collapseDoctoresCandidatos"
-                            aria-expanded="false"
-                            aria-controls="collapseDoctoresCandidatos"
+                      <div id="item-doctores-candidatos">
+                        <div class="accordion-item">
+                          <h2
+                            class="accordion-header"
+                            id="headingDoctoresCandidatos"
                           >
-                            Doctores con SNI candidatos
-                          </button>
-                        </h2>
-                        <div
-                          id="collapseDoctoresCandidatos"
-                          class="accordion-collapse collapse"
-                          aria-labelledby="headingDoctoresCandidatos"
-                          data-bs-parent="#accordionDoctores"
-                        >
-                          <div class="accordion-body">
-                            <section class="container">
-                              <h4 class="mb-4">Lista de doctores candidatos</h4>
-                              <div class="row my-3 justify-content-center">
-                                <div class="col-md-5 d-flex justify-content-center align-items-center">
-                                  <div
-                                    id="simple-list-item-3"
-                                    class="card text-center w-100"
-                                  >
-                                    <div class="card-header fs-3 fw-bold">
-                                      Lista de nombres del ciclo actual{" "}
+                            <button
+                              class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseDoctoresCandidatos"
+                              aria-expanded="false"
+                              aria-controls="collapseDoctoresCandidatos"
+                            >
+                              Doctores con SNI candidatos
+                            </button>
+                          </h2>
+                          <div
+                            id="collapseDoctoresCandidatos"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingDoctoresCandidatos"
+                            data-bs-parent="#accordionDoctores"
+                          >
+                            <div class="accordion-body">
+                              <section class="container">
+                                <h4 class="mb-4">
+                                  Lista de doctores candidatos
+                                </h4>
+                                <div class="row my-3 justify-content-center">
+                                  <div class="col-md-5 d-flex justify-content-center align-items-center">
+                                    <div
+                                      id="simple-list-item-3"
+                                      class="card text-center w-100"
+                                    >
+                                      <div class="card-header fs-3 fw-bold">
+                                        Lista de nombres del ciclo actual{" "}
+                                      </div>
+                                      {detailsSchool?.doctoresCandidatos &&
+                                        detailsSchool?.doctoresCandidatos.map(
+                                          (data, index) => (
+                                            <div class="card-body m-0 p-0">
+                                              <ul class="list-group">
+                                                <li class="list-group-item">
+                                                  {index + 1}.{" "}
+                                                  {data.doctorCandidato}
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          )
+                                        )}
                                     </div>
-                                    {detailsSchool?.doctoresCandidatos &&
-                                      detailsSchool?.doctoresCandidatos.map(
-                                        (data, index) => (
-                                          <div class="card-body m-0 p-0">
-                                            <ul class="list-group">
-                                              <li class="list-group-item">
-                                                {index + 1}.{" "}
-                                                {data.doctorCandidato}
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        )
-                                      )}
                                   </div>
                                 </div>
-                              </div>
-                            </section>
+                              </section>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              ) : null}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="services" class="services section light-background">
+          <div class="container section-title" data-aos="fade-up">
+            <h2>Historia a través del tiempo</h2>
+          </div>
+
+          <div class="container" data-aos="fade-up">
+            <div class="row no-gutters">
+              <div class="col-12 linea-tiempo ">
+                <ul class="timeline ms-2">
+                  <li class="timeline-item left">
+                    <div class="timeline-body d-md-flex justify-content-end">
+                      <div class="timeline-meta">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                          <span className="number-history">1983 </span>
+                        </div>
+                      </div>
+                      <div class="timeline-content timeline-indicator">
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/escuelaQueretaro/imagen1.png")}
+                            alt="Historia"
+                          />
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                              Primera institución encargada de la formación de
+                              los maestros{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[1]}
+                              onClick={() => handleExpandClick(1)}
+
+                              aria-expanded={expanded[1]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[1]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                                <ul>
+                                  <li>
+                                  11 de abril: se publica el Acuerdo No. 101 en el DOF, en el que se ordena la desconcentración de los cursos intensivos para profesores foráneos con el propósito de evitar gastos de traslado, hospedaje y alimentación de los docentes. Para esto la Escuela Normal Superior de México deja de tener injerencia en la organización e impartición de los cursos intensivos y se establecen sedes en Sonora, Veracruz, Aguascalientes y Querétaro.
+                                  </li>
+
+                                  <li>
+                                  Nace la Escuela Normal Superior Federal para cursos intensivos en Querétaro con tres departamentos de Control escolar, Titulación e Investigación, Área académica y Planeación Educativa.
+                                  </li>
+
+                                  <li>
+                                  1 de julio: Se establece la Comisión que se encargará de la elaboración del proyecto de reestructuración académica y admisnistrativa de la ENSM, debido a su falta de propuesta propia desde 1976, por lo que se continuaban usando los mismo planes de estudio de la reforma realizada en 1959, causando que el egresado de la ENSM no reuniera el mínimo académico necesario.
+                                  </li>
+
+                                  <li>
+                                  Se modifica el plan de estudios de las escuelas normales, y quedan conformados en dos líneas generales: tronco común y troco diferencial.
+                                  </li>
+
+                                  <li>
+
+                                  </li>
+                                </ul>
+                              
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="timeline-item right">
+                    <div class="timeline-body ">
+                      <div class="timeline-meta">
+                      <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1984 </span>
+                        </div>
+                      </div>
+                      <div class="timeline-content timeline-indicator">
+                      <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/escuelaQueretaro/imagen2.png")}
+
+                            alt="Historia"
+                          />
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                               Creación del Consejo Nacional de la Educación
+                               Superior{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[2]}
+                              onClick={() => handleExpandClick(2)}
+                              aria-expanded={expanded[2]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[2]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                            <ul>
+                            <li>
+                            23 de marzo: La educación normal básica queda elevada a nivel licenciatura.
+                            </li>
+
+                            <li>
+                            Los alumnos de cursos intensivos de la Escuela Normal Superior en Querétaro a través de los programas denominados Consejo Superior Estudiantil Coordinadora, le presentan al Director un pliego petitorio en el cual se anotan al menos 30 demandas respecto a temas económicos, académicos, políticos y admisistrativos, demandas que años anteriores había planteado la Escuela Normal Superior de México, si embargo no tuvieron la posibilidad de seguir luchando por sus demandas.
+                            </li>
+
+                            <li>
+                            Se establece que las escuelas normales debían realizar tanto actividades de docencia como de investigación educativa y de difusión cultural.
+                            </li>
+                          </ul>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                   
+                      </div>
+                    </div>
+                  </li>
+                  <li class="timeline-item left">
+                    <div class="timeline-body d-md-flex justify-content-end">
+                      <div class="timeline-meta">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">1923 </span>
+                        </div>
+                      </div>
+                      <div class="timeline-content timeline-indicator">
+                   
+
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/escuelaQueretaro/imagen3.png")}
+
+                            alt="Historia"
+                          />
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Origen y Evolución del IMPES hacia la ENS{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[3]}
+                              onClick={() => handleExpandClick(3)}
+                              aria-expanded={expanded[3]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[3]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+<ul>
+  <li>
+  La duración de las licenciaturas pasan a ser de 4 años en lugar de 6, además la modalidad pasa a ser semiescolarizada.
+  </li>
+</ul>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="timeline-item right">
+                    <div class="timeline-body ">
+                      <div class="timeline-meta">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">2000 </span>
+                        </div>
+                      </div>
+                      <div class="timeline-content timeline-indicator">
+                    
+
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/escuelaQueretaro/imagen4.png")}
+
+                            alt="Historia"
+                          />
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                             La Enseñanza Normal Superior según la Ley Orgánica
+                             de Educación{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[4]}
+                              onClick={() => handleExpandClick(4)}
+                              aria-expanded={expanded[4]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[4]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                    <ul>
+                            <li>
+                            Amplía su oferta académica ofreciendo estudios a nivel licenciatura y maestría, así como cursos, talleres y diplomados que coadyuvan a la actualización y capacitación del docente con el propósito de cumplir a cabalidad con lo dispuesto en el artículo 3 de la CPEUM.
+                            </li>
+                          </ul>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="timeline-item left">
+                    <div class="timeline-body d-md-flex justify-content-end">
+                      <div class="timeline-meta">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">2014 </span>
+                        </div>
+                      </div>
+                      <div class="timeline-content timeline-indicator">
+                        
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia5.jpg")}
+                            alt="Historia"
+                          />
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           La ENS en la Ley Orgánica de Educación de 1942{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[5]}
+                              onClick={() => handleExpandClick(5)}
+                              aria-expanded={expanded[5]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[5]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                    <ul>
+                      <li>
+                      Se comienza la construcción de las nuevas instalaciones de la Escuela Normal Superior de Querétaro, ubicada en Pie de la Cuesta.
+                      </li>
+                
+                    </ul>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="timeline-item right">
+                    <div class="timeline-body ">
+                      <div class="timeline-meta">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">2015 </span>
+                        </div>
+                      </div>
+                      <div class="timeline-content timeline-indicator">
+                        
+
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia6.jpg")}
+                            alt="Historia"
+                          />
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                            Creación de la ENS de Coahuila{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[6]}
+                              onClick={() => handleExpandClick(6)}
+                              aria-expanded={expanded[6]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[6]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                 <ul>
+                  <li>
+                  Se abre la modalidad presencial.
+                  </li>
+
+                  <li>
+                  La ENSQ de incorpora a la comisión de Educación de la Coparmex colabornado en actividades interuniversitarias .
+                  </li>
+
+                  <li>
+                  a ENSQ participó en la primera Sesión Plenaria de la Comisión Estatal para la Planeación de Educación Superior (COEPES).
+                  </li>
+
+                  <li>
+                  Se entregan las instalaciones de la ENSQ en Pie de la Cuesta.
+                  </li>
+
+                  <li>
+                  Agosto: se da inicio a la oferta educativa de la Licenciatura en Educación Secundaria en modalidad escolarizada con una duración de 4 años, con las especialidades de Matemáticas y Español.
+                  </li>
+
+                  <li>
+                  Se cierra la oferta educativa en modalidad mixta debido a que ya no existía una población de profesores que no contaran con alguna licenciatura, y esta modalidad estaba durugida a docentes frente a grupo que no contaban con licenciatura.
+                  </li>
+                 </ul>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="timeline-item left">
+                    <div class="timeline-body d-md-flex justify-content-end">
+                      <div class="timeline-meta">
+                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+
+                          <span className="number-history">2016 </span>
+                        </div>
+                      </div>
+                      <div class="timeline-content timeline-indicator">
+                   
+                        <Card className="card">
+                          <CardMedia
+                            component="img"
+                            height="250"
+                            image={require("../../assets/img/historia7.jpg")}
+                            alt="Historia"
+                          />
+                          <CardContent>
+                            <Typography
+                              variant="body2"
+                              class="card-title mb-2 text-align-center"
+                            >
+                           Fundación de escuelas{" "}
+                            </Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <ExpandMore
+                              expand={expanded[7]}
+                              onClick={() => handleExpandClick(7)}
+                              aria-expanded={expanded[7]}
+                              aria-label="show more"
+                            >
+                              <ExpandMoreIcon />
+                            </ExpandMore>
+                          </CardActions>
+                          <Collapse in={expanded[7]} timeout="auto" unmountOnExit>
+                            <CardContent>
+                              <Typography
+                                sx={{ marginBottom: 2 }}
+                                class="card-text m-0"
+                              >
+                   <ul>
+                    <li>
+                    Se implementa la Licenciatura en Educación secundaria en modalidad escolarizada.
+                    </li>
+                    <li>
+                    Egresa la primera generación de modalidad presencial.
+                    </li>
+
+                    <li>
+                    La ESNQ y el Centro Educativo y Cultural del Estado de Querétaro "Manuel Gómez Morín" (CECEQ), implementaron el programa piloto "Apoyo a Tareas de Biblioteca", a partir de la necesidad de atender algunas recomendaciones internacionales sobre el uso de bibliotecas públicas en la construcción de conocimiento.
+                    </li>
+
+                    <li>
+                    Se actualiza la Maestría en Educación 
+                    </li>
+                   </ul>
+                              </Typography>
+                            </CardContent>
+                          </Collapse>
+                        </Card>
+                      </div>
+                    </div>
+                  </li>
+              
+                </ul>
               </div>
-                ):null}
- <a
-        href="#"
-        id="scroll-top"
-        class="scroll-top d-flex align-items-center justify-content-center"
-      >
-        <i class="bi bi-arrow-up-short">
-          <IoMdArrowUp className="icon-color" />
-        </i>
-      </a>
+            </div>
+          </div>
+        </section>
+        <table
+      style={{
+        width: "50%",
+        borderCollapse: "collapse",
+        textAlign: "left",
+        border: "1px solid black",
+      }}
+    >
+      <thead>
+        <tr
+          style={{
+            backgroundColor: "#FFD966",
+            textAlign: "center",
+          }}
+        >
+          <th
+            colSpan="2"
+            style={{
+              padding: "10px",
+              fontSize: "1.2em",
+              border: "1px solid black",
+            }}
+          >
+            Medios de contacto
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style={{ border: "1px solid black", padding: "5px" }}>Correo:</td>
+          <td style={{ border: "1px solid black", padding: "5px" }}></td>
+        </tr>
+        <tr>
+          <td style={{ border: "1px solid black", padding: "5px" }}>
+            Página web:
+          </td>
+          <td style={{ border: "1px solid black", padding: "5px" }}></td>
+        </tr>
+        <tr>
+          <td style={{ border: "1px solid black", padding: "5px" }}>
+            Número de teléfono:
+          </td>
+          <td style={{ border: "1px solid black", padding: "5px" }}></td>
+        </tr>
+        <tr>
+          <td style={{ border: "1px solid black", padding: "5px" }}>Facebook:</td>
+          <td style={{ border: "1px solid black", padding: "5px" }}></td>
+        </tr>
+        <tr>
+          <td style={{ border: "1px solid black", padding: "5px" }}>
+            Instagram:
+          </td>
+          <td style={{ border: "1px solid black", padding: "5px" }}>sadasdasdsad</td>
+        </tr>
+      </tbody>
+    </table>
+
+              <a
+                href="#"
+                id="scroll-top"
+                class="scroll-top d-flex align-items-center justify-content-center"
+              >
+                <i class="bi bi-arrow-up-short">
+                  <IoMdArrowUp className="icon-color" />
+                </i>
+              </a>
             </div>
           </div>
         </div>
       </div>
-      
     </div>
   );
 };

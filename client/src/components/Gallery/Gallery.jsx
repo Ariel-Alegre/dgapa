@@ -141,7 +141,7 @@ export default function Gallery() {
   }, [pathname]);
 
  const AllGallery = async() => {
-  const response = await axios.get("http://localhost:3001/api/gallerys");
+  const response = await axios.get("https://dgapa-production-a45f.up.railway.app/api/gallerys");
   setAllPhoto(response.data.data)
 
  }

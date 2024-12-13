@@ -143,7 +143,7 @@ console.log(allSchool)
   useEffect(() => {
     const AllSchool = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/escuelas.php");
+        const response = await axios.get("https://dgapa-production-a45f.up.railway.app/api/escuelas");
         if (Array.isArray(response.data.data)) {
           setAllschool(response.data.data);
         } else {

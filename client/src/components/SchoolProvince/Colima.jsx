@@ -142,7 +142,7 @@ export default function Colima() {
   }, [pathname]);
 
   const AllSchool = async () => {
-    const response = await axios.get("http://localhost:3001/api/escuelas");
+    const response = await axios.get("https://dgapa-production-a45f.up.railway.app/api/escuelas");
     setAllschool(response.data.data);
   };
 

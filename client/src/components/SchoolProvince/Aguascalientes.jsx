@@ -143,7 +143,7 @@ export default function Aguascalientes() {
 
   const AllSchool = async () => {
     const response = await axios.get(
-      "http://localhost:3001/api/escuelas"
+      "https://dgapa-production-a45f.up.railway.app/api/escuelas"
     );
     setAllschool(response.data.data);
   };

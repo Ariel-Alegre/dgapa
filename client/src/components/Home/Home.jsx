@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+  import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoMdArrowUp } from "react-icons/io";
 import { IoMdArrowBack } from "react-icons/io";
@@ -75,7 +75,6 @@ function App() {
   const { pathname } = useLocation();
   const [allSchool, setAllschool] = useState([]);
   const [detailsSchool, setDetailsSchool] = React.useState([]);
-  console.log(detailsSchool)
   const [hoveredRegion, setHoveredRegion] = useState(null);
   const [modalRegion, setModalRegion] = useState(null);
   const [viewInfo, setViewInfo] = useState(false);
@@ -94,7 +93,7 @@ function App() {
   }, [pathname]);
   const AllSchool = async () => {
     const response = await axios.get(
-      "http://localhost:3001/api/escuelas"
+      "https://dgapa-production-a45f.up.railway.app/api/escuelas"
     );
     setAllschool(response.data.data);
   };
@@ -153,7 +152,7 @@ function App() {
     setViewInfo(true);
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/detail-school/${schoolId}`
+        `https://dgapa-production-a45f.up.railway.app/api/detail-school/${schoolId}`
       );
   
      
@@ -420,7 +419,7 @@ function App() {
               <img src={require("../../assets/img/carrusel-1.png")} alt="" />
             </div>
 
-            <div class="carousel-item  active">
+            <div class="carousel-item">
               <img src={require("../../assets/img/carrusel-2.png")} alt="" />
             </div>
 
