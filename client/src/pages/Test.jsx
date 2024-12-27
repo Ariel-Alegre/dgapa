@@ -1,59 +1,37 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import React from "react";
 
-export default function TemporaryDrawer() {
-  const [open, setOpen] = React.useState(false);
-
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
-
-  const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
+const Tabla = () => {
   return (
-    <div>
-      <Button onClick={toggleDrawer(true)}>Open drawer</Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
+    <div className="tabla-container">
+      <p className="tabla-periodo">PERIODO: 2023-2024</p>
+      <table className="tabla">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Cecilia Alejandra De Jesús Martínez</td>
+            <td>27</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>María del Mar Estrada Rebull</td>
+            <td>38</td>
+          </tr>
+          <tr className="no-border">
+            <td>3</td>
+            <td>Estefanny Delgado Rivera</td>
+            <td>32</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
-}
+};
+
+export default Tabla;

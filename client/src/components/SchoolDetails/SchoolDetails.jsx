@@ -9,7 +9,7 @@ import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import { IoMdArrowUp } from "react-icons/io";
-
+import { Image } from "antd";
 import {
   GoogleMap,
   LoadScript,
@@ -28,7 +28,7 @@ import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import Accordion from 'react-bootstrap/Accordion';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -39,8 +39,6 @@ const ExpandMore = styled((props) => {
   }),
   transform: expand ? "rotate(180deg)" : "rotate(0deg)",
 }));
-
-
 
 const containerStyle = {
   width: "345px",
@@ -54,13 +52,13 @@ const defaultCenter = {
 
 const SchoolDetails = () => {
   const { pathname } = useLocation();
-    const [expanded, setExpanded] = React.useState({});
-    const handleExpandClick = (cardId) => {
-      setExpanded((prevExpanded) => ({
-        ...prevExpanded,
-        [cardId]: !prevExpanded[cardId],
-      }));
-    };
+  const [expanded, setExpanded] = React.useState({});
+  const handleExpandClick = (cardId) => {
+    setExpanded((prevExpanded) => ({
+      ...prevExpanded,
+      [cardId]: !prevExpanded[cardId],
+    }));
+  };
   const { schoolId } = useParams();
   const [detailsSchool, setDetailsSchool] = React.useState([]);
   const [center, setCenter] = React.useState(defaultCenter); // Coordenadas del mapa
@@ -274,103 +272,215 @@ const SchoolDetails = () => {
                 class="h-100 d-flex align-items-center border-start"
               >
                 <nav class="nav nav-pills flex-column">
-                  <a class="vinculos nav-link" href="#item-datos-generales">
+                  <a class="nav-link2  ms-1" href="#item-datos-generales" style={{color:"black", fontWeight: "bold", textDecoration: "none", ":hover": {color: "red"}}}>
                     Datos generales
                   </a>
-                  <a class="vinculos nav-link" href="#item-youtube">
-                    Videos de youtube
+                  <a class="nav-link2 ms-1  " href="#item-youtube" style={{color:"black", fontWeight: "bold", textDecoration: "none"}}>
+                    Multimedia
                   </a>
-                  <a class="vinculos nav-link" href="#item-convocatorias">
+                  <a class=" nav-link2 ms-1" href="#item-convocatorias" style={{color:"black", fontWeight: "bold", textDecoration: "none"}}>
                     Convocatorias
                   </a>
-                  {/*   <nav class="nav nav-pills flex-column">
+                  <nav class="nav nav-pills flex-column">
                     <a
-                      class="vinculos nav-link ms-3"
+                      class=" nav-link2 ms-3"
                       href="#item-convocatorias-escuelas"
+                      style={{color:"grey", textDecoration: "none" }}
                     >
-                      Escuelas normales superiores
+                     Licenciaturas
+
                     </a>
                     <a
-                      class="vinculos nav-link ms-3"
+                      class=" nav-link2 ms-3"
                       href="#item-convocatorias-posgrados"
+                      style={{color:"grey", textDecoration: "none" }}
                     >
                       Posgrados (maestría/doctorado)
                     </a>
-                  </nav> */}
-                  <a class="vinculos nav-link" href="#item-becas">
+                    <a class=" nav-link2 ms-3" 
+                    href="#item-becas"
+                    style={{color:"grey",textDecoration: "none" }}
+                    >
                     Becas
                   </a>
-                  {/*  <a class="vinculos nav-link" href="#item-linea-tiempo">
+                  </nav>
+               
+                  <a class=" nav-link2 ms-1" href="#item-linea-tiempo"
+                  style={{color:"black", fontWeight: "bold", textDecoration: "none"}}
+                  >
                     Linea del tiempo
-                  </a> */}
-                  <a class="vinculos nav-link" href="#item-alumnos">
+                  </a>
+                  <a class=" nav-link2 ms-1" href="#item-alumnos"
+                  style={{color:"black", fontWeight: "bold", textDecoration: "none"}}
+                  >
                     Histórico de alumnos
                   </a>
-                  {/*     <nav class="nav nav-pills flex-column">
+                  <nav class="nav nav-pills flex-column">
                     <a
-                      class="vinculos nav-link ms-3"
+                      class=" nav-link2 ms-3"
                       href="#item-numero-alumnos-matriculados"
+                      style={{color:"black", textDecoration: "none" }}
                     >
-                      Alumnos matriculados <br /> modalidad escolarizada
+                      Alumnos matriculados 
+                    </a>
+
+                    <a
+                      class=" nav-link2 ms-5"
+                      href="#item-numero-alumnos-matriculados"
+                      style={{color:"grey", textDecoration: "none"}}
+                    >
+                     Modalidad escolarizada
+
+                    </a>
+
+                    <a
+                      class=" nav-link2 ms-5"
+                      href="#item-numero-alumnos-matriculados"
+                      style={{color:"grey", textDecoration: "none" }}
+                    >
+                     Modalidad mixta
+
+
                     </a>
                     <a
-                      class="vinculos nav-link ms-3"
+                      class=" nav-link2 ms-3"
                       href="#item-numero-maestros-egresados-mixta"
+                      style={{color:"black", textDecoration: "none" }}
+
                     >
-                      Egresados y titulados <br /> modalidad mixta
+                      Egresados y titulados 
                     </a>
                     <a
-                      class="vinculos nav-link ms-3"
-                      href="#item-numero-maestros-egresados-escolarizada"
+                      class=" nav-link2 ms-5"
+                      href="#item-numero-alumnos-matriculados"
+                      style={{color:"grey",  textDecoration: "none"}}
+
                     >
-                      Egresados y titulados <br /> modalidad escolarizada
+                     Modalidad escolarizada
+
                     </a>
-                  </nav> */}
-                  <a class="vinculos nav-link" href="#item-edades">
+
+                    <a
+                      class=" nav-link2 ms-5"
+                      href="#item-numero-alumnos-matriculados"
+                      style={{color:"grey", textDecoration: "none" }}
+
+                    >
+                     Modalidad mixta
+
+                    </a>
+                  </nav>
+                  <a class=" nav-link2 ms-1" href="#item-edades"
+                   style={{color:"black", fontWeight: "bold", textDecoration: "none" }}
+                  >
                     Profesorado
                   </a>
-                  {/*    <nav class="nav nav-pills flex-column">
-                    <a
-                      class="vinculos nav-link ms-3"
-                      href="#item-edades-profesorado-actual"
+                  <nav class="nav nav-pills flex-column">
+                  <a
+                      class=" nav-link2 ms-3"
+                      href="#item-numero-alumnos-matriculados"
+                      style={{color:"grey", textDecoration: "none"}}
+
                     >
-                      Profesorado actual
+                   Profesorado actual
+
+
                     </a>
                     <a
-                      class="vinculos nav-link ms-3"
+                      class=" nav-link2 ms-3"
                       href="#item-edades-profesorado-maestria"
+                      style={{color:"grey", textDecoration: "none"}}
+
                     >
-                      Con estudios de maestría
+                     Edades del profesorado
                     </a>
                     <a
-                      class="vinculos nav-link ms-3"
+                      class=" nav-link2 ms-3"
                       href="#item-edades-profesorado-doctorado"
+                      style={{color:"grey",textDecoration: "none" }}
+
                     >
-                      Con estudios de doctorado
+                    Con maestría
+
                     </a>
-                  </nav> */}
-                  <a class="vinculos nav-link" href="#item-doctores">
+
+                    <a
+                      class=" nav-link2 ms-3"
+                      href="#item-edades-profesorado-doctorado"
+                      style={{color:"grey", textDecoration: "none"}}
+
+                    >
+                    Con doctorado
+
+                    </a>
+                    <a
+                      class=" nav-link2 ms-3"
+                      href="#item-edades-profesorado-doctorado"
+                      style={{color:"grey", textDecoration: "none"}}
+
+                    >
+                    Matricula docente
+
+                    </a>
+                    <a
+                      class=" nav-link2 ms-3"
+                      href="#item-edades-profesorado-doctorado"
+                      style={{color:"grey",textDecoration: "none" }}
+
+                    >
+                   Matrículas docentes con especialidad
+
+                    </a>
+                  </nav>
+                  <a class=" nav-link2 ms-1" href="#item-doctores"
+                   style={{color:"black", fontWeight: "bold", textDecoration: "none" }}
+                  
+                  >
                     Doctores con SNI
                   </a>
-                  {/*     <nav class="nav nav-pills flex-column">
+                  <nav class="nav nav-pills flex-column">
                     <a
-                      class="vinculos nav-link ms-3"
+                      class=" nav-link2 ms-3"
                       href="#item-doctores-jubilados"
+                      style={{color:"grey", textDecoration: "none"}}
+
                     >
-                      Número de doctores jubilados
+                      Doctores jubilados
+
                     </a>
                     <a
-                      class="vinculos nav-link ms-3"
+                      class=" nav-link2 ms-3"
                       href="#item-doctores-candidatos"
+                      style={{color:"grey", textDecoration: "none"}}
+
                     >
-                      Número de doctores candidatos
+                     Doctores candidatos
+
                     </a>
-                  </nav> */}
-                  {/*    <nav class="nav nav-pills flex-column">
-                    <a class="vinculos nav-link" href="#item-4-2">
-                      Tabla de datos
+                  </nav>
+                  <nav class="nav nav-pills flex-column">
+                  <a class=" nav-link2 ms-1" href="#item-4-2"
+                   style={{color:"black", fontWeight: "bold", textDecoration: "none" }}
+                  
+                  >
+                  Cuerpos académicos
+
                     </a>
-                  </nav> */}
+                    <a class=" nav-link2 ms-1" href="#item-4-2"
+                   style={{color:"black", fontWeight: "bold", textDecoration: "none" }}
+
+                    >
+                    Oferta académica
+
+                    </a>
+                    <a class="nav-link2 ms-1" href="#item-4-2"
+                   style={{color:"black", fontWeight: "bold", textDecoration: "none" }}
+                    
+                    >
+                    Historia
+                    </a>
+                  
+                  </nav>
                 </nav>
               </nav>
             </div>
@@ -491,8 +601,8 @@ const SchoolDetails = () => {
                 </section>
               </div>
               <br />
-              {detailsSchool.urlYoutube && (
-                <div id="item-youtube">
+              <div id="item-youtube">
+                {detailsSchool.urlYoutube && (
                   <div className="info-section">
                     <div data-aos="fade-up" class="container">
                       <h2>Video de youtube </h2>
@@ -506,7 +616,6 @@ const SchoolDetails = () => {
                           style={{
                             position: "relative",
                             paddingBottom: "56.25%",
-                            height: 0,
                           }}
                         >
                           <iframe
@@ -529,8 +638,37 @@ const SchoolDetails = () => {
                       </section>
                     </div>
                   </div>
+                )}
+
+                <div style={{ marginTop: "-150px" }}>
+                  <section data-aos="fade-up" class="container">
+                    <h2 style={{ textAlign: "center" }}> Galeria</h2>
+
+                    <div className="galeria-details">
+                      <Image
+                        height={180}
+                        width={200}
+                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                      />
+                      <Image
+                        height={180}
+                        width={200}
+                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                      />{" "}
+                      <Image
+                        height={180}
+                        width={200}
+                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                      />{" "}
+                      <Image
+                        height={180}
+                        width={200}
+                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                      />
+                    </div>
+                  </section>
                 </div>
-              )}
+              </div>
 
               <br />
               {detailsSchool?.plantel1 ||
@@ -541,8 +679,13 @@ const SchoolDetails = () => {
                     <div data-aos="fade-up" class="container">
                       <h2>Convocatorias </h2>
                     </div>
-                    <div id="item-convocatorias-escuelas" class="mb-5">
-                      <section data-aos="fade-up" class="container">
+
+
+                    <Accordion defaultActiveKey="0">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Licenciaturas</Accordion.Header>
+        <Accordion.Body>
+        <section data-aos="fade-up" class="container">
                         <div class="row my-3 mt-4">
                           <div class="col d-flex align-items-center ">
                             <h4> {detailsSchool?.name}</h4>
@@ -739,17 +882,15 @@ const SchoolDetails = () => {
                           )}
                         </div>
                       </section>
-                    </div>
-                  </div>
-                  {detailsSchool?.postgrado1 || detailsSchool?.postgrado2 ? (
-                    <div
-                      id="item-convocatorias-posgrados"
-                      class="my-5 info-section"
-                    >
-                      <div data-aos="fade-up" class="container">
-                        <h2>Posgrados </h2>
-                      </div>
-                      <section data-aos="fade-up" class="container">
+   
+        </Accordion.Body>
+      </Accordion.Item>
+
+      {detailsSchool?.postgrado1 || detailsSchool?.postgrado2 ? (
+      <Accordion.Item eventKey="1">
+        <Accordion.Header> Posgrados (maestría / doctorado)</Accordion.Header>
+        <Accordion.Body>
+        <section data-aos="fade-up" class="container">
                         <div class="row my-3">
                           {detailsSchool?.postgrado2 ? (
                             <div class="col-md-4 col-xl-3 d-flex justify-content-start align-items-center mb-4 h-100">
@@ -847,18 +988,21 @@ const SchoolDetails = () => {
                           ) : null}
                         </div>
                       </section>
-                    </div>
-                  ) : null}
-                </div>
-              ) : null}
-              <br />
-              {detailsSchool?.beca1 || detailsSchool?.beca2 ? (
-                <div className="info-section">
-                  <div data-aos="fade-up" class="container ">
-                    <h2>Becas </h2>
-                  </div>
-                  <div id="item-becas" class="mt-5">
-                    <section data-aos="fade-up" class="container">
+        </Accordion.Body>
+      </Accordion.Item>
+      ) : null}
+
+
+
+
+{detailsSchool?.beca1 || detailsSchool?.beca2 ? (
+
+  
+  
+  <Accordion.Item eventKey="2">
+        <Accordion.Header>Becas</Accordion.Header>
+        <Accordion.Body>
+        <section data-aos="fade-up" class="container">
                       <div class="row my-3">
                         {detailsSchool?.beca1 ? (
                           <div class="col-md-4 col-xl-3 d-flex justify-content-start align-items-center mb-4 h-100">
@@ -925,9 +1069,563 @@ const SchoolDetails = () => {
                         </div>
                       </div>
                     </section>
+        </Accordion.Body>
+      </Accordion.Item>
+):null}
+
+
+      </Accordion>
+                 
                   </div>
+                 
                 </div>
               ) : null}
+              
+
+              <section id="services" class="services section light-background">
+                <div class="container section-title" data-aos="fade-up">
+                  <h2>Historia a través del tiempo</h2>
+                </div>
+
+                <div class="container" data-aos="fade-up">
+                  <div class="row no-gutters">
+                    <div class="col-12 linea-tiempo ">
+                      <ul class="timeline ms-2">
+                        <li class="timeline-item left">
+                          <div class="timeline-body d-md-flex justify-content-end">
+                            <div class="timeline-meta">
+                              <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                                <span className="number-history">1983 </span>
+                              </div>
+                            </div>
+                            <div class="timeline-content timeline-indicator">
+                              <Card className="card">
+                                <CardMedia
+                                  component="img"
+                                  height="250"
+                                  image={require("../../assets/img/escuelaQueretaro/imagen1.png")}
+                                  alt="Historia"
+                                />
+                                <CardContent>
+                                  <Typography
+                                    variant="body2"
+                                    class="card-title mb-2 text-align-center"
+                                  >
+                                    Primera institución encargada de la
+                                    formación de los maestros{" "}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions disableSpacing>
+                                  <ExpandMore
+                                    expand={expanded[1]}
+                                    onClick={() => handleExpandClick(1)}
+                                    aria-expanded={expanded[1]}
+                                    aria-label="show more"
+                                  >
+                                    <ExpandMoreIcon />
+                                  </ExpandMore>
+                                </CardActions>
+                                <Collapse
+                                  in={expanded[1]}
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  <CardContent>
+                                    <Typography
+                                      sx={{ marginBottom: 2 }}
+                                      class="card-text m-0"
+                                    >
+                                      <ul>
+                                        <li>
+                                          11 de abril: se publica el Acuerdo No.
+                                          101 en el DOF, en el que se ordena la
+                                          desconcentración de los cursos
+                                          intensivos para profesores foráneos
+                                          con el propósito de evitar gastos de
+                                          traslado, hospedaje y alimentación de
+                                          los docentes. Para esto la Escuela
+                                          Normal Superior de México deja de
+                                          tener injerencia en la organización e
+                                          impartición de los cursos intensivos y
+                                          se establecen sedes en Sonora,
+                                          Veracruz, Aguascalientes y Querétaro.
+                                        </li>
+
+                                        <li>
+                                          Nace la Escuela Normal Superior
+                                          Federal para cursos intensivos en
+                                          Querétaro con tres departamentos de
+                                          Control escolar, Titulación e
+                                          Investigación, Área académica y
+                                          Planeación Educativa.
+                                        </li>
+
+                                        <li>
+                                          1 de julio: Se establece la Comisión
+                                          que se encargará de la elaboración del
+                                          proyecto de reestructuración académica
+                                          y admisnistrativa de la ENSM, debido a
+                                          su falta de propuesta propia desde
+                                          1976, por lo que se continuaban usando
+                                          los mismo planes de estudio de la
+                                          reforma realizada en 1959, causando
+                                          que el egresado de la ENSM no reuniera
+                                          el mínimo académico necesario.
+                                        </li>
+
+                                        <li>
+                                          Se modifica el plan de estudios de las
+                                          escuelas normales, y quedan
+                                          conformados en dos líneas generales:
+                                          tronco común y troco diferencial.
+                                        </li>
+
+                                        <li></li>
+                                      </ul>
+                                    </Typography>
+                                  </CardContent>
+                                </Collapse>
+                              </Card>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="timeline-item right">
+                          <div class="timeline-body ">
+                            <div class="timeline-meta">
+                              <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                                <span className="number-history">1984 </span>
+                              </div>
+                            </div>
+                            <div class="timeline-content timeline-indicator">
+                              <Card className="card">
+                                <CardMedia
+                                  component="img"
+                                  height="250"
+                                  image={require("../../assets/img/escuelaQueretaro/imagen2.png")}
+                                  alt="Historia"
+                                />
+                                <CardContent>
+                                  <Typography
+                                    variant="body2"
+                                    class="card-title mb-2 text-align-center"
+                                  >
+                                    Creación del Consejo Nacional de la
+                                    Educación Superior{" "}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions disableSpacing>
+                                  <ExpandMore
+                                    expand={expanded[2]}
+                                    onClick={() => handleExpandClick(2)}
+                                    aria-expanded={expanded[2]}
+                                    aria-label="show more"
+                                  >
+                                    <ExpandMoreIcon />
+                                  </ExpandMore>
+                                </CardActions>
+                                <Collapse
+                                  in={expanded[2]}
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  <CardContent>
+                                    <Typography
+                                      sx={{ marginBottom: 2 }}
+                                      class="card-text m-0"
+                                    >
+                                      <ul>
+                                        <li>
+                                          23 de marzo: La educación normal
+                                          básica queda elevada a nivel
+                                          licenciatura.
+                                        </li>
+
+                                        <li>
+                                          Los alumnos de cursos intensivos de la
+                                          Escuela Normal Superior en Querétaro a
+                                          través de los programas denominados
+                                          Consejo Superior Estudiantil
+                                          Coordinadora, le presentan al Director
+                                          un pliego petitorio en el cual se
+                                          anotan al menos 30 demandas respecto a
+                                          temas económicos, académicos,
+                                          políticos y admisistrativos, demandas
+                                          que años anteriores había planteado la
+                                          Escuela Normal Superior de México, si
+                                          embargo no tuvieron la posibilidad de
+                                          seguir luchando por sus demandas.
+                                        </li>
+
+                                        <li>
+                                          Se establece que las escuelas normales
+                                          debían realizar tanto actividades de
+                                          docencia como de investigación
+                                          educativa y de difusión cultural.
+                                        </li>
+                                      </ul>
+                                    </Typography>
+                                  </CardContent>
+                                </Collapse>
+                              </Card>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="timeline-item left">
+                          <div class="timeline-body d-md-flex justify-content-end">
+                            <div class="timeline-meta">
+                              <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                                <span className="number-history">1923 </span>
+                              </div>
+                            </div>
+                            <div class="timeline-content timeline-indicator">
+                              <Card className="card">
+                                <CardMedia
+                                  component="img"
+                                  height="250"
+                                  image={require("../../assets/img/escuelaQueretaro/imagen3.png")}
+                                  alt="Historia"
+                                />
+                                <CardContent>
+                                  <Typography
+                                    variant="body2"
+                                    class="card-title mb-2 text-align-center"
+                                  >
+                                    Origen y Evolución del IMPES hacia la ENS{" "}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions disableSpacing>
+                                  <ExpandMore
+                                    expand={expanded[3]}
+                                    onClick={() => handleExpandClick(3)}
+                                    aria-expanded={expanded[3]}
+                                    aria-label="show more"
+                                  >
+                                    <ExpandMoreIcon />
+                                  </ExpandMore>
+                                </CardActions>
+                                <Collapse
+                                  in={expanded[3]}
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  <CardContent>
+                                    <Typography
+                                      sx={{ marginBottom: 2 }}
+                                      class="card-text m-0"
+                                    >
+                                      <ul>
+                                        <li>
+                                          La duración de las licenciaturas pasan
+                                          a ser de 4 años en lugar de 6, además
+                                          la modalidad pasa a ser
+                                          semiescolarizada.
+                                        </li>
+                                      </ul>
+                                    </Typography>
+                                  </CardContent>
+                                </Collapse>
+                              </Card>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="timeline-item right">
+                          <div class="timeline-body ">
+                            <div class="timeline-meta">
+                              <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                                <span className="number-history">2000 </span>
+                              </div>
+                            </div>
+                            <div class="timeline-content timeline-indicator">
+                              <Card className="card">
+                                <CardMedia
+                                  component="img"
+                                  height="250"
+                                  image={require("../../assets/img/escuelaQueretaro/imagen4.png")}
+                                  alt="Historia"
+                                />
+                                <CardContent>
+                                  <Typography
+                                    variant="body2"
+                                    class="card-title mb-2 text-align-center"
+                                  >
+                                    La Enseñanza Normal Superior según la Ley
+                                    Orgánica de Educación{" "}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions disableSpacing>
+                                  <ExpandMore
+                                    expand={expanded[4]}
+                                    onClick={() => handleExpandClick(4)}
+                                    aria-expanded={expanded[4]}
+                                    aria-label="show more"
+                                  >
+                                    <ExpandMoreIcon />
+                                  </ExpandMore>
+                                </CardActions>
+                                <Collapse
+                                  in={expanded[4]}
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  <CardContent>
+                                    <Typography
+                                      sx={{ marginBottom: 2 }}
+                                      class="card-text m-0"
+                                    >
+                                      <ul>
+                                        <li>
+                                          Amplía su oferta académica ofreciendo
+                                          estudios a nivel licenciatura y
+                                          maestría, así como cursos, talleres y
+                                          diplomados que coadyuvan a la
+                                          actualización y capacitación del
+                                          docente con el propósito de cumplir a
+                                          cabalidad con lo dispuesto en el
+                                          artículo 3 de la CPEUM.
+                                        </li>
+                                      </ul>
+                                    </Typography>
+                                  </CardContent>
+                                </Collapse>
+                              </Card>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="timeline-item left">
+                          <div class="timeline-body d-md-flex justify-content-end">
+                            <div class="timeline-meta">
+                              <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                                <span className="number-history">2014 </span>
+                              </div>
+                            </div>
+                            <div class="timeline-content timeline-indicator">
+                              <Card className="card">
+                                <CardMedia
+                                  component="img"
+                                  height="250"
+                                  image={require("../../assets/img/historia5.jpg")}
+                                  alt="Historia"
+                                />
+                                <CardContent>
+                                  <Typography
+                                    variant="body2"
+                                    class="card-title mb-2 text-align-center"
+                                  >
+                                    La ENS en la Ley Orgánica de Educación de
+                                    1942{" "}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions disableSpacing>
+                                  <ExpandMore
+                                    expand={expanded[5]}
+                                    onClick={() => handleExpandClick(5)}
+                                    aria-expanded={expanded[5]}
+                                    aria-label="show more"
+                                  >
+                                    <ExpandMoreIcon />
+                                  </ExpandMore>
+                                </CardActions>
+                                <Collapse
+                                  in={expanded[5]}
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  <CardContent>
+                                    <Typography
+                                      sx={{ marginBottom: 2 }}
+                                      class="card-text m-0"
+                                    >
+                                      <ul>
+                                        <li>
+                                          Se comienza la construcción de las
+                                          nuevas instalaciones de la Escuela
+                                          Normal Superior de Querétaro, ubicada
+                                          en Pie de la Cuesta.
+                                        </li>
+                                      </ul>
+                                    </Typography>
+                                  </CardContent>
+                                </Collapse>
+                              </Card>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="timeline-item right">
+                          <div class="timeline-body ">
+                            <div class="timeline-meta">
+                              <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                                <span className="number-history">2015 </span>
+                              </div>
+                            </div>
+                            <div class="timeline-content timeline-indicator">
+                              <Card className="card">
+                                <CardMedia
+                                  component="img"
+                                  height="250"
+                                  image={require("../../assets/img/historia6.jpg")}
+                                  alt="Historia"
+                                />
+                                <CardContent>
+                                  <Typography
+                                    variant="body2"
+                                    class="card-title mb-2 text-align-center"
+                                  >
+                                    Creación de la ENS de Coahuila{" "}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions disableSpacing>
+                                  <ExpandMore
+                                    expand={expanded[6]}
+                                    onClick={() => handleExpandClick(6)}
+                                    aria-expanded={expanded[6]}
+                                    aria-label="show more"
+                                  >
+                                    <ExpandMoreIcon />
+                                  </ExpandMore>
+                                </CardActions>
+                                <Collapse
+                                  in={expanded[6]}
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  <CardContent>
+                                    <Typography
+                                      sx={{ marginBottom: 2 }}
+                                      class="card-text m-0"
+                                    >
+                                      <ul>
+                                        <li>
+                                          Se abre la modalidad presencial.
+                                        </li>
+
+                                        <li>
+                                          La ENSQ de incorpora a la comisión de
+                                          Educación de la Coparmex colabornado
+                                          en actividades interuniversitarias .
+                                        </li>
+
+                                        <li>
+                                          a ENSQ participó en la primera Sesión
+                                          Plenaria de la Comisión Estatal para
+                                          la Planeación de Educación Superior
+                                          (COEPES).
+                                        </li>
+
+                                        <li>
+                                          Se entregan las instalaciones de la
+                                          ENSQ en Pie de la Cuesta.
+                                        </li>
+
+                                        <li>
+                                          Agosto: se da inicio a la oferta
+                                          educativa de la Licenciatura en
+                                          Educación Secundaria en modalidad
+                                          escolarizada con una duración de 4
+                                          años, con las especialidades de
+                                          Matemáticas y Español.
+                                        </li>
+
+                                        <li>
+                                          Se cierra la oferta educativa en
+                                          modalidad mixta debido a que ya no
+                                          existía una población de profesores
+                                          que no contaran con alguna
+                                          licenciatura, y esta modalidad estaba
+                                          durugida a docentes frente a grupo que
+                                          no contaban con licenciatura.
+                                        </li>
+                                      </ul>
+                                    </Typography>
+                                  </CardContent>
+                                </Collapse>
+                              </Card>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="timeline-item left">
+                          <div class="timeline-body d-md-flex justify-content-end">
+                            <div class="timeline-meta">
+                              <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
+                                <span className="number-history">2016 </span>
+                              </div>
+                            </div>
+                            <div class="timeline-content timeline-indicator">
+                              <Card className="card">
+                                <CardMedia
+                                  component="img"
+                                  height="250"
+                                  image={require("../../assets/img/historia7.jpg")}
+                                  alt="Historia"
+                                />
+                                <CardContent>
+                                  <Typography
+                                    variant="body2"
+                                    class="card-title mb-2 text-align-center"
+                                  >
+                                    Fundación de escuelas{" "}
+                                  </Typography>
+                                </CardContent>
+                                <CardActions disableSpacing>
+                                  <ExpandMore
+                                    expand={expanded[7]}
+                                    onClick={() => handleExpandClick(7)}
+                                    aria-expanded={expanded[7]}
+                                    aria-label="show more"
+                                  >
+                                    <ExpandMoreIcon />
+                                  </ExpandMore>
+                                </CardActions>
+                                <Collapse
+                                  in={expanded[7]}
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  <CardContent>
+                                    <Typography
+                                      sx={{ marginBottom: 2 }}
+                                      class="card-text m-0"
+                                    >
+                                      <ul>
+                                        <li>
+                                          Se implementa la Licenciatura en
+                                          Educación secundaria en modalidad
+                                          escolarizada.
+                                        </li>
+                                        <li>
+                                          Egresa la primera generación de
+                                          modalidad presencial.
+                                        </li>
+
+                                        <li>
+                                          La ESNQ y el Centro Educativo y
+                                          Cultural del Estado de Querétaro
+                                          "Manuel Gómez Morín" (CECEQ),
+                                          implementaron el programa piloto
+                                          "Apoyo a Tareas de Biblioteca", a
+                                          partir de la necesidad de atender
+                                          algunas recomendaciones
+                                          internacionales sobre el uso de
+                                          bibliotecas públicas en la
+                                          construcción de conocimiento.
+                                        </li>
+
+                                        <li>
+                                          Se actualiza la Maestría en Educación
+                                        </li>
+                                      </ul>
+                                    </Typography>
+                                  </CardContent>
+                                </Collapse>
+                              </Card>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+             
               {(detailsSchool.alumnos && detailsSchool.alumnos.length > 0) ||
               (detailsSchool.alumnas && detailsSchool.alumnas.length > 0) ||
               (detailsSchool.egresados && detailsSchool.egresados.length > 0) ||
@@ -950,7 +1648,7 @@ const SchoolDetails = () => {
                               aria-expanded="true"
                               aria-controls="collapseAlumnos"
                             >
-                              Histórico de Alumnos
+                              Alumnos matriculados: Modalidad escolarizada.
                             </button>
                           </h2>
                           <div
@@ -963,14 +1661,10 @@ const SchoolDetails = () => {
                               <section class="container">
                                 <div class="row mb-3">
                                   <div class="col d-flex align-items-center">
-                                    <h4>Alumnos matriculados</h4>
+                                    <h4>Alumnos matriculados: Modalidad escolarizada.</h4>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <div class="col d-flex align-items-center">
-                                    <h6>Modalidad escolarizada</h6>
-                                  </div>
-                                </div>
+                            
                                 {detailsSchool && detailsSchool?.alumnos && (
                                   <div className="cardalumn-container">
                                     {detailsSchool.alumnos &&
@@ -1065,7 +1759,6 @@ const SchoolDetails = () => {
                           </div>
                         </div>
                       </div>
-
 
                       <div id="item-numero-alumnos-matriculados">
                         <div class="accordion-item">
@@ -1078,7 +1771,7 @@ const SchoolDetails = () => {
                               aria-expanded="true"
                               aria-controls="collapseAlumnos2"
                             >
-                              Matricula, egresados y titulados
+                              Alumnos matriculados: Modalidad Mixta.
                             </button>
                           </h2>
                           <div
@@ -1091,14 +1784,10 @@ const SchoolDetails = () => {
                               <section class="container">
                                 <div class="row mb-3">
                                   <div class="col d-flex align-items-center">
-                                    <h4>Matricula, egresados y titulados</h4>
+                                    <h4>Alumnos matriculados: Modalidad Mixta.</h4>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <div class="col d-flex align-items-center">
-                                    <h6>Modalidad mixta</h6>
-                                  </div>
-                                </div>
+                          
                                 {detailsSchool && detailsSchool?.alumnos && (
                                   <div className="cardalumn-container">
                                     {detailsSchool.alumnos &&
@@ -1194,8 +1883,6 @@ const SchoolDetails = () => {
                         </div>
                       </div>
 
-
-                      
                       {detailsSchool?.egresados || detailsSchool?.egresadas ? (
                         <div id="item-numero-maestros-egresados-mixta">
                           <div class="accordion-item">
@@ -1211,7 +1898,7 @@ const SchoolDetails = () => {
                                 aria-expanded="false"
                                 aria-controls="collapseMaestrosMixta"
                               >
-                                Maestros Egresados (Modalidad Mixta)
+                               Alumnos egresados y titulados: Modalidad escolarizada
                               </button>
                             </h2>
                             <div
@@ -1224,14 +1911,10 @@ const SchoolDetails = () => {
                                 <section class="container">
                                   <div class="row my-3">
                                     <div class="col d-flex align-items-center">
-                                      <h4>Egresados y titulados</h4>
+                                      <h4>Alumnos egresados y titulados: Modalidad escolarizada</h4>
                                     </div>
                                   </div>
-                                  <div class="row my-3">
-                                    <div class="col d-flex align-items-center">
-                                      <h6>Modalidad mixta</h6>
-                                    </div>
-                                  </div>
+                            
                                   <div className="cardalumn-container">
                                     {detailsSchool?.egresados &&
                                       detailsSchool.egresados.map(
@@ -1330,89 +2013,72 @@ const SchoolDetails = () => {
                       <hr />
                     </div>
                   </div>
-                  
                 </div>
               ) : null}
 
+          {/*     <div
+                data-aos="fade-up"
+                data-aos-duration="3000"
+                class="container"
+              >
+                <h2 style={{ textAlign: "center" }}>NOMBRAMIENTOS</h2>
+              </div>
+              <div className="table-container">
+                <table className="custom-table">
+                  <thead>
+                    <tr>
+                      <th>N°</th>
+                      <th>NOMBRE</th>
+                      <th>NOMBRAMIENTO </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Dato 1</td>
+                      <td>Dato 2</td>
+                      <td>Dato 2</td>
+                    </tr>
+                    <tr>
+                      <td>Dato 3</td>
+                      <td>Dato 4</td>
+                      <td>Dato 4</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> */}
 
-
-
-
-
-
-<div
-                      data-aos="fade-up"
-                      data-aos-duration="3000"
-                      class="container"
-                    >
-                      <h2 style={{textAlign: "center"}}>NOMBRAMIENTOS</h2>
-                    </div>
-<div className="table-container">
-      <table className="custom-table">
-        <thead>
-          <tr>
-            <th>N°</th>
-            <th>NOMBRE</th>
-            <th>NOMBRAMIENTO </th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Dato 1</td>
-            <td>Dato 2</td>
-            <td>Dato 2</td>
-
-          </tr>
-          <tr>
-            <td>Dato 3</td>
-            <td>Dato 4</td>
-            <td>Dato 4</td>
-
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-
-
-
-<div
-                      data-aos="fade-up"
-                      data-aos-duration="3000"
-                      class="container"
-                    >
-                      <h2 style={{textAlign: "center"}}>No. DE DOCENTES CON ESPECIALIDAD</h2>
-                    </div>
-<div className="table-container">
-      <table className="custom-table">
-        <thead>
-          <tr>
-            <th>N°</th>
-            <th>OFERTA</th>
-            <th>ESPECIALIDAD</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Dato 1</td>
-            <td>Dato 2</td>
-            <td>Dato 2</td>
-
-          </tr>
-          <tr>
-            <td>Dato 3</td>
-            <td>Dato 4</td>
-            <td>Dato 4</td>
-
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-              
+            {/*   <div
+                data-aos="fade-up"
+                data-aos-duration="3000"
+                class="container"
+              >
+                <h2 style={{ textAlign: "center" }}>
+                  No. DE DOCENTES CON ESPECIALIDAD
+                </h2>
+              </div>
+              <div className="table-container">
+                <table className="custom-table">
+                  <thead>
+                    <tr>
+                      <th>N°</th>
+                      <th>OFERTA</th>
+                      <th>ESPECIALIDAD</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Dato 1</td>
+                      <td>Dato 2</td>
+                      <td>Dato 2</td>
+                    </tr>
+                    <tr>
+                      <td>Dato 3</td>
+                      <td>Dato 4</td>
+                      <td>Dato 4</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> */}
 
               {(detailsSchool.profesoresMaestrias &&
                 detailsSchool.profesoresMaestrias.length > 0) ||
@@ -1424,7 +2090,7 @@ const SchoolDetails = () => {
                   <div data-aos="fade-up" class="container">
                     <h2>Profesorado </h2>
                   </div>
-                  
+
                   <div class="accordion px-3" id="accordionProfesores">
                     <div id="item-edades-profesorado-actual">
                       <div class="accordion-item">
@@ -1437,7 +2103,7 @@ const SchoolDetails = () => {
                             aria-expanded="true"
                             aria-controls="colapsarActual"
                           >
-                            Actual
+                            Profesorado Actual
                           </button>
                         </h2>
                         <div
@@ -1492,311 +2158,131 @@ const SchoolDetails = () => {
                       </div>
                     </div>
 
-                    {detailsSchool.profesoresMaestrias &&
+
+                    <Accordion>
+      <Accordion.Item eventKey="4">
+        <Accordion.Header>Edades del profesorado</Accordion.Header>
+        <Accordion.Body>
+        <div className="tabla-container">
+      <p className="tabla-periodo">PERIODO: 2023-2024</p>
+      <table className="tabla">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Cecilia Alejandra De Jesús Martínez</td>
+            <td>27</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>María del Mar Estrada Rebull</td>
+            <td>38</td>
+          </tr>
+          <tr className="no-border">
+            <td>3</td>
+            <td>Estefanny Delgado Rivera</td>
+            <td>32</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+        </Accordion.Body>
+      </Accordion.Item>
+
+
+
+
+      {detailsSchool.profesoresMaestrias &&
                     detailsSchool.profesoresMaestrias.length > 0 ? (
-                      <div id="item-edades-profesorado-maestria">
-                        <div className="accordion-item">
-                          <h2
-                            className="accordion-header"
-                            id="profesoradoMaestria"
-                          >
-                            <button
-                              className="accordion-button collapsed"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#colapsarMaestria"
-                              aria-expanded="false"
-                              aria-controls="colapsarMaestria"
-                            >
-                              Con Maestría
-                            </button>
-                          </h2>
-                          <div
-                            id="colapsarMaestria"
-                            className="accordion-collapse collapse"
-                            aria-labelledby="profesoradoMaestria"
-                            data-bs-parent="#accordionProfesores"
-                          >
-                            <div className="accordion-body">
-                              <section className="container">
-                                <h4 className="mb-4">
-                                  Lista de profesores con maestría
-                                </h4>
-                                {detailsSchool.profesoresMaestrias.map(
-                                  (data, index) => (
-                                    <div
-                                      className="row my-3 justify-content-center"
-                                      key={index}
-                                    >
-                                      <div className="col-md-6 d-flex justify-content-center align-items-center">
-                                        <div className="card mb-4">
-                                          <div className="card-header">
-                                            <h2 className="card-title">
-                                              Lista de nombres y edades año:{" "}
-                                              {data.fechaHastaMaestria}
-                                            </h2>
-                                          </div>
-                                          <div className="card-body">
-                                            <ul className="list-group">
-                                              {data.textProfeMaestria &&
-                                              data.textProfeMaestria.length > 0
-                                                ? data.textProfeMaestria.map(
-                                                    (row, rowIndex) => (
-                                                      <li
-                                                        key={rowIndex}
-                                                        className="list-group-item"
-                                                      >
-                                                        {rowIndex + 1}. {row}
-                                                      </li>
-                                                    )
-                                                  )
-                                                : null}
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )
-                                )}
-                              </section>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+      <Accordion.Item eventKey="5">
+        <Accordion.Header>Con maestría </Accordion.Header>
+        <Accordion.Body>
+        <div className="tabla-container">
+      <p className="tabla-periodo">PERIODO: 2023-2024</p>
+      <table className="tabla">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Cecilia Alejandra De Jesús Martínez</td>
+            <td>27</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>María del Mar Estrada Rebull</td>
+            <td>38</td>
+          </tr>
+          <tr className="no-border">
+            <td>3</td>
+            <td>Estefanny Delgado Rivera</td>
+            <td>32</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+        </Accordion.Body>
+      </Accordion.Item>
                     ) : null}
 
-                    {detailsSchool.profesoresConDoctorados &&
+
+{detailsSchool.profesoresConDoctorados &&
                     detailsSchool.profesoresConDoctorados.length > 0 ? (
-                      <div id="item-edades-profesorado-doctorado" class="mb-5">
-                        <div class="accordion-item">
-                          <h2
-                            class="accordion-header"
-                            id="profesoradoDoctorado"
-                          >
-                            <button
-                              class="accordion-button collapsed"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#colapsarDoctorado"
-                              aria-expanded="false"
-                              aria-controls="colapsarDoctorado"
-                            >
-                              Con Doctorado
-                            </button>
-                          </h2>
-                          <div
-                            id="colapsarDoctorado"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="profesoradoDoctorado"
-                            data-bs-parent="#accordionProfesores"
-                          >
-                            <div class="accordion-body">
-                              <section class="container">
-                                <h4 class="mb-4">
-                                  Lista de profesores con doctorado
-                                </h4>
-                                {detailsSchool.profesoresConDoctorados &&
-                                  detailsSchool.profesoresConDoctorados.map(
-                                    (data, index) => (
-                                      <div class="row my-3 justify-content-center">
-                                        <div class="col-md-7 d-flex justify-content-center align-items-center">
-                                          <div
-                                            id="simple-list-item-3"
-                                            class="card text-center w-100"
-                                          >
-                                            <div class="card-header fs-3 fw-bold">
-                                              Lista de nombres y edades del
-                                              ciclo {data.fechaDesdeDoctorado} -{" "}
-                                              {data.fechaHastaDoctorado}
-                                            </div>
-                                            <div class="card-body m-0 p-0">
-                                              <ul class="list-group">
-                                                {data.textProfeDoctorado &&
-                                                data.textProfeDoctorado.length >
-                                                  0
-                                                  ? data.textProfeDoctorado.map(
-                                                      (row, rowIndex) => (
-                                                        <li
-                                                          key={rowIndex}
-                                                          className="list-group-item"
-                                                        >
-                                                          {rowIndex + 1}. {row}
-                                                        </li>
-                                                      )
-                                                    )
-                                                  : null}
-                                              </ul>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    )
-                                  )}
-                              </section>
-                            </div>
-                          </div>
-                        </div>
-                        {detailsSchool.profesoresMaestrias &&
-                    detailsSchool.profesoresMaestrias.length > 0 ? (
-                         <div
-                            id="collapseAlumnos"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingAlumnos"
-                            data-bs-parent="#accordionAlumnos"
-                          >
-                            <div class="accordion-body">
-                              <section class="container">
-                                <div class="row mb-3">
-                                  <div class="col d-flex align-items-center">
-                                    <h4>Alumnos matriculados</h4>
-                                  </div>
-                                </div>
-                                <div class="row mb-3">
-                                  <div class="col d-flex align-items-center">
-                                    <h6>Modalidad escolarizada</h6>
-                                  </div>
-                                </div>
-                                {detailsSchool && detailsSchool?.alumnos && (
-                                  <div className="cardalumn-container">
-                                    {detailsSchool.alumnos &&
-                                      detailsSchool.alumnos.map(
-                                        (data, index) => (
-                                          <div
-                                            className="row justify-content-center"
-                                            key={index}
-                                          >
-                                            <div className="col-md-6 col-lg-3 my-3">
-                                              <div className="alumn-card text-center shadow-sm">
-                                                <div className="card-body">
-                                                  <p className="card-text mb-0">
-                                                    Ciclo escolar{" "}
-                                                    {(data.fechaDesdeAlumnos &&
-                                                      data.fechaDesdeAlumnos.split(
-                                                        "-"
-                                                      )[0]) ||
-                                                      ""}{" "}
-                                                    -{" "}
-                                                    {(data.fechaDesdeAlumnos &&
-                                                      data.fechaDesdeAlumnos.split(
-                                                        "-"
-                                                      )[0]) ||
-                                                      ""}
-                                                  </p>
-                                                  <hr />
-                                                  <p>
-                                                    <b className="fs-2 text-primary mb-2">
-                                                      {data.cantidadAlumnos}
-                                                      <br />
-                                                      <span className="fs-4 fw-medium">
-                                                        Alumnos
-                                                      </span>
-                                                    </b>
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        )
-                                      )}
-                                  </div>
-                                )}
-
-                                {detailsSchool?.alumnas && (
-                                  <div className="cardalumn-container">
-                                    {detailsSchool?.alumnas &&
-                                      detailsSchool.alumnas.map(
-                                        (data, index) => (
-                                          <div
-                                            className="row justify-content-center"
-                                            key={index}
-                                          >
-                                            <div className="col-md-6 col-lg-3 my-3">
-                                              <div className="alumn-card text-center shadow-sm">
-                                                <div className="card-body">
-                                                  <p className="card-text mb-0">
-                                                    Ciclo escolar{" "}
-                                                    {(data.fechaDesdeAlumnas &&
-                                                      data.fechaDesdeAlumnas.split(
-                                                        "-"
-                                                      )[0]) ||
-                                                      ""}{" "}
-                                                    -{" "}
-                                                    {(data.fechaDesdeAlumnas &&
-                                                      data.fechaDesdeAlumnas.split(
-                                                        "-"
-                                                      )[0]) ||
-                                                      ""}
-                                                  </p>
-                                                  <hr />
-                                                  <p>
-                                                    <b className="fs-2 text-primary mb-2">
-                                                      {data.cantidadAlumnas}
-                                                      <br />
-                                                      <span className="fs-4 fw-medium">
-                                                        Alumnas
-                                                      </span>
-                                                    </b>
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        )
-                                      )}
-                                  </div>
-                                )}
-                              </section>
-                            </div>
-                          </div>
+      <Accordion.Item eventKey="6">
+        <Accordion.Header>Con doctorado </Accordion.Header>
+        <Accordion.Body>
+        <div className="tabla-container">
+      <p className="tabla-periodo">PERIODO: 2023-2024</p>
+      <table className="tabla">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Cecilia Alejandra De Jesús Martínez</td>
+            <td>27</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>María del Mar Estrada Rebull</td>
+            <td>38</td>
+          </tr>
+          <tr className="no-border">
+            <td>3</td>
+            <td>Estefanny Delgado Rivera</td>
+            <td>32</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+        </Accordion.Body>
+      </Accordion.Item>
                     ) : null}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-                    
-                      <div id="item-numero-alumnos-matriculados">
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingMaestro3">
-                            <button
-                              class="accordion-button collapsed"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#collapseMaestro3"
-                              aria-expanded="true"
-                              aria-controls="collapseMaestro3"
-                            >
-                          Matricula docente
-                            </button>
-                          </h2>
-                          <div
-                            id="collapseMaestro3"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingAlumnos"
-                            data-bs-parent="#accordionAlumnos"
-                          >
-                            <div class="accordion-body">
-                              <section class="container">
-                                <div class="row mb-3">
-                                  <div class="col d-flex align-items-center">
-                                    <h4>Docentes matriculados</h4>
-                                  </div>
-                                </div>
-                                <div class="row mb-3">
-                                  <div class="col d-flex align-items-center">
-                                    <h6>Modalidad mixta</h6>
-                                  </div>
-                                </div>
-                                {detailsSchool && detailsSchool?.alumnos && (
+      <Accordion.Item eventKey="7">
+        <Accordion.Header> Matricula docente</Accordion.Header>
+        <Accordion.Body>
+  
                                   <div className="cardalumn-container">
                                     {detailsSchool.alumnos &&
                                       detailsSchool.alumnos.map(
@@ -1839,35 +2325,69 @@ const SchoolDetails = () => {
                                         )
                                       )}
                                   </div>
-                                )}
 
-                              </section>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-             
-
-
-               
-
-                      <hr />
-                      </div>
-
-                      
-                    ) : null}
+        </Accordion.Body>
+      </Accordion.Item>
 
 
 
-                    
+      <Accordion.Item eventKey="8">
+        <Accordion.Header> Matrículas docentes con especialidad</Accordion.Header>
+        <Accordion.Body>
+        <div className="cardalumn-container">
+                                    {detailsSchool.alumnos &&
+                                      detailsSchool.alumnos.map(
+                                        (data, index) => (
+                                          <div
+                                            className="row justify-content-center"
+                                            key={index}
+                                          >
+                                            <div className="col-md-6 col-lg-3 my-3">
+                                              <div className="alumn-card text-center shadow-sm">
+                                                <div className="card-body">
+                                                  <p className="card-text mb-0">
+                                                    Ciclo escolar{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}{" "}
+                                                    -{" "}
+                                                    {(data.fechaDesdeAlumnos &&
+                                                      data.fechaDesdeAlumnos.split(
+                                                        "-"
+                                                      )[0]) ||
+                                                      ""}
+                                                  </p>
+                                                  <hr />
+                                                  <p>
+                                                    <b className="fs-2 text-primary mb-2">
+                                                      {data.cantidadAlumnos}
+                                                      <br />
+                                                      <span className="fs-4 fw-medium">
+                                                        Docentes
+                                                      </span>
+                                                    </b>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
+                                  </div>
+
+        </Accordion.Body>
+      </Accordion.Item>
+     
+    </Accordion>
+
+
+                 
+                 
                   </div>
-              
-                  
                 </div>
               ) : null}
-
 
               {(detailsSchool.doctoresCandidatos &&
                 detailsSchool.doctoresCandidatos.length > 0) ||
@@ -1897,7 +2417,7 @@ const SchoolDetails = () => {
                               aria-expanded="true"
                               aria-controls="collapseDoctoresJubilados"
                             >
-                              Doctores con SNI jubilados
+                              Doctores con jubilados
                             </button>
                           </h2>
                           <div
@@ -1908,37 +2428,35 @@ const SchoolDetails = () => {
                           >
                             <div class="accordion-body">
                               <section class="container">
-                                <h4 class="mb-4">
-                                  Lista de doctores jubilados
-                                </h4>
-                                <div class="row my-3 justify-content-center">
-                                  <div class="col-md-5 d-flex justify-content-center align-items-center">
-                                    <div
-                                      id="simple-list-item-3"
-                                      class="card text-center w-100"
-                                    >
-                                      <div class="card-header fs-3 fw-bold">
-                                        Lista de nombres del ciclo historico{" "}
-                                      </div>
-
-                                      {detailsSchool?.doctoresJubilados &&
-                                        detailsSchool?.doctoresJubilados.map(
-                                          (data, index) => (
-                                            <div class="card-body m-0 p-0">
-                                              <ol class="list-group">
-                                                <li
-                                                  key={index}
-                                                  class="list-group-item"
-                                                >
-                                                  {index + 1}. {data.doctor}
-                                                </li>
-                                              </ol>
-                                            </div>
-                                          )
-                                        )}
-                                    </div>
-                                  </div>
-                                </div>
+                              <div className="doctor-tabla-container">
+      <p className="doctor-tabla-periodo">Histórico</p>
+      <table className="doctor-tabla">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nombre</th>
+            <th>Nivel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Cecilia Alejandra De Jesús Martínez</td>
+            <td>Jubilado</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>María del Mar Estrada Rebull</td>
+            <td>Jubilado</td>
+          </tr>
+          <tr className="no-border">
+            <td>3</td>
+            <td>Estefanny Delgado Rivera</td>
+            <td>Jubilado</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
                               </section>
                             </div>
                           </div>
@@ -1958,7 +2476,7 @@ const SchoolDetails = () => {
                               aria-expanded="false"
                               aria-controls="collapseDoctoresCandidatos"
                             >
-                              Doctores con SNI candidatos
+                              Doctores con candidatos
                             </button>
                           </h2>
                           <div
@@ -1969,34 +2487,36 @@ const SchoolDetails = () => {
                           >
                             <div class="accordion-body">
                               <section class="container">
-                                <h4 class="mb-4">
-                                  Lista de doctores candidatos
-                                </h4>
-                                <div class="row my-3 justify-content-center">
-                                  <div class="col-md-5 d-flex justify-content-center align-items-center">
-                                    <div
-                                      id="simple-list-item-3"
-                                      class="card text-center w-100"
-                                    >
-                                      <div class="card-header fs-3 fw-bold">
-                                        Lista de nombres del ciclo actual{" "}
-                                      </div>
-                                      {detailsSchool?.doctoresCandidatos &&
-                                        detailsSchool?.doctoresCandidatos.map(
-                                          (data, index) => (
-                                            <div class="card-body m-0 p-0">
-                                              <ul class="list-group">
-                                                <li class="list-group-item">
-                                                  {index + 1}.{" "}
-                                                  {data.doctorCandidato}
-                                                </li>
-                                              </ul>
-                                            </div>
-                                          )
-                                        )}
-                                    </div>
-                                  </div>
-                                </div>
+                              <div className="doctor-tabla-container">
+      <p className="doctor-tabla-periodo">Actual</p>
+      <table className="doctor-tabla">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nombre</th>
+            <th>Nivel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Cecilia Alejandra De Jesús Martínez</td>
+            <td>Candidatos</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>María del Mar Estrada Rebull</td>
+            <td>Jubilado</td>
+          </tr>
+          <tr className="no-border">
+            <td>3</td>
+            <td>Estefanny Delgado Rivera</td>
+            <td>Candidatos</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+            
                               </section>
                             </div>
                           </div>
@@ -2007,550 +2527,256 @@ const SchoolDetails = () => {
                 </div>
               ) : null}
 
+            
 
 
 
+<br />
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section id="services" class="services section light-background">
-          <div class="container section-title" data-aos="fade-up">
-            <h2>Historia a través del tiempo</h2>
-          </div>
-
-          <div class="container" data-aos="fade-up">
-            <div class="row no-gutters">
-              <div class="col-12 linea-tiempo ">
-                <ul class="timeline ms-2">
-                  <li class="timeline-item left">
-                    <div class="timeline-body d-md-flex justify-content-end">
-                      <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
-                          <span className="number-history">1983 </span>
-                        </div>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                        <Card className="card">
-                          <CardMedia
-                            component="img"
-                            height="250"
-                            image={require("../../assets/img/escuelaQueretaro/imagen1.png")}
-                            alt="Historia"
-                          />
-                          <CardContent>
-                            <Typography
-                              variant="body2"
-                              class="card-title mb-2 text-align-center"
-                            >
-                              Primera institución encargada de la formación de
-                              los maestros{" "}
-                            </Typography>
-                          </CardContent>
-                          <CardActions disableSpacing>
-                            <ExpandMore
-                              expand={expanded[1]}
-                              onClick={() => handleExpandClick(1)}
-
-                              aria-expanded={expanded[1]}
-                              aria-label="show more"
-                            >
-                              <ExpandMoreIcon />
-                            </ExpandMore>
-                          </CardActions>
-                          <Collapse in={expanded[1]} timeout="auto" unmountOnExit>
-                            <CardContent>
-                              <Typography
-                                sx={{ marginBottom: 2 }}
-                                class="card-text m-0"
-                              >
-                                <ul>
-                                  <li>
-                                  11 de abril: se publica el Acuerdo No. 101 en el DOF, en el que se ordena la desconcentración de los cursos intensivos para profesores foráneos con el propósito de evitar gastos de traslado, hospedaje y alimentación de los docentes. Para esto la Escuela Normal Superior de México deja de tener injerencia en la organización e impartición de los cursos intensivos y se establecen sedes en Sonora, Veracruz, Aguascalientes y Querétaro.
-                                  </li>
-
-                                  <li>
-                                  Nace la Escuela Normal Superior Federal para cursos intensivos en Querétaro con tres departamentos de Control escolar, Titulación e Investigación, Área académica y Planeación Educativa.
-                                  </li>
-
-                                  <li>
-                                  1 de julio: Se establece la Comisión que se encargará de la elaboración del proyecto de reestructuración académica y admisnistrativa de la ENSM, debido a su falta de propuesta propia desde 1976, por lo que se continuaban usando los mismo planes de estudio de la reforma realizada en 1959, causando que el egresado de la ENSM no reuniera el mínimo académico necesario.
-                                  </li>
-
-                                  <li>
-                                  Se modifica el plan de estudios de las escuelas normales, y quedan conformados en dos líneas generales: tronco común y troco diferencial.
-                                  </li>
-
-                                  <li>
-
-                                  </li>
-                                </ul>
-                              
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="timeline-item right">
-                    <div class="timeline-body ">
-                      <div class="timeline-meta">
-                      <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
-
-                          <span className="number-history">1984 </span>
-                        </div>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                      <Card className="card">
-                          <CardMedia
-                            component="img"
-                            height="250"
-                            image={require("../../assets/img/escuelaQueretaro/imagen2.png")}
-
-                            alt="Historia"
-                          />
-                          <CardContent>
-                            <Typography
-                              variant="body2"
-                              class="card-title mb-2 text-align-center"
-                            >
-                               Creación del Consejo Nacional de la Educación
-                               Superior{" "}
-                            </Typography>
-                          </CardContent>
-                          <CardActions disableSpacing>
-                            <ExpandMore
-                              expand={expanded[2]}
-                              onClick={() => handleExpandClick(2)}
-                              aria-expanded={expanded[2]}
-                              aria-label="show more"
-                            >
-                              <ExpandMoreIcon />
-                            </ExpandMore>
-                          </CardActions>
-                          <Collapse in={expanded[2]} timeout="auto" unmountOnExit>
-                            <CardContent>
-                              <Typography
-                                sx={{ marginBottom: 2 }}
-                                class="card-text m-0"
-                              >
-                            <ul>
-                            <li>
-                            23 de marzo: La educación normal básica queda elevada a nivel licenciatura.
-                            </li>
-
-                            <li>
-                            Los alumnos de cursos intensivos de la Escuela Normal Superior en Querétaro a través de los programas denominados Consejo Superior Estudiantil Coordinadora, le presentan al Director un pliego petitorio en el cual se anotan al menos 30 demandas respecto a temas económicos, académicos, políticos y admisistrativos, demandas que años anteriores había planteado la Escuela Normal Superior de México, si embargo no tuvieron la posibilidad de seguir luchando por sus demandas.
-                            </li>
-
-                            <li>
-                            Se establece que las escuelas normales debían realizar tanto actividades de docencia como de investigación educativa y de difusión cultural.
-                            </li>
-                          </ul>
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                   
-                      </div>
-                    </div>
-                  </li>
-                  <li class="timeline-item left">
-                    <div class="timeline-body d-md-flex justify-content-end">
-                      <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
-
-                          <span className="number-history">1923 </span>
-                        </div>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                   
-
-                        <Card className="card">
-                          <CardMedia
-                            component="img"
-                            height="250"
-                            image={require("../../assets/img/escuelaQueretaro/imagen3.png")}
-
-                            alt="Historia"
-                          />
-                          <CardContent>
-                            <Typography
-                              variant="body2"
-                              class="card-title mb-2 text-align-center"
-                            >
-                            Origen y Evolución del IMPES hacia la ENS{" "}
-                            </Typography>
-                          </CardContent>
-                          <CardActions disableSpacing>
-                            <ExpandMore
-                              expand={expanded[3]}
-                              onClick={() => handleExpandClick(3)}
-                              aria-expanded={expanded[3]}
-                              aria-label="show more"
-                            >
-                              <ExpandMoreIcon />
-                            </ExpandMore>
-                          </CardActions>
-                          <Collapse in={expanded[3]} timeout="auto" unmountOnExit>
-                            <CardContent>
-                              <Typography
-                                sx={{ marginBottom: 2 }}
-                                class="card-text m-0"
-                              >
-<ul>
-  <li>
-  La duración de las licenciaturas pasan a ser de 4 años en lugar de 6, además la modalidad pasa a ser semiescolarizada.
-  </li>
-</ul>
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="timeline-item right">
-                    <div class="timeline-body ">
-                      <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
-
-                          <span className="number-history">2000 </span>
-                        </div>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                    
-
-                        <Card className="card">
-                          <CardMedia
-                            component="img"
-                            height="250"
-                            image={require("../../assets/img/escuelaQueretaro/imagen4.png")}
-
-                            alt="Historia"
-                          />
-                          <CardContent>
-                            <Typography
-                              variant="body2"
-                              class="card-title mb-2 text-align-center"
-                            >
-                             La Enseñanza Normal Superior según la Ley Orgánica
-                             de Educación{" "}
-                            </Typography>
-                          </CardContent>
-                          <CardActions disableSpacing>
-                            <ExpandMore
-                              expand={expanded[4]}
-                              onClick={() => handleExpandClick(4)}
-                              aria-expanded={expanded[4]}
-                              aria-label="show more"
-                            >
-                              <ExpandMoreIcon />
-                            </ExpandMore>
-                          </CardActions>
-                          <Collapse in={expanded[4]} timeout="auto" unmountOnExit>
-                            <CardContent>
-                              <Typography
-                                sx={{ marginBottom: 2 }}
-                                class="card-text m-0"
-                              >
-                    <ul>
-                            <li>
-                            Amplía su oferta académica ofreciendo estudios a nivel licenciatura y maestría, así como cursos, talleres y diplomados que coadyuvan a la actualización y capacitación del docente con el propósito de cumplir a cabalidad con lo dispuesto en el artículo 3 de la CPEUM.
-                            </li>
-                          </ul>
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="timeline-item left">
-                    <div class="timeline-body d-md-flex justify-content-end">
-                      <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
-
-                          <span className="number-history">2014 </span>
-                        </div>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                        
-                        <Card className="card">
-                          <CardMedia
-                            component="img"
-                            height="250"
-                            image={require("../../assets/img/historia5.jpg")}
-                            alt="Historia"
-                          />
-                          <CardContent>
-                            <Typography
-                              variant="body2"
-                              class="card-title mb-2 text-align-center"
-                            >
-                           La ENS en la Ley Orgánica de Educación de 1942{" "}
-                            </Typography>
-                          </CardContent>
-                          <CardActions disableSpacing>
-                            <ExpandMore
-                              expand={expanded[5]}
-                              onClick={() => handleExpandClick(5)}
-                              aria-expanded={expanded[5]}
-                              aria-label="show more"
-                            >
-                              <ExpandMoreIcon />
-                            </ExpandMore>
-                          </CardActions>
-                          <Collapse in={expanded[5]} timeout="auto" unmountOnExit>
-                            <CardContent>
-                              <Typography
-                                sx={{ marginBottom: 2 }}
-                                class="card-text m-0"
-                              >
-                    <ul>
-                      <li>
-                      Se comienza la construcción de las nuevas instalaciones de la Escuela Normal Superior de Querétaro, ubicada en Pie de la Cuesta.
-                      </li>
-                
-                    </ul>
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="timeline-item right">
-                    <div class="timeline-body ">
-                      <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
-
-                          <span className="number-history">2015 </span>
-                        </div>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                        
-
-                        <Card className="card">
-                          <CardMedia
-                            component="img"
-                            height="250"
-                            image={require("../../assets/img/historia6.jpg")}
-                            alt="Historia"
-                          />
-                          <CardContent>
-                            <Typography
-                              variant="body2"
-                              class="card-title mb-2 text-align-center"
-                            >
-                            Creación de la ENS de Coahuila{" "}
-                            </Typography>
-                          </CardContent>
-                          <CardActions disableSpacing>
-                            <ExpandMore
-                              expand={expanded[6]}
-                              onClick={() => handleExpandClick(6)}
-                              aria-expanded={expanded[6]}
-                              aria-label="show more"
-                            >
-                              <ExpandMoreIcon />
-                            </ExpandMore>
-                          </CardActions>
-                          <Collapse in={expanded[6]} timeout="auto" unmountOnExit>
-                            <CardContent>
-                              <Typography
-                                sx={{ marginBottom: 2 }}
-                                class="card-text m-0"
-                              >
-                 <ul>
-                  <li>
-                  Se abre la modalidad presencial.
-                  </li>
-
-                  <li>
-                  La ENSQ de incorpora a la comisión de Educación de la Coparmex colabornado en actividades interuniversitarias .
-                  </li>
-
-                  <li>
-                  a ENSQ participó en la primera Sesión Plenaria de la Comisión Estatal para la Planeación de Educación Superior (COEPES).
-                  </li>
-
-                  <li>
-                  Se entregan las instalaciones de la ENSQ en Pie de la Cuesta.
-                  </li>
-
-                  <li>
-                  Agosto: se da inicio a la oferta educativa de la Licenciatura en Educación Secundaria en modalidad escolarizada con una duración de 4 años, con las especialidades de Matemáticas y Español.
-                  </li>
-
-                  <li>
-                  Se cierra la oferta educativa en modalidad mixta debido a que ya no existía una población de profesores que no contaran con alguna licenciatura, y esta modalidad estaba durugida a docentes frente a grupo que no contaban con licenciatura.
-                  </li>
-                 </ul>
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="timeline-item left">
-                    <div class="timeline-body d-md-flex justify-content-end">
-                      <div class="timeline-meta">
-                        <div class="d-inline-flex flex-column text-primary-emphasis  border border-success-subtle text-md-end bg-number-history">
-
-                          <span className="number-history">2016 </span>
-                        </div>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                   
-                        <Card className="card">
-                          <CardMedia
-                            component="img"
-                            height="250"
-                            image={require("../../assets/img/historia7.jpg")}
-                            alt="Historia"
-                          />
-                          <CardContent>
-                            <Typography
-                              variant="body2"
-                              class="card-title mb-2 text-align-center"
-                            >
-                           Fundación de escuelas{" "}
-                            </Typography>
-                          </CardContent>
-                          <CardActions disableSpacing>
-                            <ExpandMore
-                              expand={expanded[7]}
-                              onClick={() => handleExpandClick(7)}
-                              aria-expanded={expanded[7]}
-                              aria-label="show more"
-                            >
-                              <ExpandMoreIcon />
-                            </ExpandMore>
-                          </CardActions>
-                          <Collapse in={expanded[7]} timeout="auto" unmountOnExit>
-                            <CardContent>
-                              <Typography
-                                sx={{ marginBottom: 2 }}
-                                class="card-text m-0"
-                              >
-                   <ul>
-                    <li>
-                    Se implementa la Licenciatura en Educación secundaria en modalidad escolarizada.
-                    </li>
-                    <li>
-                    Egresa la primera generación de modalidad presencial.
-                    </li>
-
-                    <li>
-                    La ESNQ y el Centro Educativo y Cultural del Estado de Querétaro "Manuel Gómez Morín" (CECEQ), implementaron el programa piloto "Apoyo a Tareas de Biblioteca", a partir de la necesidad de atender algunas recomendaciones internacionales sobre el uso de bibliotecas públicas en la construcción de conocimiento.
-                    </li>
-
-                    <li>
-                    Se actualiza la Maestría en Educación 
-                    </li>
-                   </ul>
-                              </Typography>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      </div>
-                    </div>
-                  </li>
-              
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+<Accordion >
+      <Accordion.Item eventKey="9">
+        <Accordion.Header>Cuerpos académicos
+        </Accordion.Header>
+        <Accordion.Body>
         <table
-      style={{
-        width: "50%",
-        borderCollapse: "collapse",
-        textAlign: "left",
-        border: "1px solid black",
-      }}
-    >
-      <thead>
-        <tr
-          style={{
-            backgroundColor: "#FFD966",
-            textAlign: "center",
-          }}
-        >
-          <th
-            colSpan="2"
-            style={{
-              padding: "10px",
-              fontSize: "1.2em",
-              border: "1px solid black",
-            }}
-          >
-            Medios de contacto
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style={{ border: "1px solid black", padding: "5px" }}>Correo:</td>
-          <td style={{ border: "1px solid black", padding: "5px" }}></td>
-        </tr>
-        <tr>
-          <td style={{ border: "1px solid black", padding: "5px" }}>
-            Página web:
-          </td>
-          <td style={{ border: "1px solid black", padding: "5px" }}></td>
-        </tr>
-        <tr>
-          <td style={{ border: "1px solid black", padding: "5px" }}>
-            Número de teléfono:
-          </td>
-          <td style={{ border: "1px solid black", padding: "5px" }}></td>
-        </tr>
-        <tr>
-          <td style={{ border: "1px solid black", padding: "5px" }}>Facebook:</td>
-          <td style={{ border: "1px solid black", padding: "5px" }}></td>
-        </tr>
-        <tr>
-          <td style={{ border: "1px solid black", padding: "5px" }}>
-            Instagram:
-          </td>
-          <td style={{ border: "1px solid black", padding: "5px" }}>sadasdasdsad</td>
-        </tr>
-      </tbody>
-    </table>
+                style={{
+                  width: "100%",
+                  borderCollapse: "collapse",
+                  textAlign: "left",
+                  border: "1px solid black",
+                }}
+              >
+                <thead>
+                  <tr
+                    style={{
+                      backgroundColor: "#003F82FF",
+                      textAlign: "center",
+                    }}
+                  >
+                    <th
+                      style={{
+                        padding: "10px",
+                        fontSize: "1.2em",
+                        border: "1px solid black",
+                        color: "white"
+                      }}
+                    >
+                      PERIODO
+                    </th>
+                    <th
+                      style={{
+                        padding: "10px",
+                        fontSize: "1.2em",
+                        border: "1px solid black",
+                        color: "white"
+
+                      }}
+                    >
+                      Descripción
+                    </th>
+                    <th
+                      style={{
+                        padding: "10px",
+                        fontSize: "1.2em",
+                        border: "1px solid black",
+                        color: "white"
+
+                      }}
+                    >
+                     Estado:
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={{ border: "1px solid black", padding: "5px", color: "red", textAlign: "center" }}>
+                      2023
+                    </td>
+                    <td
+                      style={{ border: "1px solid black", padding: "5px",textAlign: "center",  }}
+                    >
+                    No cuenta con cuerpos academicos para la segunda mitad de 2024
+
+
+                    </td>
+                    <td
+                      style={{ border: "1px solid black", padding: "5px", textAlign: "center" }}
+                    >
+                     s/d
+
+
+                    </td>
+                  </tr>
+                
+                </tbody>
+              </table>
+        </Accordion.Body>
+      </Accordion.Item>
+
+
+
+
+      <Accordion.Item eventKey="10">
+        <Accordion.Header>Oferta académicos
+        </Accordion.Header>
+        <Accordion.Body>
+        <table
+                style={{
+                  width: "100%",
+                  borderCollapse: "collapse",
+                  textAlign: "left",
+                  border: "1px solid black",
+                }}
+              >
+                <thead>
+                  <tr
+                    style={{
+                      backgroundColor: "#003F82FF",
+                      textAlign: "center",
+                    }}
+                  >
+                    <th
+                      style={{
+                        padding: "10px",
+                        fontSize: "1.2em",
+                        border: "1px solid black",
+                        color: "white"
+                      }}
+                    >
+                      N
+                    </th>
+                    <th
+                      style={{
+                        padding: "10px",
+                        fontSize: "1.2em",
+                        border: "1px solid black",
+                        color: "white"
+
+                      }}
+                    >
+                      Oferta
+                    </th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={{ border: "1px solid black", padding: "5px", textAlign: "center"}}>
+                      1
+                    </td>
+                    <td
+                      style={{ border: "1px solid black", padding: "5px", textAlign: "center" }}
+                    >
+                  Especialidad en Telesecundaria
+
+                    </td>
+                  
+                  </tr>
+                
+                </tbody>
+              </table>
+        </Accordion.Body>
+      </Accordion.Item>
+
+
+
+
+      <Accordion.Item eventKey="11">
+        <Accordion.Header>Historia
+        </Accordion.Header>
+        <Accordion.Body style={{border: "1px solid blue", padding: "10px", width: "50%", margin: "auto", marginTop: "10px"}}>
+        La Escuela Normal Superior de Querétaro surgió en 1983 por parte del gobierno 
+federal, la institución surge como consecuencia de la descentralización llegando 
+al estado en forma de cursos intensivos enfocados en profesores frente a grupo. 
+Los cursos se impartieron durante muchos años en la Universidad Autónoma de 
+Querétaro en la cual llegaron a estudiar cerca de 1000 alumnos en los años 90s 
+como parte de los cursos mixtos, la ENSQro durante sus primeros años 
+compartió oferta educativa con la "Escuela Normal Superior de Querétaro A.C." 
+una escuela de iniciativa privada que pertenecía al SNTE y que brindaba una 
+alternativa a los cursos intensivos de la ENSM. 
+La ENSQro cuanta hoy en día con instalaciones propias que le fueron otorgadas 
+por la federación en la década de 2010, cuanta con múltiples edificios que 
+albergan laboratorios, auditorio y biblioteca. A partir de que Normal obtuvo sus 
+propias instalaciones se ha dedicado a incrementar la calidad académica por 
+medio de publicaciones, congresos y fomento a cuerpos académicos.
+        </Accordion.Body>
+      </Accordion.Item>
+    
+    </Accordion>
+
+           {/*    <table
+                style={{
+                  width: "50%",
+                  borderCollapse: "collapse",
+                  textAlign: "left",
+                  border: "1px solid black",
+                }}
+              >
+                <thead>
+                  <tr
+                    style={{
+                      backgroundColor: "#FFD966",
+                      textAlign: "center",
+                    }}
+                  >
+                    <th
+                      colSpan="2"
+                      style={{
+                        padding: "10px",
+                        fontSize: "1.2em",
+                        border: "1px solid black",
+                      }}
+                    >
+                      Medios de contacto
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={{ border: "1px solid black", padding: "5px" }}>
+                      Correo:
+                    </td>
+                    <td
+                      style={{ border: "1px solid black", padding: "5px" }}
+                    ></td>
+                  </tr>
+                  <tr>
+                    <td style={{ border: "1px solid black", padding: "5px" }}>
+                      Página web:
+                    </td>
+                    <td
+                      style={{ border: "1px solid black", padding: "5px" }}
+                    ></td>
+                  </tr>
+                  <tr>
+                    <td style={{ border: "1px solid black", padding: "5px" }}>
+                      Número de teléfono:
+                    </td>
+                    <td
+                      style={{ border: "1px solid black", padding: "5px" }}
+                    ></td>
+                  </tr>
+                  <tr>
+                    <td style={{ border: "1px solid black", padding: "5px" }}>
+                      Facebook:
+                    </td>
+                    <td
+                      style={{ border: "1px solid black", padding: "5px" }}
+                    ></td>
+                  </tr>
+                  <tr>
+                    <td style={{ border: "1px solid black", padding: "5px" }}>
+                      Instagram:
+                    </td>
+                    <td style={{ border: "1px solid black", padding: "5px" }}>
+                      sadasdasdsad
+                    </td>
+                  </tr>
+                </tbody>
+              </table> */}
 
               <a
                 href="#"

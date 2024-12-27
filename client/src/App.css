@@ -1413,6 +1413,60 @@ section,
   border-color: #0091ff;
 }
 
+
+
+/* detalles */
+
+.features .nav-link2{
+  color: var(--heading-color);
+  padding: 15px 0;
+  transition: 0.3s;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 100%;
+  border: 0;
+  border-bottom: 4px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.features .nav-link2 i {
+  padding-right: 15px;
+  font-size: 48px;
+}
+
+.features .nav-link2 h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+@media (max-width: 575px) {
+  .features .nav-link2 h4 {
+    font-size: 16px;
+  }
+}
+
+.features .nav-link2:hover {
+  color: #0091ff;
+  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+}
+
+.features .nav-link2.active {
+  background-color: var(--background-color);
+  color: #0091ff;
+  border-color: #0091ff;
+}
+
+
+
+
+
+
+
+
 .features .tab-content {
   margin-top: 30px;
 }
@@ -4166,7 +4220,7 @@ border-radius: 1em;
     color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
-.nvinculosi {
+.vinculos i {
   padding-right: 15px;
   font-size: 48px;
 }
@@ -4245,4 +4299,165 @@ color: white;
 
 .custom-table tr:hover {
   background-color: #f1f1f1;
+}
+
+
+.galeria-details {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+
+
+/* Tabla.css */
+.tabla-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  color: #1c3b8b; /* Azul para el título */
+
+}
+
+.tabla-periodo {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #1c3b8b; /* Azul para el título */
+  margin-bottom: 0;
+  border: 0px 1px 0px  solid #ffcc00; /* Bordes amarillos */
+  border-left: 1px solid #ffcc00; /* Bordes amarillos */
+  border-right: 1px solid #ffcc00; /* Bordes amarillos */
+  border-top: 1px solid #ffcc00; /* Bordes amarillos */
+ width: 80%;
+ text-align: center;
+}
+
+.tabla {
+  border-collapse: collapse;
+  width: 80%;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #1c3b8b; /* Azul para el título */
+  border: 1px solid #ffcc00; /* Bordes amarillos */
+
+}
+
+.tabla  th,
+td {
+  border: 1px solid #ffcc00; /* Bordes amarillos */
+  padding: 8px;
+  font-size: 1em;
+}
+
+.tabla  th {
+  background-color: #f3f4f6; /* Fondo gris claro */
+  color: #000;
+  border: 1px solid #ffcc00; /* Bordes amarillos */
+  color: #1c3b8b; /* Azul para el título */
+
+}
+
+.tabla  tbody tr {
+  background-color: #ffffff; /* Fondo blanco */
+  border: 1px solid #ffcc00; /* Bordes amarillos */
+  
+}
+
+.tabla tbody tr td {
+  border: 1px solid #ffcc00; /* Bordes amarillos */
+  font-size: 0.9em;
+}
+
+.tabla th:first-child,
+td:first-child {
+  width: 50px; /* Ajustar ancho de la columna 'N°' */
+  border: 1px solid #ffcc00; /* Bordes amarillos */
+
+}
+
+.tabla th:last-child,
+td:last-child {
+  width: 80px; /* Ajustar ancho de la columna 'Edad' */
+  border: 1px solid #ffcc00; /* Bordes amarillos */
+
+}
+
+
+/* doctor */
+.doctor-tabla-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  color: #000; /* Azul para el título */
+
+}
+
+.doctor-tabla-periodo {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #000; /* Azul para el título */
+  margin-bottom: 0;
+  border: 0px 1px 0px  solid #000; /* Bordes amarillos */
+  border-left: 1px solid #000; /* Bordes amarillos */
+  border-right: 1px solid #000; /* Bordes amarillos */
+  border-top: 1px solid #000; /* Bordes amarillos */
+ width: 80%;
+ text-align: center;
+ background-color: #ffcc00;
+}
+
+.doctor-tabla {
+  border-collapse: collapse;
+  width: 80%;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #000; /* Azul para el título */
+  border: 1px solid #000; /* Bordes amarillos */
+
+}
+
+.doctor-tabla  th,
+td {
+  border: 1px solid #000; /* Bordes amarillos */
+  padding: 8px;
+  font-size: 1em;
+  
+}
+
+.doctor-tabla  th {
+  background-color: #f3f4f6; /* Fondo gris claro */
+  color: #000;
+  border: 1px solid #000; /* Bordes amarillos */
+  color: #000; /* Azul para el título */
+
+  background-color: #ffcc00;
+}
+
+.doctor-tabla  tbody tr {
+  background-color: #ffffff; /* Fondo blanco */
+  border: 1px solid #000; /* Bordes amarillos */
+  
+}
+
+.doctor-tabla tbody tr td {
+  border: 1px solid #000; /* Bordes amarillos */
+  font-size: 0.9em;
+  
+}
+
+.doctor-tabla th:first-child,
+td:first-child {
+  width: 50px; /* Ajustar ancho de la columna 'N°' */
+  border: 1px solid #000; /* Bordes amarillos */
+
+}
+
+.doctor-tabla th:last-child,
+td:last-child {
+  width: 80px; /* Ajustar ancho de la columna 'Edad' */
+  border: 1px solid #000; /* Bordes amarillos */
+
 }
