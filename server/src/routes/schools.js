@@ -38,6 +38,8 @@ const upload = multer({
 
 // Ruta con multer middleware para manejar la subida de múltiples archivos
 router.post('/register-school', upload.fields([
+  { name: 'galeria', maxCount: 100  },
+
   { name: 'image', maxCount: 1 },
   { name: 'plantel1', maxCount: 1 },
   { name: 'plantel2', maxCount: 1 },

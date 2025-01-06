@@ -10,14 +10,43 @@ cloudinary.config({
 
 module.exports = {
   RegisterSchools: async (req, res) => {
-    const { name, address, province, phone, email, year_of_operation, sic, alumnos, egresados, doctoresJubilados, doctoresCandidatos, profesores, profesoresMaestrias, profesoresConDoctorados, postgrado1, postgrado2, beca1, beca2, urlYoutube, alumnas, egresadas } = req.body;
+    const { name,
+      address,
+      province,
+      phone,
+      email,
+      year_of_operation,
+      sic,
+      urlYoutube,
+     postgrado1,
+      postgrado2,
+      beca1,
+      beca2,
+      licenciatura1,
+      licenciatura2,
+      historia,
+      alumnos,
+      alumnos_mixta,
+      egresados,
+      doctoresJubilados,
+      doctoresCandidatos,
+      profesores,
+      edad_profesores,
+      profesoresMaestrias,
+      profesoresConDoctorados,
+      matriculaDocentes,
+      matriculaDocentesEspecialidad,
+
+      cuerposAcademicos,
+      ofertaAcademicos,
+    } = req.body;
 
     try {
       let logoUrl = null;
       let plantel1Url = null;
       let plantel2Url = null;
       let plantel3Url = null;
-
+      let galeriaUrls = []; // Arreglo para las URLs de la galería
       // Imprimir los archivos recibidos para depuración
       console.log('Archivos recibidos:', req.files);
 
@@ -69,18 +98,87 @@ module.exports = {
           plantel3Url = plantel3Upload.secure_url;
           console.log('Plantel 3 subido:', plantel3Url);
         }
+
       }
-      const parsedAlumnos = JSON.parse(alumnos);
-      const parsedAlumnas = JSON.parse(alumnas);
 
-      const parsedEgresados = JSON.parse(egresados);
-      const parsedEgresadas = JSON.parse(egresadas);
+      if (req.files && req.files.image) {
+        const logoFile = req.files.image[0];
+        const cloudinaryUploadResultLogo = await cloudinary.uploader.upload(logoFile.path, {
+          resource_type: 'image',
+          quality: 'auto:low',
+          fetch_format: 'auto',
+        });
+        logoUrl = cloudinaryUploadResultLogo.secure_url;
+      }
 
-      const parsedDoctoresJubilados = JSON.parse(doctoresJubilados);
-      const parsedDoctoresCandidatos = JSON.parse(doctoresCandidatos);
-      const parsedProfesores = JSON.parse(profesores);
-      const parsedProfesoresMaestrias = JSON.parse(profesoresMaestrias);
-      const parsedProfesoresConDoctorados = JSON.parse(profesoresConDoctorados);
+      // Subir planteles
+      if (req.files) {
+        const { plantel1, plantel2, plantel3 } = req.files;
+
+        if (plantel1 && plantel1.length > 0) {
+          const plantel1Upload = await cloudinary.uploader.upload(plantel1[0].path, {
+            resource_type: 'raw',
+            format: 'pdf',
+            type: 'upload',
+            access_mode: 'public'
+          });
+          plantel1Url = plantel1Upload.secure_url;
+        }
+
+        if (plantel2 && plantel2.length > 0) {
+          const plantel2Upload = await cloudinary.uploader.upload(plantel2[0].path, {
+            resource_type: 'raw',
+            format: 'pdf',
+            type: 'upload',
+            access_mode: 'public'
+          });
+          plantel2Url = plantel2Upload.secure_url;
+        }
+
+        if (plantel3 && plantel3.length > 0) {
+          const plantel3Upload = await cloudinary.uploader.upload(plantel3[0].path, {
+            resource_type: 'raw',
+            format: 'pdf',
+            type: 'upload',
+            access_mode: 'public'
+          });
+          plantel3Url = plantel3Upload.secure_url;
+        }
+      }
+
+      // Subir galería
+      if (req.files && req.files.galeria) {
+        const galeriaFiles = req.files.galeria;
+        for (const file of galeriaFiles) {
+          const uploadResult = await cloudinary.uploader.upload(file.path, {
+            resource_type: 'image',
+            quality: 'auto:low',
+            fetch_format: 'auto'
+          });
+          galeriaUrls.push(uploadResult.secure_url);
+        }
+      }
+
+      const parsedAlumnos = alumnos ?JSON.parse(alumnos) : [];
+      const parsedAlumnosMixtos = alumnos_mixta ?JSON.parse(alumnos_mixta) : [];
+
+      const parsedEgresados = egresados ?JSON.parse(egresados) : [];
+
+
+      const parsedDoctoresJubilados =doctoresJubilados ? JSON.parse(doctoresJubilados) : [];
+      const parsedDoctoresCandidatos = doctoresCandidatos ?JSON.parse(doctoresCandidatos) : [];
+      const parsedProfesores =profesores ? JSON.parse(profesores) : [];
+      const parsedEdadProfesores =edad_profesores ? JSON.parse(edad_profesores) : [];
+      const parsedProfesoresMaestrias = profesoresMaestrias ?JSON.parse(profesoresMaestrias) : [];
+      const parsedProfesoresConDoctorados = profesoresConDoctorados ?JSON.parse(profesoresConDoctorados) : [];
+      const parsedMatriculaDocentes = matriculaDocentes ?JSON.parse(matriculaDocentes) : [];
+      const parsedCuerpoAcademico = cuerposAcademicos ?JSON.parse(cuerposAcademicos) : [];
+      const parsedOfertaAcademico = ofertaAcademicos ?  JSON.parse(ofertaAcademicos) : [];
+      const parsedMatriculaDocentesEspecialidad = matriculaDocentesEspecialidad ?JSON.parse(matriculaDocentesEspecialidad) : [];
+
+
+      
+
       // Crear la escuela en la base de datos
       const school = await Schools.create({
         name,
@@ -95,19 +193,27 @@ module.exports = {
         beca1,
         beca2,
         urlYoutube,
+        licenciatura1,
+        licenciatura2,
+        historia,
         alumnos: parsedAlumnos,
-        alumnas: parsedAlumnas,
+        alumnos_mixta: parsedAlumnosMixtos,
         egresados: parsedEgresados,
-        egresadas: parsedEgresadas,
         doctoresJubilados: parsedDoctoresJubilados,
         doctoresCandidatos: parsedDoctoresCandidatos,
         profesores: parsedProfesores,
+        edad_profesores: parsedEdadProfesores,
+        matriculaDocentes: parsedMatriculaDocentes,
+        matriculaDocentesEspecialidad: parsedMatriculaDocentesEspecialidad,
+        cuerposAcademicos: parsedCuerpoAcademico,
+        ofertaAcademicos: parsedOfertaAcademico,
         profesoresMaestrias: parsedProfesoresMaestrias,
         profesoresConDoctorados: parsedProfesoresConDoctorados,
         image: logoUrl,
         plantel1: plantel1Url,
         plantel2: plantel2Url,
-        plantel3: plantel3Url
+        plantel3: plantel3Url,
+        galeria: galeriaUrls
       });
 
       res.status(200).send({ success: true, data: school });

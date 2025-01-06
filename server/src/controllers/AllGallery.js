@@ -9,7 +9,7 @@ require('dotenv').config();
         const allschool = await Gallery.findAll()
         if (allschool) {
             res.status(200).send({success: true, data: allschool})
-    console.log("Todas las fotos de galeria")
+       console.log("Todas las fotos de galeria")
 
             
         } else {

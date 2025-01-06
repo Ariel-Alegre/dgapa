@@ -5,6 +5,11 @@ const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE, DB_PORT
 } = process.env;
+console.log(DB_USER)
+console.log(DB_PASSWORD)
+console.log(DB_HOST)
+console.log(DB_DATABASE)
+console.log(DB_PORT)
 
 const sequelize = new Sequelize(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
   logging: false,
