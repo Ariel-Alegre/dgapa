@@ -210,6 +210,7 @@ module.exports = {
         profesoresMaestrias: parsedProfesoresMaestrias,
         profesoresConDoctorados: parsedProfesoresConDoctorados,
         image: logoUrl,
+        
         plantel1: plantel1Url,
         plantel2: plantel2Url,
         plantel3: plantel3Url,
